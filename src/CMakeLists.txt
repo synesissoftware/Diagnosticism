@@ -47,6 +47,7 @@ set(TARGET_NAME core)
 
 set(CORE_SRCS
 	api.c
+	tracing.c
 )
 
 add_library(${TARGET_NAME}
