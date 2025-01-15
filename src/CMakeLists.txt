@@ -46,6 +46,7 @@ endif()
 set(TARGET_NAME core)
 
 set(CORE_SRCS
+	abort.c
 	api.c
 	tracing.c
 )

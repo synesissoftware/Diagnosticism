@@ -4,7 +4,7 @@
  * Purpose: Main header file for Diagnosticm (C-API).
  *
  * Created: 23rd November 2024
- * Updated: 15th January 2025
+ * Updated: 16th January 2025
  *
  * Home:    https://github.com/synesissoftware/DIAGNOSTICISM/
  *
@@ -95,7 +95,8 @@
  * includes - 1
  */
 
-// #include <diagnosticism/internal/
+#include <diagnosticism/internal/compiler.h>
+#include <diagnosticism/internal/language.h>
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -116,6 +117,10 @@
 #  define DIAGNOSTICISM_CALL(rt)                            extern rt
 # endif
 #endif
+
+
+/* TODO: this needs to be done in terms of `[[noreturn]]` */
+#define DIAGNOSTICISM_CALL_NORETURN                         DIAGNOSTICISM_CALL(void)
 
 
 /* /////////////////////////////////////////////////////////////////////////
