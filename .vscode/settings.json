@@ -72,6 +72,7 @@
     "deque": "cpp",
     "exception": "cpp",
     "execution": "cpp",
+    "forward_list": "cpp",
     "functional": "cpp",
     "implicit_link.h": "c",
     "initializer_list": "cpp",

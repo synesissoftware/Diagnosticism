@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for Diagnosticism
 #
 # Created:  23rd November 2024
-# Updated:  23rd November 2024
+# Updated:  15th January 2025
 #
 # ######################################################################## #
 
@@ -46,7 +46,7 @@ string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_MAJOR${RX_WS}+
 set(_VERSION_MAJOR ${CMAKE_MATCH_1})
 string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_MINOR${RX_WS}+([0-9]+)" MINOR_DUMMY ${_header_file})
 set(_VERSION_MINOR ${CMAKE_MATCH_1})
-string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_REVISION${RX_WS}+([0-9]+)" PATCH_DUMMY ${_header_file})
+string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_PATCH${RX_WS}+([0-9]+)" PATCH_DUMMY ${_header_file})
 set(_VERSION_PATCH ${CMAKE_MATCH_1})
 
 # set project version number here
@@ -57,10 +57,10 @@ set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT
 
 # adhere strictly to C and C++ standards plus extensions. These are actually
 # useless since we do not compile anything; they merely state our intention.
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON) # GNU extensions and POSIX standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
@@ -102,17 +102,43 @@ endif(Diagnosticism_OS_SIMULATE_WINDOWS_ON_UNIX)
 # dependencies
 #
 # required:
+# - CLASP - required for testing;
+# - cstring;
 # - STLSoft - required for testing;
 # - xTests - required for testing;
 #
 # optional:
 # - shwild - required for testing;
 
+
+# ############################
+# CLASP
+
 if(BUILD_TESTING)
 
-	# ##################################################
-	# STLSoft
-	#
+	set(CLASP_REQUIRED_VERSION_ 0.14)
+
+	find_package(CLASP ${CLASP_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package CLASP found (version ${CLASP_VERSION}; ${CLASP_REQUIRED_VERSION_} requested)")
+endif(BUILD_TESTING)
+
+
+# ############################
+# cstring
+
+set(cstring_REQUIRED_VERSION_ 4.0)
+
+find_package(cstring ${cstring_REQUIRED_VERSION_} REQUIRED)
+
+message("-- CMake package cstring found (version ${cstring_VERSION}; ${cstring_REQUIRED_VERSION_} requested)")
+
+
+# ############################
+# STLSoft
+
+if(BUILD_TESTING)
+
 	# We provide flexibility here, as in:
 	# 1. if a CMake variable STLSOFT is provided then it is used; otherwise
 	# 2. if an environment variable STLSOFT is provided then it then it is
@@ -240,7 +266,7 @@ endif(BUILD_TESTING)
 # ##########################################################
 # export
 
-set(EXPORT_NAME ${PROJECT_NAME_LOWER})
+set(EXPORT_NAME ${PROJECT_NAME})
 
 configure_package_config_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/cmake/${EXPORT_NAME}-config.cmake.in
