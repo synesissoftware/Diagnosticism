@@ -1,8 +1,10 @@
 
+#include <diagnosticism/diagnosticism.h>
 
 #include <stdio.h>
 
-int
+
+DIAGNOSTICISM_CALL(int)
 diagnosticism_trace_impl(
     FILE*       stm
 ,   char const* file
@@ -24,3 +26,7 @@ diagnosticism_trace_impl(
 
 
 #pragma once
+
+
+/* ///////////////////////////// end of file //////////////////////////// */
+

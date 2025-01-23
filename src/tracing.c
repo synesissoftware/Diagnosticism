@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 
-int
+DIAGNOSTICISM_CALL(int)
 diagnosticism_trace_impl(
     FILE*       stm
 ,   char const* file
@@ -52,4 +52,6 @@ diagnosticism_trace_impl(
     }
 }
 
+
+/* ///////////////////////////// end of file //////////////////////////// */
 

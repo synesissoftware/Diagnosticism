@@ -4,9 +4,9 @@
  * Purpose: Main header file for Diagnosticm (C-API).
  *
  * Created: 23rd November 2024
- * Updated: 15th January 2025
+ * Updated: 23rd January 2025
  *
- * Home:    https://github.com/synesissoftware/DIAGNOSTICISM/
+ * Home:    https://github.com/synesissoftware/Diagnosticism/
  *
  * Copyright (c) 2024-2025, Matthew Wilson and Synesis Information Systems
  * All rights reserved.
@@ -113,7 +113,7 @@
 # ifdef __cplusplus
 #  define DIAGNOSTICISM_CALL(rt)                            extern "C" rt
 # else
-#  define DIAGNOSTICISM_CALL(rt)                            extern rt
+#  define DIAGNOSTICISM_CALL(rt)                            rt
 # endif
 #endif
 
