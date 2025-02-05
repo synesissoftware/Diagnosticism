@@ -9,6 +9,7 @@
  * helper functions
  */
 
+static
 bool
 try_add_ns_to_total_and_update_minmax_and_count_(
     diagnosticism_doomgram_t*   dg
@@ -47,6 +48,138 @@ try_add_ns_to_total_and_update_minmax_and_count_(
 
         return true;
     }
+}
+
+static
+unsigned
+calc_doom_(
+    uint64_t v
+)
+{
+    if (v >= 100000000)
+    {
+        size_t n = 0u;
+
+        for (; 0 != v; v /= 10, ++n)
+        {}
+
+        return n;
+    }
+    else
+    {
+        if (v >= 10000)
+        {
+            if (v >= 1000000)
+            {
+                if (v >= 10000000)
+                {
+                    return 8;
+                }
+                else
+                {
+                    return 7;
+                }
+            }
+            else
+            {
+                if (v >= 100000)
+                {
+                    return 6;
+                }
+                else
+                {
+                    return 5;
+                }
+            }
+        }
+        else
+        {
+            if (v >= 100)
+            {
+                if (v >= 1000)
+                {
+                    return 4;
+                }
+                else
+                {
+                    return 3;
+                }
+            }
+            else
+            {
+                if (v >= 10)
+                {
+                    return 2;
+                }
+                else
+                {
+                    if (v > 0)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+static
+char
+gram_doom_to_char_(
+    unsigned    doom
+,   char        ch_0
+,   char        ch_overflow
+,   size_t      cch_range
+,   char const  range[]
+)
+{
+    if (0 == doom)
+    {
+        return ch_0;
+    }
+    else
+    {
+        if (doom > cch_range)
+        {
+            return ch_overflow;
+        }
+        else
+        {
+            return range[doom - 1];
+        }
+    }
+}
+
+
+static
+char const*
+gram_to_strip_impl_(
+    diagnosticism_doomgram_t*   dg
+,   char                        ch_0
+,   char                        ch_overflow
+,   size_t                      cch_range
+,   char const                  range[]
+,   char                      (*ar)[12]
+)
+{
+    (*ar)[ 0]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[ 0]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[ 1]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[ 1]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[ 2]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[ 2]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[ 3]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[ 3]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[ 4]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[ 4]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[ 5]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[ 5]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[ 6]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[ 6]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[ 7]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[ 7]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[ 8]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[ 8]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[ 9]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[ 9]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[10]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[10]), ch_0, ch_overflow, cch_range, range);
+    (*ar)[11]   =   gram_doom_to_char_(calc_doom_(dg->oom_event_counts[11]), ch_0, ch_overflow, cch_range, range);
+
+    return "";
 }
 
 
@@ -479,6 +612,24 @@ diagnosticism_doomgram_dump_to_stream(
     return 0;
 }
 
+
+DIAGNOSTICISM_CALL(char const*)
+diagnosticism_doomgram_to_strip_12(
+    diagnosticism_doomgram_t*   dg
+,   char                      (*ar)[12]
+)
+{
+    assert(NULL != dg);
+
+    return gram_to_strip_impl_(
+                dg
+            ,   '_'
+            ,   '*'
+            ,   26
+            ,   "abcdefghijklmnopqrstuvwxyz"
+            ,   ar
+            );
+}
 
 
 /* ///////////////////////////// end of file //////////////////////////// */

@@ -171,16 +171,13 @@ static void TEST_doomgram_SINGLE_TIMING_EVENT(void)
     TEST_INTEGER_EQUAL(0, diagnosticism_doomgram_num_events_in_10s(&dg));
     TEST_INTEGER_EQUAL(0, diagnosticism_doomgram_num_events_ge_100s(&dg));
 
-#if 0
-
     {
         char    strip[12];
 
-        stlsoft::gram_to_strip(dg, &strip);
+        diagnosticism_doomgram_to_strip_12(&dg, &strip);
 
         TEST_MULTIBYTE_STRING_EQUAL_N("_______a____", strip, 12);
     }
-#endif
 }
 
 static void TEST_doomgram_ZERO_TIME_EVENTS()
@@ -217,16 +214,13 @@ static void TEST_doomgram_ZERO_TIME_EVENTS()
     TEST_INTEGER_EQUAL(0, diagnosticism_doomgram_num_events_in_10s(&dg));
     TEST_INTEGER_EQUAL(0, diagnosticism_doomgram_num_events_ge_100s(&dg));
 
-#if 0
-
     {
         char    strip[12];
 
-        stlsoft::gram_to_strip(dg, &strip);
+        diagnosticism_doomgram_to_strip_12(&dg, &strip);
 
         TEST_MULTIBYTE_STRING_EQUAL_N("____________", strip, 12);
     }
-#endif
 }
 
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_1()
@@ -272,16 +266,13 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_1()
     TEST_INTEGER_EQUAL(1, diagnosticism_doomgram_num_events_in_10s(&dg));
     TEST_INTEGER_EQUAL(1, diagnosticism_doomgram_num_events_ge_100s(&dg));
 
-#if 0
-
     {
         char    strip[12];
 
-        stlsoft::gram_to_strip(dg, &strip);
+        diagnosticism_doomgram_to_strip_12(&dg, &strip);
 
         TEST_MULTIBYTE_STRING_EQUAL_N("aaaaaaaaaaaa", strip, 12);
     }
-#endif
 }
 
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_2()
@@ -327,16 +318,13 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_2()
     TEST_INTEGER_EQUAL(1, diagnosticism_doomgram_num_events_in_10s(&dg));
     TEST_INTEGER_EQUAL(1, diagnosticism_doomgram_num_events_ge_100s(&dg));
 
-#if 0
-
     {
         char    strip[12];
 
-        stlsoft::gram_to_strip(dg, &strip);
+        diagnosticism_doomgram_to_strip_12(&dg, &strip);
 
         TEST_MULTIBYTE_STRING_EQUAL_N("aaaaaaaaaaaa", strip, 12);
     }
-#endif
 }
 
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_3()
@@ -382,16 +370,13 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_3()
     TEST_INTEGER_EQUAL(1, diagnosticism_doomgram_num_events_in_10s(&dg));
     TEST_INTEGER_EQUAL(1, diagnosticism_doomgram_num_events_ge_100s(&dg));
 
-#if 0
-
     {
         char    strip[12];
 
-        stlsoft::gram_to_strip(dg, &strip);
+        diagnosticism_doomgram_to_strip_12(&dg, &strip);
 
         TEST_MULTIBYTE_STRING_EQUAL_N("aaaaaaaaaaaa", strip, 12);
     }
-#endif
 }
 
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_4()
@@ -434,16 +419,13 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_4()
     TEST_INTEGER_EQUAL(1, diagnosticism_doomgram_num_events_in_10s(&dg));
     TEST_INTEGER_EQUAL(1, diagnosticism_doomgram_num_events_ge_100s(&dg));
 
-#if 0
-
     {
         char    strip[12];
 
-        stlsoft::gram_to_strip(dg, &strip);
+        diagnosticism_doomgram_to_strip_12(&dg, &strip);
 
-        TEST_MULTIBYTE_STRING_EQUAL_N("aaaaaaaaaaaa", strip, 12);
+        TEST_MULTIBYTE_STRING_EQUAL_N("___aaaaaaaaa", strip, 12);
     }
-#endif
 }
 
 static void TEST_doomgram_SEVERAL_DISTINCT_TIMINGS()
@@ -485,16 +467,13 @@ static void TEST_doomgram_SEVERAL_DISTINCT_TIMINGS()
     TEST_INTEGER_EQUAL(0, diagnosticism_doomgram_num_events_in_10s(&dg));
     TEST_INTEGER_EQUAL(1, diagnosticism_doomgram_num_events_ge_100s(&dg));
 
-#if 0
-
     {
         char    strip[12];
 
-        stlsoft::gram_to_strip(dg, &strip);
+        diagnosticism_doomgram_to_strip_12(&dg, &strip);
 
         TEST_MULTIBYTE_STRING_EQUAL_N("_a_aa___aa_a", strip, 12);
     }
-#endif
 }
 
 static void TEST_doomgram_SEVERAL_INTERSECTING_TIMINGS()
@@ -537,16 +516,13 @@ static void TEST_doomgram_SEVERAL_INTERSECTING_TIMINGS()
     TEST_INTEGER_EQUAL(0, diagnosticism_doomgram_num_events_in_10s(&dg));
     TEST_INTEGER_EQUAL(1, diagnosticism_doomgram_num_events_ge_100s(&dg));
 
-#if 0
-
     {
         char    strip[12];
 
-        stlsoft::gram_to_strip(dg, &strip);
+        diagnosticism_doomgram_to_strip_12(&dg, &strip);
 
         TEST_MULTIBYTE_STRING_EQUAL_N("_a_aa___aa_a", strip, 12);
     }
-#endif
 }
 
 static void TEST_doomgram_MANY_CUMULATIVE_TIMINGS()
@@ -598,16 +574,13 @@ static void TEST_doomgram_MANY_CUMULATIVE_TIMINGS()
     TEST_INTEGER_EQUAL(0, diagnosticism_doomgram_num_events_in_10s(&dg));
     TEST_INTEGER_EQUAL(0, diagnosticism_doomgram_num_events_ge_100s(&dg));
 
-#if 0
-
     {
         char    strip[12];
 
-        stlsoft::gram_to_strip(dg, &strip);
+        diagnosticism_doomgram_to_strip_12(&dg, &strip);
 
         TEST_MULTIBYTE_STRING_EQUAL_N("e__d__c__b__", strip, 12);
     }
-#endif
 }
 
 static void TEST_doomgram_OVERFLOW_BY_SECONDS()
@@ -689,6 +662,7 @@ static void TEST_doomgram_OVERFLOW_BY_MICROSECONDS()
         TEST_BOOLEAN_FALSE(r);
     }
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

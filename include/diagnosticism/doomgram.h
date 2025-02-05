@@ -127,6 +127,13 @@ diagnosticism_doomgram_dump_to_stream(
 #endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
 
+DIAGNOSTICISM_CALL(char const*)
+diagnosticism_doomgram_to_strip_12(
+    diagnosticism_doomgram_t*   dg
+,   char                      (*ar)[12]
+);
+
+
 #pragma once
 
 
