@@ -47,6 +47,7 @@ set(TARGET_NAME core)
 
 set(CORE_SRCS
 	api.c
+	doomgram.c
 	tracing.c
 )
 
