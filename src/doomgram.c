@@ -573,10 +573,8 @@ diagnosticism_doomgram_dump_to_stream(
 {
     assert(NULL != dg);
 
-    if (NULL != var_name && '\0' != *var_name)
-    {
-        return fprintf(stm
-        ,   "%s = { \
+# define DDD2S_fmt_ \
+           "%s = { \
 .event_count=%llu, \
 .total_event_time_ns=%llu, \
 .min_event_time_ns=%llu, \
@@ -584,6 +582,11 @@ diagnosticism_doomgram_dump_to_stream(
 .oom_event_counts = { %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu }, \
 .has_overflowed=%s \
 }"
+
+    if (NULL != var_name && '\0' != *var_name)
+    {
+        return fprintf(stm
+        ,   DDD2S_fmt_
         ,   var_name
         ,   dg->event_count
         ,   dg->total_event_time_ns
