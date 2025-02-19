@@ -4,11 +4,11 @@
  * Purpose: Main header file for Diagnosticm (C-API).
  *
  * Created: 23rd November 2024
- * Updated: 23rd November 2024
+ * Updated: 23rd January 2025
  *
- * Home:    https://github.com/synesissoftware/DIAGNOSTICISM/
+ * Home:    https://github.com/synesissoftware/Diagnosticism/
  *
- * Copyright (c) 2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2024-2025, Matthew Wilson and Synesis Information Systems
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,10 +48,10 @@
 #define DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_DIAGNOSTICISM
 
 #ifndef DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MAJOR      0
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MINOR      0
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_REVISION   0
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT       1
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MAJOR  0
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MINOR  0
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  1
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   2
 #endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -68,9 +68,9 @@
  *
  * Minor version number of the DIAGNOSTICISM library
  *
- * \def DIAGNOSTICISM_VER_REVISION
+ * \def DIAGNOSTICISM_VER_PATCH
  *
- * The revision number of the DIAGNOSTICISM library
+ * The patch number of the DIAGNOSTICISM library
  *
  * \def DIAGNOSTICISM_VER
  *
@@ -80,7 +80,7 @@
 #define DIAGNOSTICISM_VER_MAJOR         0
 #define DIAGNOSTICISM_VER_MINOR         0
 #define DIAGNOSTICISM_VER_PATCH         0
-#define DIAGNOSTICISM_VER_ALPHABETA     21
+#define DIAGNOSTICISM_VER_ALPHABETA     22
 
 #define DIAGNOSTICISM_VER \
     (0\
@@ -113,7 +113,7 @@
 # ifdef __cplusplus
 #  define DIAGNOSTICISM_CALL(rt)                            extern "C" rt
 # else
-#  define DIAGNOSTICISM_CALL(rt)                            extern rt
+#  define DIAGNOSTICISM_CALL(rt)                            rt
 # endif
 #endif
 
