@@ -6,7 +6,7 @@
  * Created: 23rd November 2024
  * Updated: 15th January 2025
  *
- * Home:    https://github.com/synesissoftware/DIAGNOSTICISM/
+ * Home:    https://github.com/synesissoftware/Diagnosticism/
  *
  * Copyright (c) 2024-2025, Matthew Wilson and Synesis Information Systems
  * All rights reserved.
@@ -50,8 +50,8 @@
 #ifndef DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MAJOR  0
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MINOR  0
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  1
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   2
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  2
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   3
 #endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -80,7 +80,7 @@
 #define DIAGNOSTICISM_VER_MAJOR         0
 #define DIAGNOSTICISM_VER_MINOR         0
 #define DIAGNOSTICISM_VER_PATCH         0
-#define DIAGNOSTICISM_VER_ALPHABETA     22
+#define DIAGNOSTICISM_VER_ALPHABETA     23
 
 #define DIAGNOSTICISM_VER \
     (0\
@@ -113,7 +113,7 @@
 # ifdef __cplusplus
 #  define DIAGNOSTICISM_CALL(rt)                            extern "C" rt
 # else
-#  define DIAGNOSTICISM_CALL(rt)                            extern rt
+#  define DIAGNOSTICISM_CALL(rt)                            rt
 # endif
 #endif
 

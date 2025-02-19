@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for Diagnosticsm core library
 #
 # Created:  23rd November 2024
-# Updated:  23rd November 2024
+# Updated:  5th February 2025
 #
 # ######################################################################## #
 
@@ -47,6 +47,7 @@ set(TARGET_NAME core)
 
 set(CORE_SRCS
 	api.c
+	doomgram.c
 	tracing.c
 )
 
@@ -62,6 +63,7 @@ add_library(${TARGET_NAME}
 # `install()` step
 set(CORE_PUBLIC_HEADERS
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/${PROJECT_NAME_LOWER}.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/doomgram.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/tracing.h"
 )
 
