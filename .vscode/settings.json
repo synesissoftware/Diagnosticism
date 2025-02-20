@@ -1,7 +1,7 @@
 {
   "[c]": {
     "editor.insertSpaces": true,
-    "editor.rulers": [ 60, 76 ],
+    "editor.rulers": [ 60, 64, 68, 72, 76 ],
     "editor.tabSize": 4,
   },
   "[cpp]": {
