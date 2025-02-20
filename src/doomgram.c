@@ -573,17 +573,31 @@ diagnosticism_doomgram_dump_to_stream(
 {
     assert(NULL != dg);
 
-    if (NULL != var_name && '\0' != *var_name)
-    {
-        return fprintf(stm
-        ,   "%s = { \
+#define DDD2S_fmt_(v) _Generic((v), \
+	unsigned long: \
+           "%s = { \
+.event_count=%lu, \
+.total_event_time_ns=%lu, \
+.min_event_time_ns=%lu, \
+.max_event_time_ns=%lu, \
+.oom_event_counts = { %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu, %lu }, \
+.has_overflowed=%s \
+}", \
+	unsigned long long: \
+           "%s = { \
 .event_count=%llu, \
 .total_event_time_ns=%llu, \
 .min_event_time_ns=%llu, \
 .max_event_time_ns=%llu, \
 .oom_event_counts = { %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu, %llu }, \
 .has_overflowed=%s \
-}"
+}" \
+)
+
+    if (NULL != var_name && '\0' != *var_name)
+    {
+        return fprintf(stm
+        ,   DDD2S_fmt_(dg->event_count)
         ,   var_name
         ,   dg->event_count
         ,   dg->total_event_time_ns
