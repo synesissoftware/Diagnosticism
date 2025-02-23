@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for Diagnosticism
 #
 # Created:  23rd November 2024
-# Updated:  17th February 2025
+# Updated:  23rd February 2025
 #
 # ######################################################################## #
 
@@ -278,7 +278,7 @@ endif(BUILD_TESTING)
 # ##########################################################
 # export
 
-set(EXPORT_NAME ${PROJECT_NAME})
+set(EXPORT_NAME ${PROJECT_NAME_LOWER})
 
 configure_package_config_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/cmake/${EXPORT_NAME}-config.cmake.in

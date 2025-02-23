@@ -1,4 +1,4 @@
- Diagnosticism - News <!-- omit in toc -->
+# Diagnosticism - News <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -9,6 +9,7 @@
 
 | Date           | News Item                                                                        |
 | -------------- | -------------------------------------------------------------------------------- |
+| 23rd Feb 2025  | Diagnosticism 0.1.1 released                                                     |
 | 20th Feb 2025  | Diagnosticism 0.1.0 released                                                     |
 | 23rd Nov 2024  | Diagnosticism 0.0.1 released                                                     |
 
