@@ -1,5 +1,7 @@
 # Diagnosticism <!-- omit in toc -->
-**SH**ell-compatible **WILD**cards
+
+Miscellaneous Diagnostic facilities for C (and C++)
+
 
 ## Table of Contents <!-- omit in toc -->
 
