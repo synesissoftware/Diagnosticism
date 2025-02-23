@@ -1,4 +1,4 @@
- Diagnosticism - News <!-- omit in toc -->
+# Diagnosticism - News <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 
