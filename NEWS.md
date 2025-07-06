@@ -7,11 +7,12 @@
 
 ## News
 
-| Date           | News Item                                                                        |
-| -------------- | -------------------------------------------------------------------------------- |
-| 23rd Feb 2025  | Diagnosticism 0.1.1 released                                                     |
-| 20th Feb 2025  | Diagnosticism 0.1.0 released                                                     |
-| 23rd Nov 2024  | Diagnosticism 0.0.1 released                                                     |
+| Date            | News Item                                                                       |
+| --------------- | ------------------------------------------------------------------------------- |
+| 7th Jul 2025    | Diagnosticism 0.2.0 (beta 1) released                                           |
+| 23rd Feb 2025   | Diagnosticism 0.1.1 released                                                    |
+| 20th Feb 2025   | Diagnosticism 0.1.0 released                                                    |
+| 23rd Nov 2024   | Diagnosticism 0.0.1 released                                                    |
 
 
 <!-- ########################### end of file ########################### -->
