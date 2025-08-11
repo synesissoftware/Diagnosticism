@@ -13,7 +13,7 @@
  */
 
 /** Obtains from the environment the value of the environment variable
- * mathcing @c name
+ * matching @c name.
  *
  * @param name The name of the environment variable to be ;
  * @param defaultValueOrNull An optional default value to be used ;

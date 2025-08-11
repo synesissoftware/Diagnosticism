@@ -4,7 +4,7 @@
  * Purpose: Main header file for Diagnosticm (C-API).
  *
  * Created: 23rd November 2024
- * Updated: 7th July 2025
+ * Updated: 11th August 2025
  *
  * Home:    https://github.com/synesissoftware/Diagnosticism/
  *
@@ -50,8 +50,8 @@
 #ifndef DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MAJOR  0
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MINOR  0
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  7
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   8
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  8
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   9
 #endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -80,7 +80,7 @@
 #define DIAGNOSTICISM_VER_MAJOR         0
 #define DIAGNOSTICISM_VER_MINOR         2
 #define DIAGNOSTICISM_VER_PATCH         0
-#define DIAGNOSTICISM_VER_ALPHABETA     0x82
+#define DIAGNOSTICISM_VER_ALPHABETA     0x83
 
 #define DIAGNOSTICISM_VER \
     (0\
@@ -103,9 +103,9 @@
  * macros
  */
 
-/** \def DIAGNOSTICISM_CALL(rc)
+/** \def DIAGNOSTICISM_CALL(rt)
  *
- * T.B.C.
+ * \param rt The return type.
  */
 #ifndef DIAGNOSTICISM_CALL
 # ifdef __cplusplus
@@ -128,7 +128,7 @@ typedef uint32_t                                            diag_uint32_t;
  * API functions
  */
 
-/** Obtains the Diagnosticism version (at time of compilation)
+/** Obtains the Diagnosticism version (at time of compilation).
  *
  * @note Can be called without having initialised the API.
  *
@@ -139,7 +139,7 @@ diagnosticism_api_version(void);
 
 
 
-/** T.B.C.
+/** Initialises the Diagnosticism API.
  *
  */
 DIAGNOSTICISM_CALL(int)
@@ -148,7 +148,7 @@ diagnosticism_api_init(
 ,   void*           init_param
 );
 
-/** T.B.C.
+/** Uninitialises the Diagnosticism API.
  *
  */
 DIAGNOSTICISM_CALL(void)
