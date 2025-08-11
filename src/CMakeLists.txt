@@ -66,7 +66,9 @@ add_library(${TARGET_NAME}
 set(CORE_PUBLIC_HEADERS
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/${PROJECT_NAME_LOWER}.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/doomgram.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/ev.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/tracing.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/version_string.h"
 )
 
 set_target_properties(${TARGET_NAME} PROPERTIES
