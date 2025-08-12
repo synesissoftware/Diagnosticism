@@ -35,7 +35,7 @@ diagnosticism_getenv_atoi(
 
     if (NULL == r)
     {
-        errno = ENOMEM;
+        errno = ENOENT;
 
         return defaultValue;
     }
