@@ -10,9 +10,11 @@
  * API types
  */
 
-/** T.B.C.
+/** Decimal Order-Of-Magnitude frequency histoGRAM
  *
- *
+ * \note This is a C port of the equivalent `stlsoft::doomgram` class from
+ * the **STLSoft** libraries
+ * (https://github.com/synesissoftware/STLSoft-1.11).
  */
 struct diagnosticism_doomgram_t
 {
@@ -24,7 +26,7 @@ struct diagnosticism_doomgram_t
     bool        has_overflowed;
 };
 #ifndef __cplusplus
-typedef struct diagnosticism_doomgram_t diagnosticism_doomgram_t;
+typedef struct diagnosticism_doomgram_t                     diagnosticism_doomgram_t;
 #endif
 
 #define DIAGNOSTICISM_DOOMGRAM_INITIALIZER                          \
@@ -83,7 +85,11 @@ diagnosticism_doomgram_push_event_time_s(
 #define diagnosticism_doomgram_num_events_ge_100s(pdg)      ((pdg)->oom_event_counts[11])
 
 
-/**
+/** Attempts to obtain the total event time (in nanoseconds), which may be
+ * fail if overflow has occurred.
+ *
+ * \param dg The doomgram whose value is to be elicited;
+ * \param value Pointer to a variable into which the value is to be written;
  *
  * @pre NULL != dg
  */
@@ -93,9 +99,20 @@ diagnosticism_doomgram_try_get_total_event_time_ns(
 ,   uint64_t*                   value
 );
 
+/** \def diagnosticism_doomgram_try_get_total_event_time_ns_raw(dg)
+ *
+ * Obtains the total event time (in nanoseconds) without consideration as to
+ * whether overflow has occurred.
+ *
+ * \param dg The doomgram whose value is to be elicited;
+ */
 #define diagnosticism_doomgram_try_get_total_event_time_ns_raw(pdg)         ((pdg)->total_event_time_ns)
 
-/**
+/** Attempts to obtain the minimum event time (in nanoseconds), which may be
+ * fail if overflow has occurred.
+ *
+ * \param dg The doomgram whose value is to be elicited;
+ * \param value Pointer to a variable into which the value is to be written;
  *
  * @pre NULL != dg
  */
@@ -105,7 +122,11 @@ diagnosticism_doomgram_try_get_min_event_time_ns(
 ,   uint64_t*                   value
 );
 
-/**
+/** Attempts to obtain the maximum event time (in nanoseconds), which may be
+ * fail if overflow has occurred.
+ *
+ * \param dg The doomgram whose value is to be elicited;
+ * \param value Pointer to a variable into which the value is to be written;
  *
  * @pre NULL != dg
  */
@@ -126,7 +147,11 @@ diagnosticism_doomgram_dump_to_stream(
 );
 #endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
-
+/** Converts to string form according to given options.
+ *
+ * \param dg The doomgram whose value is to be elicited;
+ * \param ar Array of 12 characters into which to write the results;
+ */
 DIAGNOSTICISM_CALL(char const*)
 diagnosticism_doomgram_to_strip_12(
     diagnosticism_doomgram_t*   dg
@@ -134,8 +159,11 @@ diagnosticism_doomgram_to_strip_12(
 );
 
 
-#pragma once
+/* /////////////////////////////////////////////////////////////////////////
+ * inclusion control
+ */
 
+#pragma once
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

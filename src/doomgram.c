@@ -154,7 +154,6 @@ gram_doom_to_char_(
     }
 }
 
-
 static
 char const*
 gram_to_strip_impl_(
@@ -487,22 +486,31 @@ diagnosticism_doomgram_push_event_time_s(
     }
 }
 
-
 DIAGNOSTICISM_CALL(bool)
 diagnosticism_doomgram_try_get_total_event_time_ns(
     diagnosticism_doomgram_t*   dg
 ,   uint64_t*                   value
 )
 {
+    uint64_t dummy;
+
     assert(NULL != dg);
 
-    if (NULL != value)
+    if (NULL == value)
     {
-        *value = dg->total_event_time_ns;
+        value = &dummy;
     }
 
-    return !dg->has_overflowed;
+    if (!dg->has_overflowed)
+    {
+        *value = dg->total_event_time_ns;
 
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 DIAGNOSTICISM_CALL(bool)
@@ -562,7 +570,6 @@ diagnosticism_doomgram_try_get_max_event_time_ns(
         return false;
     }
 }
-
 
 DIAGNOSTICISM_CALL(int)
 diagnosticism_doomgram_dump_to_stream(
@@ -625,7 +632,6 @@ diagnosticism_doomgram_dump_to_stream(
 
     return 0;
 }
-
 
 DIAGNOSTICISM_CALL(char const*)
 diagnosticism_doomgram_to_strip_12(
