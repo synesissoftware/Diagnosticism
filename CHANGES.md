@@ -1,6 +1,11 @@
 # **to-be.Rust** Changes
 
 
+## 0.2.0-beta4 - 23rd August 2025
+
+* added `diagnosticism::calc_version_string()`;
+
+
 ## 0.2.0-beta3 - 12th August 2025
 
 * misc. changes;
