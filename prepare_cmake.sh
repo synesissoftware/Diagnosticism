@@ -4,8 +4,8 @@ ScriptPath=$0
 Dir=$(cd $(dirname "$ScriptPath"); pwd)
 Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
-MakeCmd=${SIS_CMAKE_COMMAND:-make}
-
+[[ -n "$MSYSTEM" ]] && DefaultMakeCmd=mingw32-make.exe || DefaultMakeCmd=make
+MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
 
 Configuration=Release
 ExamplesDisabled=0
@@ -60,7 +60,7 @@ while [[ $# -gt 0 ]]; do
 
       cat << EOF
 Diagnosticism is a standalone library of simple components for aiding in diagnostics for C and C++ projects
-Copyright (c) 2024, Matthew Wilson and Synesis Information Systems
+Copyright (c) 2024-2025, Matthew Wilson and Synesis Information Systems
 Creates/reinitialises the CMake build script(s)
 
 $ScriptPath [ ... flags/options ... ]
