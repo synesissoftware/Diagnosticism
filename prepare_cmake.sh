@@ -67,7 +67,7 @@ while [[ $# -gt 0 ]]; do
 
       cat << EOF
 Diagnosticism is a standalone library of simple components for aiding in diagnostics for C and C++ projects
-Copyright (c) 2024, Matthew Wilson and Synesis Information Systems
+Copyright (c) 2025, Matthew Wilson and Synesis Information Systems
 Creates/reinitialises the CMake build script(s)
 
 $ScriptPath [ ... flags/options ... ]
