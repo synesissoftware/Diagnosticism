@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for Diagnosticism
 #
 # Created:  23rd November 2024
-# Updated:  23rd February 2025
+# Updated:  25th August 2025
 #
 # ######################################################################## #
 
@@ -139,11 +139,14 @@ endif(BUILD_TESTING)
 # ############################
 # cstring
 
-set(cstring_REQUIRED_VERSION_ 4.0)
+if(BUILD_TESTING)
 
-find_package(cstring ${cstring_REQUIRED_VERSION_} REQUIRED)
+	set(cstring_REQUIRED_VERSION_ 4.0)
 
-message("-- CMake package cstring found (version ${cstring_VERSION}; ${cstring_REQUIRED_VERSION_} requested)")
+	find_package(cstring ${cstring_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package cstring found (version ${cstring_VERSION}; ${cstring_REQUIRED_VERSION_} requested)")
+endif(BUILD_TESTING)
 
 
 # ############################

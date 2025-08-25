@@ -1,6 +1,11 @@
 # **to-be.Rust** Changes
 
 
+## 0.2.1 - 25th August 2025
+
+* fixed unnecessary dependency on **cstring** when not building tests;
+
+
 ## 0.2.0 - 25th August 2025
 
 * minor mods for release;
