@@ -1,6 +1,13 @@
 # **to-be.Rust** Changes
 
 
+## 0.2.0 - 25th August 2025
+
+* minor mods for release;
+* automatic detection of MinGW;
+* dependency fix;
+
+
 ## 0.2.0-beta4 - 23rd August 2025
 
 * added `diagnosticism::calc_version_string()`;
