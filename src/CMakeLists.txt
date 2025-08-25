@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for Diagnosticsm core library
 #
 # Created:  23rd November 2024
-# Updated:  7th July 2025
+# Updated:  25th August 2025
 #
 # ######################################################################## #
 
@@ -84,7 +84,7 @@ target_include_directories(${TARGET_NAME}
 
 target_link_libraries(${TARGET_NAME}
 	PUBLIC
-		$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+		$<$<BOOL:${STLSoft_FOUND}>:STLSoft::STLSoft>
 )
 
 target_compile_options(${TARGET_NAME}

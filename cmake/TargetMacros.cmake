@@ -38,7 +38,7 @@ macro(target_link_STLSoft target_name)
 
 	target_link_libraries(${target_name}
 		PRIVATE
-			$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+			$<$<BOOL:${STLSoft_FOUND}>:STLSoft::STLSoft>
 	)
 endmacro(target_link_STLSoft)
 
