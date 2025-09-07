@@ -1,13 +1,12 @@
 # Diagnosticism <!-- omit in toc -->
 
+![C](https://img.shields.io/badge/C-00599C?style=flat&logo=c&logoColor=white)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![GitHub release](https://img.shields.io/github/v/release/synesissoftware/Diagnosticism.svg)](https://github.com/synesissoftware/Diagnosticism/releases/latest)
 [![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/Diagnosticism)](https://github.com/synesissoftware/Diagnosticism/commits/master)
 
 Miscellaneous Diagnostic facilities for C (and C++)
 
-![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
 
 
 ## Table of Contents <!-- omit in toc -->
