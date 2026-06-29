@@ -69,6 +69,7 @@ set(CORE_PUBLIC_HEADERS
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/ev.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/tracing.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/version_string.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/version_string.hpp"
 )
 
 set_target_properties(${TARGET_NAME} PROPERTIES
