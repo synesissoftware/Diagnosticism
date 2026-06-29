@@ -1,4 +1,4 @@
-# **to-be.Rust** Changes
+# **Diagnosticism** Changes
 
 
 ## 0.2.1 - 29th June 2026
