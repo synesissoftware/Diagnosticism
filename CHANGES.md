@@ -6,6 +6,7 @@
 * **clang** v17 compatibility;
 * fixed unnecessary dependency on **cstring** when not building tests;
 * **README.md** improvements;
+* fixed undefined `m_has_overflowed` identifier in `diagnosticism_doomgram_push_event_time_ns()` (debug builds);
 
 
 ## 0.2.0 - 25th August 2025

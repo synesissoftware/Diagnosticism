@@ -192,7 +192,8 @@ diagnosticism_doomgram_push_event_time_ns(
 ,   uint64_t                    time_in_ns
 )
 {
-    assert(!m_has_overflowed);
+    assert(NULL != dg);
+    assert(!dg->has_overflowed);
 
     if (!try_add_ns_to_total_and_update_minmax_and_count_(dg, time_in_ns))
     {
