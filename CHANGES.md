@@ -1,8 +1,9 @@
 # **to-be.Rust** Changes
 
 
-## 0.2.1 - 25th August 2025
+## 0.2.1 - 29th June 2026
 
+* **clang** v17 compatibility;
 * fixed unnecessary dependency on **cstring** when not building tests;
 
 
