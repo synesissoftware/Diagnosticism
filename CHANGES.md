@@ -5,6 +5,7 @@
 
 * **clang** v17 compatibility;
 * fixed unnecessary dependency on **cstring** when not building tests;
+* **README.md** improvements;
 
 
 ## 0.2.0 - 25th August 2025

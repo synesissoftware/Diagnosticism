@@ -1,13 +1,21 @@
 # Diagnosticism <!-- omit in toc -->
 
+Simple diagnostics utilities for C (and C++) — part of the cross-language **Diagnosticism** family.
+
+![Language](https://img.shields.io/badge/c-000000?style=flat&logo=c&logoColor=white)
+![Language](https://img.shields.io/badge/c++-000000?style=flat&logo=c%2B%2B&logoColor=white)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![GitHub release](https://img.shields.io/github/v/release/synesissoftware/Diagnosticism.svg)](https://github.com/synesissoftware/Diagnosticism/releases/latest)
 [![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/Diagnosticism)](https://github.com/synesissoftware/Diagnosticism/commits/master)
 
-Miscellaneous Diagnostic facilities for C (and C++)
 
-![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
+## Introduction
+
+**Diagnosticism** is a library providing miscellaneous discrete and simple diagnostics facilities to supplement what is available in the standard library. It is implemented in several languages, providing enhancements that are necessary (and possible). For example, [**Diagnosticism.Python**](https://github.com/synesissoftware/Diagnosticism.Python) can provide the `trace()` function that can capture the callstack information to issue into a diagnostic log statement.
+
+In **C** and **C++**, which offer only modest built-in diagnostic support, the facilities are aimed at lightweight, low-overhead utilities that integrate cleanly with existing code. For example, the **DoomGram** component records duration events into an order-of-magnitude histogram and can summarise many thousands of timings in a single 12-character strip — useful for logging cumulative execution costs in long-running performance-sensitive applications. (See the [Components](#components) section below for more on this.) The `diagnosticism_trace()` macro provides a simple call-site trace facility, writing file, line, function, and a `printf`-style message to a chosen stream; see [**examples/tracing/**](./examples/tracing/).
+
+Other facilities include environment-variable helpers (`diagnosticism_getenv()`, `diagnosticism_getenv_atoi()`), version-string formatting (`diagnosticism_calc_version_string()` and the C++ wrapper `diagnosticism::calc_version_string()`), and a small core API for library initialisation and version discovery. Further facilities will be added over time (and will be listed in the [Components](#components) section below).
 
 
 ## Table of Contents <!-- omit in toc -->
@@ -17,7 +25,12 @@ Miscellaneous Diagnostic facilities for C (and C++)
 - [Installation](#installation)
 - [Components](#components)
   - [C API / core library](#c-api--core-library)
+    - [Constants](#constants)
+    - [Types](#types)
+    - [Functions](#functions)
+    - [Macros](#macros)
   - [C++ API](#c-api)
+    - [Functions (C++)](#functions-c)
 - [Examples](#examples)
 - [Project Information](#project-information)
   - [Where to get help](#where-to-get-help)
@@ -25,11 +38,6 @@ Miscellaneous Diagnostic facilities for C (and C++)
   - [Dependencies](#dependencies)
   - [Related projects](#related-projects)
   - [License](#license)
-
-
-## Introduction
-
-**Diagnosticism** is a standalone library of simple components for aiding in diagnostics for C and C++ projects.
 
 
 ## Installation
@@ -41,14 +49,109 @@ file.
 
 ## Components
 
+The C library is organised by header under `include/diagnosticism/`. Include `<diagnosticism/diagnosticism.h>` for the core API, and the component headers as required.
+
+
 ### C API / core library
 
-T.B.C.
+
+#### Constants
+
+The following version constants are defined in `<diagnosticism/diagnosticism.h>`:
+
+* `DIAGNOSTICISM_VER_MAJOR`, `DIAGNOSTICISM_VER_MINOR`, `DIAGNOSTICISM_VER_PATCH` - the major, minor, and patch components of the library version;
+* `DIAGNOSTICISM_VER_ALPHABETA` - the alpha/beta component of the library version (0xFF when not applicable);
+* `DIAGNOSTICISM_VER` - a composite 32-bit encoding of the library version;
+
+
+#### Types
+
+The following types are defined in the public C headers:
+
+* `diag_uint32_t` - an unsigned 32-bit integer type used by the core API (`<diagnosticism/diagnosticism.h>`);
+* `diagnosticism_doomgram_t` - a **D**ecimal **O**rder-**O**f-**M**agnitude histo**G**ram structure that records duration values efficiently in the orders of magnitude 1ns+, 10ns+, 100ns+, 1µs+, ..., 10s+, 100s+ (`<diagnosticism/doomgram.h>`). This is a C port of the equivalent `stlsoft::doomgram` class from the **STLSoft** libraries;
+
+
+#### Functions
+
+The following functions comprise the public C API:
+
+Core API (`<diagnosticism/diagnosticism.h>`):
+
+* `diagnosticism_api_version()` - obtains the **Diagnosticism** version (at time of compilation); may be called without having initialised the API;
+* `diagnosticism_api_init()` - initialises the **Diagnosticism** API;
+* `diagnosticism_api_uninit()` - uninitialises the **Diagnosticism** API;
+
+DoomGram (`<diagnosticism/doomgram.h>`):
+
+* `diagnosticism_doomgram_push_event_time_ns()` - records an event of the given duration in nanoseconds;
+* `diagnosticism_doomgram_push_event_time_us()` - records an event of the given duration in microseconds;
+* `diagnosticism_doomgram_push_event_time_ms()` - records an event of the given duration in milliseconds;
+* `diagnosticism_doomgram_push_event_time_s()` - records an event of the given duration in seconds;
+* `diagnosticism_doomgram_try_get_total_event_time_ns()` - attempts to obtain the cumulative event time (in nanoseconds), which may fail if overflow has occurred;
+* `diagnosticism_doomgram_try_get_min_event_time_ns()` - attempts to obtain the minimum recorded event time (in nanoseconds);
+* `diagnosticism_doomgram_try_get_max_event_time_ns()` - attempts to obtain the maximum recorded event time (in nanoseconds);
+* `diagnosticism_doomgram_to_strip_12()` - writes a terse 12-character histogram strip summarising the order-of-magnitude distribution; useful for logging cumulative execution costs in long-running performance-sensitive applications. Each character encodes the event count in one magnitude bucket, using `_` for zero, `a`-`z` for increasing count ranges, and `*` when a bucket's count exceeds the representable range;
+
+Environment variables (`<diagnosticism/ev.h>`):
+
+* `diagnosticism_getenv()` - obtains the value of a named environment variable, or a caller-supplied default when the variable is not set (in which case `errno` is set to `ENOENT`);
+* `diagnosticism_getenv_atoi()` - obtains the value of a named environment variable interpreted as an integer, or a caller-supplied default when the variable is not set (in which case `errno` is set to `ENOENT`); returns 0 when the value cannot be interpreted as an integer;
+
+Tracing (`<diagnosticism/tracing.h>`):
+
+* `diagnosticism_trace_impl()` - low-level implementation used by the `diagnosticism_trace()` macro; writes a trace line to a given `FILE*` stream, including file, line, and function, followed by a `printf`-style formatted message;
+
+Version strings (`<diagnosticism/version_string.h>`):
+
+* `diagnosticism_calc_version_string()` - formats a version number (major, minor, patch, and optional alpha/beta/rc/build component) into a caller-supplied buffer; returns the number of characters written, or a negative value on failure. The `verAlphaBeta` argument encodes pre-release information: values in the ranges 0x4000+, 0x8000+, and 0xC000+ yield `-alphaN`, `-betaN`, and `-rcN` suffixes respectively; 0xFFFF suppresses any suffix; other non-zero values are appended as a fourth dotted component;
+
+
+#### Macros
+
+The following macros are defined in the public C headers:
+
+Core API (`<diagnosticism/diagnosticism.h>`):
+
+* `DIAGNOSTICISM_CALL(rt)` - expands to the appropriate linkage/return-type decoration for C and C++ (`extern "C" rt` in C++, `rt` in C);
+
+DoomGram (`<diagnosticism/doomgram.h>`):
+
+* `DIAGNOSTICISM_DOOMGRAM_INITIALIZER` - brace initialiser for a zeroed `diagnosticism_doomgram_t` instance;
+* `diagnosticism_doomgram_num_events_in_1ns()` through `diagnosticism_doomgram_num_events_ge_100s()` - elicit the event count for each order-of-magnitude bucket;
+* `diagnosticism_doomgram_try_get_total_event_time_ns_raw()` - obtains the cumulative event time (in nanoseconds) without regard to overflow;
+
+Tracing (`<diagnosticism/tracing.h>`):
+
+* `diagnosticism_trace(stm, ...)` - writes a trace line to `stm` at the call site, automatically supplying `__FILE__`, `__LINE__`, and the current function name together with a `printf`-style formatted message. For example:
+
+```C
+#include <diagnosticism/tracing.h>
+
+diagnosticism_trace(stderr, "argc=%d", argc);
+diagnosticism_trace(stderr, "argument=%s", argument);
+```
+
+See the example program in [**examples/tracing/**](./examples/tracing/).
 
 
 ### C++ API
 
-T.B.C.
+The C++ API is intentionally small: a thin convenience layer over selected C functions. Include the C++ headers directly (they pull in the corresponding C headers).
+
+
+#### Functions (C++)
+
+Version strings (`<diagnosticism/version_string.hpp>`):
+
+* `diagnosticism::calc_version_string()` - C++ wrapper around `diagnosticism_calc_version_string()` that returns a `std::string`; throws `std::runtime_error` on failure. For example:
+
+```C++
+#include <diagnosticism/version_string.hpp>
+
+std::string const s = diagnosticism::calc_version_string(1, 2, 3, 0);
+// s == "1.2.3"
+```
 
 
 ## Examples
