@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    diagnosticm/diagnosticm.h
+ * File:    diagnosticism/diagnosticism.h
  *
- * Purpose: Main header file for Diagnosticm (C-API).
+ * Purpose: Main header file for Diagnosticism (C-API).
  *
  * Created: 23rd November 2024
- * Updated: 29th June 2026
+ * Updated: 1st July 2026
  *
  * Home:    https://github.com/synesissoftware/Diagnosticism/
  *
@@ -39,9 +39,9 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-/** \file diagnosticm/diagnosticm.h
+/** \file diagnosticism/diagnosticism.h
  *
- * [C, C++] Main header file for Diagnosticm (C-API).
+ * [C, C++] Main header file for Diagnosticism (C-API).
  */
 
 #ifndef DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_DIAGNOSTICISM
@@ -51,7 +51,7 @@
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MAJOR  0
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MINOR  0
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  11
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   12
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   13
 #endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
 
