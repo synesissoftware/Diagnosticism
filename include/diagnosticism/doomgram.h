@@ -45,6 +45,12 @@ typedef struct diagnosticism_doomgram_t                     diagnosticism_doomgr
  * API functions & macros
  */
 
+/** Resets all fields of the doomgram to their initial state. */
+DIAGNOSTICISM_CALL(void)
+diagnosticism_doomgram_clear(
+    diagnosticism_doomgram_t*   dg
+);
+
 /** Pushes an event with the given number of nanoseconds. */
 DIAGNOSTICISM_CALL(bool)
 diagnosticism_doomgram_push_event_time_ns(

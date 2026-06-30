@@ -185,6 +185,16 @@ gram_to_strip_impl_(
  * API functions
  */
 
+DIAGNOSTICISM_CALL(void)
+diagnosticism_doomgram_clear(
+    diagnosticism_doomgram_t*   dg
+)
+{
+    assert(NULL != dg);
+
+    *dg = (diagnosticism_doomgram_t)DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
+}
+
 DIAGNOSTICISM_CALL(bool)
 diagnosticism_doomgram_push_event_time_ns(
     diagnosticism_doomgram_t*   dg

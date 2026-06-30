@@ -88,6 +88,7 @@ DoomGram (`<diagnosticism/doomgram.h>`):
 * `diagnosticism_doomgram_push_event_time_us()` - records an event of the given duration in microseconds;
 * `diagnosticism_doomgram_push_event_time_ms()` - records an event of the given duration in milliseconds;
 * `diagnosticism_doomgram_push_event_time_s()` - records an event of the given duration in seconds;
+* `diagnosticism_doomgram_clear()` - resets all fields of a doomgram to their initial state;
 * `diagnosticism_doomgram_try_get_total_event_time_ns()` - attempts to obtain the cumulative event time (in nanoseconds), which may fail if overflow has occurred;
 * `diagnosticism_doomgram_try_get_min_event_time_ns()` - attempts to obtain the minimum recorded event time (in nanoseconds);
 * `diagnosticism_doomgram_try_get_max_event_time_ns()` - attempts to obtain the maximum recorded event time (in nanoseconds);

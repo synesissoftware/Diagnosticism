@@ -3,6 +3,7 @@
 
 ## 0.2.1 - 1st July 2026
 
+* added `diagnosticism_doomgram_clear()`;
 * **clang** v17 compatibility;
 * removed unnecessary dependency on **<stdatomic.h>**;
 * fixed unnecessary dependency on **cstring** when not building tests;
