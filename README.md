@@ -186,14 +186,15 @@ If you _do_ need **STLSoft**, then version 1.10.6 or later is recommended. If yo
 
 ### Related projects
 
-Projects in which **Diagnosticism** is used include:
+Other implementations in the **Diagnosticism** family:
 
-T.B.C.
+* [**Diagnosticism.Go**](https://github.com/synesissoftware/Diagnosticism.Go);
+* [**Diagnosticism.Python**](https://github.com/synesissoftware/Diagnosticism.Python);
+* [**Diagnosticism.Rust**](https://github.com/synesissoftware/Diagnosticism.Rust);
+* [**Diagnosticism.Ruby**](https://github.com/synesissoftware/Diagnosticism.Ruby);
+* [**Diagnosticism.NET**](https://github.com/synesissoftware/Diagnosticism.NET);
 
-
-Projects in which **Diagnosticism** is used for testing include:
-
-T.B.C.
+The **DoomGram** component in this (C) library is ported from [`stlsoft::doomgram`](https://github.com/synesissoftware/STLSoft-1.11) in **STLSoft** (see [Dependencies](#dependencies)).
 
 
 ### License

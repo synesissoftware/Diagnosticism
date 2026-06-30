@@ -9,7 +9,7 @@
 * fixed unnecessary dependency on **cstring** when not building tests;
 * fixed undefined `m_has_overflowed` identifier in `diagnosticism_doomgram_push_event_time_ns()` (debug builds);
 * fixed **CMake** install omitting `<diagnosticism/version_string.hpp>`;
-* **README.md** improvements;
+* **README.md** improvements (related projects);
 
 
 ## 0.2.0 - 25th August 2025
