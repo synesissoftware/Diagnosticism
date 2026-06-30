@@ -2,7 +2,6 @@
 #include <diagnosticism/doomgram.h>
 
 #include <assert.h>
-#include <stdatomic.h>
 
 
 /* /////////////////////////////////////////////////////////////////////////

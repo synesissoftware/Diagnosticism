@@ -1,13 +1,14 @@
 # **Diagnosticism** Changes
 
 
-## 0.2.1 - 29th June 2026
+## 0.2.1 - 1st July 2026
 
 * **clang** v17 compatibility;
+* removed unnecessary dependency on **<stdatomic.h>**;
 * fixed unnecessary dependency on **cstring** when not building tests;
-* **README.md** improvements;
 * fixed undefined `m_has_overflowed` identifier in `diagnosticism_doomgram_push_event_time_ns()` (debug builds);
 * fixed **CMake** install omitting `<diagnosticism/version_string.hpp>`;
+* **README.md** improvements;
 
 
 ## 0.2.0 - 25th August 2025
