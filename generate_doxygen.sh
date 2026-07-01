@@ -70,7 +70,7 @@ fi
 mkdir -p "${CMakeDir}/doxygen"
 
 {
-  cat cmake/Doxyfile
+  cat Doxyfile
   echo ""
   echo "# Output directory (overridden by ${Basename})"
   echo "OUTPUT_DIRECTORY = ${CMakeDir}/doxygen"
