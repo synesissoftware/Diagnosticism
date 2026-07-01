@@ -24,6 +24,7 @@ Other facilities include environment-variable helpers (`diagnosticism_getenv()`,
 - [Introduction](#introduction)
 - [Installation](#installation)
   - [CMake consumer projects](#cmake-consumer-projects)
+  - [API documentation (Doxygen)](#api-documentation-doxygen)
 - [Components](#components)
   - [C API / core library](#c-api--core-library)
     - [Constants](#constants)
@@ -63,6 +64,17 @@ target_link_libraries(myapp PRIVATE Diagnosticism::core)
 ```
 
 Ensure `CMAKE_PREFIX_PATH` includes the install prefix (for example `/usr/local` or the path passed to `cmake --install`).
+
+
+### API documentation (Doxygen)
+
+HTML API reference for the public headers may be generated locally:
+
+```bash
+$ ./generate_doxygen.sh
+```
+
+Open `_build/doxygen/html/index.html` in a browser (or `<build-dir>/doxygen/html/index.html` when `SIS_CMAKE_BUILD_DIR` is set). Requires [Doxygen](https://www.doxygen.nl/) on `PATH`.
 
 
 ## Components

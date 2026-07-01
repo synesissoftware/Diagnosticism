@@ -42,6 +42,9 @@
 /** \file diagnosticism/diagnosticism.h
  *
  * [C, C++] Main header file for Diagnosticism (C-API).
+ *
+ * @defgroup diagnosticism_core Core API
+ * @{
  */
 
 #ifndef DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_DIAGNOSTICISM
@@ -103,11 +106,15 @@
  * macros
  */
 
-/** \def DIAGNOSTICISM_CALL(rt)
+/** Expands to the appropriate linkage/return-type decoration for C and C++.
  *
- * \param rt The return type.
+ * In C++ expands to `extern "C" rt`; in C expands to `rt`.
+ *
+ * @param rt The return type.
  */
-#ifndef DIAGNOSTICISM_CALL
+#if defined(__DOXYGEN__)
+# define DIAGNOSTICISM_CALL(rt)                            rt
+#elif !defined(DIAGNOSTICISM_CALL)
 # ifdef __cplusplus
 #  define DIAGNOSTICISM_CALL(rt)                            extern "C" rt
 # else
@@ -120,6 +127,7 @@
  * types
  */
 
+/** Unsigned 32-bit integer type used by the core API. */
 typedef uint32_t                                            diag_uint32_t;
 
 
@@ -141,6 +149,10 @@ diagnosticism_api_version(void);
 
 /** Initialises the Diagnosticism API.
  *
+ * @param init_flags Reserved; pass 0.
+ * @param init_param Reserved; pass NULL.
+ *
+ * @return 0 on success.
  */
 DIAGNOSTICISM_CALL(int)
 diagnosticism_api_init(
@@ -148,9 +160,7 @@ diagnosticism_api_init(
 ,   void*           init_param
 );
 
-/** Uninitialises the Diagnosticism API.
- *
- */
+/** Uninitialises the Diagnosticism API. */
 DIAGNOSTICISM_CALL(void)
 diagnosticism_api_uninit(void);
 
@@ -158,6 +168,9 @@ diagnosticism_api_uninit(void);
 /* /////////////////////////////////////////////////////////////////////////
  * API functions (C++)
  */
+
+
+/** @} */
 
 
 /* /////////////////////////////////////////////////////////////////////////

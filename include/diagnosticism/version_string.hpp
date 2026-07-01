@@ -1,4 +1,10 @@
 
+/** @file diagnosticism/version_string.hpp
+ * @brief Version-string formatting (C++ API).
+ *
+ * @ingroup diagnosticism_version
+ */
+
 #include <diagnosticism/version_string.h>
 
 #include <stdexcept>
@@ -7,6 +13,18 @@
 
 namespace diagnosticism {
 
+/** C++ wrapper around diagnosticism_calc_version_string().
+ *
+ * @param verMajor Major version component.
+ * @param verMinor Minor version component.
+ * @param verPatch Patch version component.
+ * @param verAlphaBeta Alpha/beta/rc/build encoding; see
+ *  diagnosticism_calc_version_string().
+ *
+ * @return Formatted version string (for example @c "1.2.3").
+ *
+ * @throws std::runtime_error on formatting failure.
+ */
 inline
 std::string
 calc_version_string(
@@ -42,4 +60,3 @@ calc_version_string(
 #pragma once
 
 /* ///////////////////////////// end of file //////////////////////////// */
-

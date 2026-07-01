@@ -19,7 +19,9 @@ int main(int argc, char* argv[])
 {
     ((void)&argv);
 
+    //! [tracing_call]
     diagnosticism_trace(stderr, "argc=%d, argv=...", argc);
+    //! [tracing_call]
 
     f();
 

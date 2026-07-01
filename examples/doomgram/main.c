@@ -8,11 +8,14 @@
 
 int main(void)
 {
+    //! [doomgram_init]
     diagnosticism_doomgram_t    dg = DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
+    //! [doomgram_init]
     char                        strip[12 + 1];
     uint64_t                    min_ns;
     uint64_t                    max_ns;
 
+    //! [doomgram_push]
     diagnosticism_doomgram_push_event_time_ns(&dg,   9);
     { for (int i = 0; i != 25; ++i)
     diagnosticism_doomgram_push_event_time_ns(&dg,  80);
@@ -42,7 +45,9 @@ int main(void)
     { for (int i = 0; i != 3; ++i)
     diagnosticism_doomgram_push_event_time_s(&dg,  700);
     }
+    //! [doomgram_push]
 
+    //! [doomgram_strip]
     diagnosticism_doomgram_to_strip_12(&dg, (char (*)[12])strip);
     strip[12] = '\0';
 
@@ -66,6 +71,7 @@ int main(void)
     ,   max_ns
     ,   dg.event_count
     );
+    //! [doomgram_strip]
 
     return EXIT_SUCCESS;
 }

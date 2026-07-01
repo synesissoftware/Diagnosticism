@@ -1,9 +1,32 @@
 
+/** @file diagnosticism/tracing.h
+ * @brief Call-site trace macro.
+ *
+ * @see @ref tracing_page "Tracing overview"
+ *
+ * @defgroup diagnosticism_tracing Tracing
+ * @{
+ */
+
 #include <diagnosticism/diagnosticism.h>
 
 #include <stdio.h>
 
 
+/** Low-level implementation used by the diagnosticism_trace() macro.
+ *
+ * Writes a trace line to @a stm in the form `file:line:function(message)`.
+ *
+ * @param stm Output stream (for example @c stderr).
+ * @param file Source file name (typically @c __FILE__).
+ * @param line Source line number (typically @c __LINE__).
+ * @param function Current function name.
+ * @param args_fmt `printf`-style format string for the message portion.
+ *
+ * @return Non-negative value on success, or negative on failure.
+ *
+ * @see diagnosticism_trace()
+ */
 DIAGNOSTICISM_CALL(int)
 diagnosticism_trace_impl(
     FILE*       stm
@@ -23,6 +46,20 @@ diagnosticism_trace_impl(
 # define DIAGNOSTICISM_FUNCTION_                            __FUNCTION__
 #endif
 
+/** @def diagnosticism_trace(stm, ...)
+ * @brief Writes a trace line to @a stm at the call site.
+ *
+ * Automatically supplies @c __FILE__, @c __LINE__, and the current function
+ * name together with a `printf`-style formatted message.
+ *
+ * @param stm Output stream (for example @c stderr).
+ * @param ... Format string and arguments for the message portion.
+ *
+ * @see @ref tracing_page "Tracing overview"
+ * @see diagnosticism_trace_impl()
+ *
+ * @snippet tracing/main.c tracing_call
+ */
 #define diagnosticism_trace(stm, ...)                       \
                                                             \
     diagnosticism_trace_impl(                               \
@@ -34,6 +71,9 @@ diagnosticism_trace_impl(
     )
 
 
+/** @} */
+
+
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control
  */
@@ -42,4 +82,3 @@ diagnosticism_trace_impl(
 
 
 /* ///////////////////////////// end of file //////////////////////////// */
-

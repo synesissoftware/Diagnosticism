@@ -10,9 +10,10 @@
 * removed unnecessary dependencies on **CLASP** and **cstring** from **CMake** configuration;
 * examples link only `core` (`define_example_program()` no longer links **CLASP**);
 * added [EXAMPLES.md](./EXAMPLES.md), [examples/tracing.md](./examples/tracing.md), and `generate_doxygen.sh` API documentation;
+* expanded Doxygen documentation (`doc/` topic pages, header API comments, example snippets);
 * fixed undefined `m_has_overflowed` identifier in `diagnosticism_doomgram_push_event_time_ns()` (debug builds);
 * fixed **CMake** install omitting `<diagnosticism/version_string.hpp>`;
-* **README.md** improvements (Components, DoomGram example, related projects, **EXAMPLES.md**, tracing example, **CMake** consumer quick-start);
+* **README.md** improvements (Components, DoomGram example, related projects, **EXAMPLES.md**, tracing example, **CMake** consumer quick-start, Doxygen);
 
 
 ## 0.2.0 - 25th August 2025
