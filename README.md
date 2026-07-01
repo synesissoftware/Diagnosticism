@@ -23,6 +23,7 @@ Other facilities include environment-variable helpers (`diagnosticism_getenv()`,
 
 - [Introduction](#introduction)
 - [Installation](#installation)
+  - [CMake consumer projects](#cmake-consumer-projects)
 - [Components](#components)
   - [C API / core library](#c-api--core-library)
     - [Constants](#constants)
@@ -33,6 +34,7 @@ Other facilities include environment-variable helpers (`diagnosticism_getenv()`,
     - [Functions (C++)](#functions-c)
 - [Examples](#examples)
   - [Example - DoomGram](#example---doomgram)
+  - [Example - tracing](#example---tracing)
 - [Project Information](#project-information)
   - [Where to get help](#where-to-get-help)
   - [Contribution guidelines](#contribution-guidelines)
@@ -43,9 +45,24 @@ Other facilities include environment-variable helpers (`diagnosticism_getenv()`,
 
 ## Installation
 
-Detailed instructions - via **CMake**, via bundling, via custom makefile
-parameters - are provided in the accompanying [INSTALL.md](./INSTALL.md)
-file.
+Detailed instructions — via **CMake**, via bundling, via custom makefile parameters — are provided in the accompanying [INSTALL.md](./INSTALL.md) file.
+
+
+### CMake consumer projects
+
+After installing **Diagnosticism** (see [INSTALL.md](./INSTALL.md)), consumer **CMake** projects may link against the library as follows:
+
+```cmake
+cmake_minimum_required(VERSION 3.20)
+project(myapp C)
+
+find_package(Diagnosticism REQUIRED)
+
+add_executable(myapp main.c)
+target_link_libraries(myapp PRIVATE Diagnosticism::core)
+```
+
+Ensure `CMAKE_PREFIX_PATH` includes the install prefix (for example `/usr/local` or the path passed to `cmake --install`).
 
 
 ## Components
@@ -158,7 +175,7 @@ std::string const s = diagnosticism::calc_version_string(1, 2, 3, 0);
 
 ## Examples
 
-Examples are provided in the ```examples``` directory, along with a markdown description for each.
+Examples are provided in the ```examples``` directory, along with a markdown description for each. A detailed list is provided in [EXAMPLES.md](./EXAMPLES.md).
 
 
 ### Example - DoomGram
@@ -221,6 +238,26 @@ indicating, among other buckets:
 - and further non-uniform counts across the remaining magnitude buckets.
 
 In a live system one would log only the strip (and perhaps min/max), not the full internal histogram state.
+
+
+### Example - tracing
+
+The example program **tracing** (in the **examples** directory) illustrates use of `diagnosticism_trace()` at the call site. See [**examples/tracing/main.c**](./examples/tracing/main.c) and [**examples/tracing.md**](./examples/tracing.md).
+
+```C
+#include <diagnosticism/tracing.h>
+
+diagnosticism_trace(stderr, "argc=%d, argv=...", argc);
+diagnosticism_trace(stderr, "argument=%s", argument);
+```
+
+Typical output (to `stderr`) is along the lines of:
+
+```plaintext
+examples/tracing/main.c:22:main(argc=1, argv=...)
+examples/tracing/main.c:10:f()
+examples/tracing/main.c:15:g(argument=the argument to g)
+```
 
 
 ## Project Information

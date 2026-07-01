@@ -110,7 +110,7 @@ diagnosticism_doomgram_try_get_total_event_time_ns(
  * Obtains the total event time (in nanoseconds) without consideration as to
  * whether overflow has occurred.
  *
- * \param dg The doomgram whose value is to be elicited;
+ * \param pdg The doomgram whose value is to be elicited;
  */
 #define diagnosticism_doomgram_try_get_total_event_time_ns_raw(pdg)         ((pdg)->total_event_time_ns)
 
