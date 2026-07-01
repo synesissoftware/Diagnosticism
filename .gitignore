@@ -5,6 +5,7 @@
 /.vs/
 
 /_build/
+/_build-ci/
 /_internal/
 
 /bin/

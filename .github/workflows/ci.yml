@@ -1,0 +1,121 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    name: Build (library + examples)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+          - os: macos-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Clang (Ubuntu)
+        if: runner.os == 'Linux' && matrix.c_compiler == 'clang'
+        run: sudo apt-get update && sudo apt-get install -y clang
+
+      - name: Configure
+        run: >
+          cmake -B build
+          -S .
+          -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+          -DBUILD_EXAMPLES=ON
+          -DBUILD_TESTING=OFF
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Smoke-run examples
+        run: |
+          set -e
+          ./build/examples/doomgram/doomgram >/dev/null
+          ./build/examples/tracing/tracing >/dev/null
+          ./build/examples/version_string/version_string >/dev/null
+          ./build/examples/ev/ev >/dev/null
+
+  test:
+    name: Unit tests (${{ matrix.os }}, ${{ matrix.c_compiler }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: macos-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install test dependencies
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          DEPS="${RUNNER_TEMP}/sis-deps"
+          STL="${RUNNER_TEMP}/stlsoft/STLSoft_1_11"
+          XTSRC="${RUNNER_TEMP}/xtests-src"
+          XTBUILDDIR="${RUNNER_TEMP}/xtests-build"
+
+          mkdir -p "$(dirname "$STL")"
+
+          git clone --depth 1 https://github.com/synesissoftware/STLSoft-1.11 "$STL"
+          git clone --depth 1 https://github.com/synesissoftware/xTests "$XTSRC"
+
+          cmake -S "$XTSRC" -B "$XTBUILDDIR" \
+            -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+            -DCMAKE_INSTALL_PREFIX="$DEPS" \
+            -DBUILD_EXAMPLES=OFF \
+            -DBUILD_TESTING=OFF \
+            -DNO_SHWILD=TRUE \
+            -DSTLSOFT="$STL"
+
+          cmake --build "$XTBUILDDIR" --parallel
+          cmake --install "$XTBUILDDIR"
+
+          echo "SIS_CMAKE_DEPS_PREFIX=$DEPS" >> "$GITHUB_ENV"
+          echo "STLSOFT=$STL" >> "$GITHUB_ENV"
+
+      - name: Configure
+        run: >
+          cmake -B build
+          -S .
+          -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+          -DCMAKE_PREFIX_PATH=${{ env.SIS_CMAKE_DEPS_PREFIX }}
+          -DSTLSOFT=${{ env.STLSOFT }}
+          -DBUILD_EXAMPLES=OFF
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Run unit tests
+        run: SIS_CMAKE_BUILD_DIR="${{ github.workspace }}/build" ./run_all_unit_tests.sh -M

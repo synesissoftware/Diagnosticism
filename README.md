@@ -6,6 +6,7 @@ Simple diagnostics utilities for C (and C++) — part of the cross-language **Di
 ![Language](https://img.shields.io/badge/c++-000000?style=flat&logo=c%2B%2B&logoColor=white)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![GitHub release](https://img.shields.io/github/v/release/synesissoftware/Diagnosticism.svg)](https://github.com/synesissoftware/Diagnosticism/releases/latest)
+[![CI](https://github.com/synesissoftware/Diagnosticism/actions/workflows/ci.yml/badge.svg)](https://github.com/synesissoftware/Diagnosticism/actions/workflows/ci.yml)
 [![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/Diagnosticism)](https://github.com/synesissoftware/Diagnosticism/commits/master)
 
 
