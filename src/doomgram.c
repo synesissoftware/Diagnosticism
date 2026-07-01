@@ -57,12 +57,12 @@ calc_doom_(
 {
     if (v >= 100000000)
     {
-        size_t n = 0u;
+        uint64_t n = 0u;
 
         for (; 0 != v; v /= 10, ++n)
         {}
 
-        return n;
+        return (unsigned)n;
     }
     else
     {
