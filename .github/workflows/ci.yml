@@ -27,6 +27,9 @@ jobs:
           - os: macos-latest
             c_compiler: clang
             cpp_compiler: clang++
+          - os: windows-latest
+            c_compiler: msvc
+            cpp_compiler: msvc
 
     steps:
       - uses: actions/checkout@v4
@@ -36,25 +39,47 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y clang
 
       - name: Configure
-        run: >
-          cmake -B build
-          -S .
-          -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
-          -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
-          -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-          -DBUILD_EXAMPLES=ON
-          -DBUILD_TESTING=OFF
-
-      - name: Build
-        run: cmake --build build --parallel
-
-      - name: Smoke-run examples
+        shell: bash
         run: |
           set -e
-          ./build/examples/doomgram/doomgram >/dev/null
-          ./build/examples/tracing/tracing >/dev/null
-          ./build/examples/version_string/version_string >/dev/null
-          ./build/examples/ev/ev >/dev/null
+          if [ "${{ matrix.c_compiler }}" = "msvc" ]; then
+            cmake -B build -S . \
+              -DBUILD_EXAMPLES=ON \
+              -DBUILD_TESTING=OFF
+          else
+            cmake -B build -S . \
+              -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+              -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} \
+              -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }} \
+              -DBUILD_EXAMPLES=ON \
+              -DBUILD_TESTING=OFF
+          fi
+
+      - name: Build
+        shell: bash
+        run: |
+          set -e
+          if [ "${{ matrix.c_compiler }}" = "msvc" ]; then
+            cmake --build build --config ${{ env.BUILD_TYPE }} --parallel
+          else
+            cmake --build build --parallel
+          fi
+
+      - name: Smoke-run examples
+        shell: bash
+        run: |
+          set -e
+          if [ "${{ matrix.c_compiler }}" = "msvc" ]; then
+            EXE_SUFFIX=.exe
+            EXE_DIR=${{ env.BUILD_TYPE }}
+          else
+            EXE_SUFFIX=
+            EXE_DIR=.
+          fi
+          "build/examples/doomgram/${EXE_DIR}/doomgram${EXE_SUFFIX}"
+          "build/examples/tracing/${EXE_DIR}/tracing${EXE_SUFFIX}"
+          "build/examples/version_string/${EXE_DIR}/version_string${EXE_SUFFIX}"
+          "build/examples/ev/${EXE_DIR}/ev${EXE_SUFFIX}"
 
   test:
     name: Unit tests (${{ matrix.os }}, ${{ matrix.c_compiler }})
@@ -69,6 +94,9 @@ jobs:
           - os: macos-latest
             c_compiler: clang
             cpp_compiler: clang++
+          - os: windows-latest
+            c_compiler: msvc
+            cpp_compiler: msvc
 
     steps:
       - uses: actions/checkout@v4
@@ -88,34 +116,61 @@ jobs:
           git clone --depth 1 https://github.com/synesissoftware/STLSoft-1.11 "$STL"
           git clone --depth 1 https://github.com/synesissoftware/xTests "$XTSRC"
 
-          cmake -S "$XTSRC" -B "$XTBUILDDIR" \
-            -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
-            -DCMAKE_INSTALL_PREFIX="$DEPS" \
-            -DBUILD_EXAMPLES=OFF \
-            -DBUILD_TESTING=OFF \
-            -DNO_SHWILD=TRUE \
-            -DSTLSOFT="$STL"
-
-          cmake --build "$XTBUILDDIR" --parallel
-          cmake --install "$XTBUILDDIR"
+          if [ "${{ matrix.c_compiler }}" = "msvc" ]; then
+            cmake -S "$XTSRC" -B "$XTBUILDDIR" \
+              -DCMAKE_INSTALL_PREFIX="$DEPS" \
+              -DBUILD_EXAMPLES=OFF \
+              -DBUILD_TESTING=OFF \
+              -DNO_SHWILD=TRUE \
+              -DSTLSOFT="$STL"
+            cmake --build "$XTBUILDDIR" --config ${{ env.BUILD_TYPE }} --parallel
+            cmake --install "$XTBUILDDIR" --config ${{ env.BUILD_TYPE }}
+          else
+            cmake -S "$XTSRC" -B "$XTBUILDDIR" \
+              -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+              -DCMAKE_INSTALL_PREFIX="$DEPS" \
+              -DBUILD_EXAMPLES=OFF \
+              -DBUILD_TESTING=OFF \
+              -DNO_SHWILD=TRUE \
+              -DSTLSOFT="$STL"
+            cmake --build "$XTBUILDDIR" --parallel
+            cmake --install "$XTBUILDDIR"
+          fi
 
           echo "SIS_CMAKE_DEPS_PREFIX=$DEPS" >> "$GITHUB_ENV"
           echo "STLSOFT=$STL" >> "$GITHUB_ENV"
 
       - name: Configure
-        run: >
-          cmake -B build
-          -S .
-          -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
-          -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
-          -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-          -DCMAKE_PREFIX_PATH=${{ env.SIS_CMAKE_DEPS_PREFIX }}
-          -DSTLSOFT=${{ env.STLSOFT }}
-          -DBUILD_EXAMPLES=OFF
-          -DBUILD_TESTING=ON
+        shell: bash
+        run: |
+          set -e
+          if [ "${{ matrix.c_compiler }}" = "msvc" ]; then
+            cmake -B build -S . \
+              -DCMAKE_PREFIX_PATH="${SIS_CMAKE_DEPS_PREFIX}" \
+              -DSTLSOFT="${STLSOFT}" \
+              -DBUILD_EXAMPLES=OFF \
+              -DBUILD_TESTING=ON
+          else
+            cmake -B build -S . \
+              -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} \
+              -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} \
+              -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }} \
+              -DCMAKE_PREFIX_PATH="${SIS_CMAKE_DEPS_PREFIX}" \
+              -DSTLSOFT="${STLSOFT}" \
+              -DBUILD_EXAMPLES=OFF \
+              -DBUILD_TESTING=ON
+          fi
 
       - name: Build
-        run: cmake --build build --parallel
+        shell: bash
+        run: |
+          set -e
+          if [ "${{ matrix.c_compiler }}" = "msvc" ]; then
+            cmake --build build --config ${{ env.BUILD_TYPE }} --parallel
+          else
+            cmake --build build --parallel
+          fi
 
       - name: Run unit tests
+        shell: bash
         run: SIS_CMAKE_BUILD_DIR="${{ github.workspace }}/build" ./run_all_unit_tests.sh -M
