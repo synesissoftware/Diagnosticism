@@ -53,4 +53,21 @@ getenv_atoi("DIAGNOSTICISM_EXAMPLE_BADINT", 99) -> 0 (errno=22)
 ```
 
 
+## version_string
+
+Formats version tuples with `diagnosticism_calc_version_string()`, including alpha/beta/rc suffixes.
+
+* Source: `examples/version_string/main.c`
+* API: @ref diagnosticism_version
+
+Typical output:
+
+```plaintext
+1.2.3 (0x0000) -> "1.2.3"
+0.1.0 (0x4321) -> "0.1.0-alpha801"
+1.2.3 (0xc123) -> "1.2.3-rc291"
+1.2.3 (0xffff) -> "1.2.3"
+```
+
+
 <!-- ########################### end of file ########################### -->

@@ -11,6 +11,7 @@
 * examples link only **core** (`define_example_program()` no longer links **CLASP**);
 * added [EXAMPLES.md](./EXAMPLES.md), [examples/tracing.md](./examples/tracing.md), and **generate_doxygen.sh** API documentation;
 * added **ev** example program (**examples/ev/**) with markdown walkthroughs;
+* added **version_string** example program (**examples/version_string/**) with markdown walkthroughs;
 * expanded Doxygen documentation (**doc/** topic pages, header API comments, example snippets);
 * fixed undefined `m_has_overflowed` identifier in `diagnosticism_doomgram_push_event_time_ns()` (debug builds);
 * fixed **CMake** install omitting `<diagnosticism/version_string.hpp>`;
