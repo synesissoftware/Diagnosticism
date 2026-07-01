@@ -32,6 +32,7 @@ Other facilities include environment-variable helpers (`diagnosticism_getenv()`,
   - [C++ API](#c-api)
     - [Functions (C++)](#functions-c)
 - [Examples](#examples)
+  - [Example - DoomGram](#example---doomgram)
 - [Project Information](#project-information)
   - [Where to get help](#where-to-get-help)
   - [Contribution guidelines](#contribution-guidelines)
@@ -158,6 +159,68 @@ std::string const s = diagnosticism::calc_version_string(1, 2, 3, 0);
 ## Examples
 
 Examples are provided in the ```examples``` directory, along with a markdown description for each.
+
+
+### Example - DoomGram
+
+The example program **doomgram** (in the **examples** directory) illustrates use of `diagnosticism_doomgram_t` to accumulate many timing events and obtain the 12-character timing strip. Each strip character corresponds to one order-of-magnitude bucket (from 1ns+ through 100s+). Within a bucket, `_` means no events, `a`-`z` encodes increasing event counts, and `*` indicates overflow of the representable range.
+
+The program records a spread of durations across the magnitude range, using `{}`-guarded loops where several events share the same order-of-magnitude. See [**examples/doomgram/main.c**](./examples/doomgram/main.c) and [**examples/doomgram.md**](./examples/doomgram.md).
+
+```C
+// examples/doomgram/main.c (extract)
+
+diagnosticism_doomgram_push_event_time_ns(&dg,   9);
+{ for (int i = 0; i != 25; ++i)
+diagnosticism_doomgram_push_event_time_ns(&dg,  80);
+}
+{ for (int i = 0; i != 15; ++i)
+diagnosticism_doomgram_push_event_time_ns(&dg, 700);
+}
+
+{ for (int i = 0; i != 30; ++i)
+diagnosticism_doomgram_push_event_time_us(&dg,   6);
+}
+diagnosticism_doomgram_push_event_time_us(&dg,  50);
+{ for (int i = 0; i != 120000; ++i)
+diagnosticism_doomgram_push_event_time_us(&dg, 400);
+}
+
+/* diagnosticism_doomgram_push_event_time_ms(&dg,   3); */
+{ for (int i = 0; i != 22; ++i)
+diagnosticism_doomgram_push_event_time_ms(&dg,  20);
+}
+diagnosticism_doomgram_push_event_time_ms(&dg, 100);
+
+diagnosticism_doomgram_push_event_time_s(&dg,    9);
+/* ... further s-bucket pushes ... */
+
+diagnosticism_doomgram_to_strip_12(&dg, (char (*)[12])strip);
+strip[12] = '\0';
+
+diagnosticism_doomgram_try_get_min_event_time_ns(&dg, &min_ns);
+diagnosticism_doomgram_try_get_max_event_time_ns(&dg, &max_ns);
+
+fprintf(stderr,
+    "strip: %s; min: %" PRIu64 "ns;  max: %" PRIu64 "ns;  event_count: %" PRIu64 "\n",
+    strip, min_ns, max_ns, dg.event_count);
+```
+
+Typical output is:
+
+```plaintext
+strip: abbbaf_baaaa; min: 9ns;  max: 700000000000ns;  event_count: 120106
+```
+
+indicating, among other buckets:
+- `a` in the 1ns+ bucket (1 event at 9ns);
+- `b` in the 10ns+ and 100ns+ buckets (25 events at 80ns; 15 at 700ns);
+- `b` in the 1µs+ bucket (30 events at 6µs);
+- `f` in the 100µs+ bucket (120000 events at 400µs);
+- `_` in the 1ms+ bucket (the single `3ms` push is commented out in the example source);
+- and further non-uniform counts across the remaining magnitude buckets.
+
+In a live system one would log only the strip (and perhaps min/max), not the full internal histogram state.
 
 
 ## Project Information

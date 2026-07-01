@@ -4,12 +4,13 @@
 ## 0.2.1 - 1st July 2026
 
 * added `diagnosticism_doomgram_clear()`;
+* added **doomgram** example program (`examples/doomgram/`);
 * **clang** v17 compatibility;
 * removed unnecessary dependency on **<stdatomic.h>**;
 * fixed unnecessary dependency on **cstring** when not building tests;
 * fixed undefined `m_has_overflowed` identifier in `diagnosticism_doomgram_push_event_time_ns()` (debug builds);
 * fixed **CMake** install omitting `<diagnosticism/version_string.hpp>`;
-* **README.md** improvements (related projects);
+* **README.md** improvements (Components, DoomGram example, related projects);
 
 
 ## 0.2.0 - 25th August 2025

@@ -1,3 +1,11 @@
-# SIS:AUTO_GENERATED: Remove this line if you edit the file, otherwise it will be overwritten
-define_example_program(tracing main.c)
 
+add_executable(tracing
+	main.c
+)
+
+target_link_libraries(tracing
+	PRIVATE
+		core
+)
+
+define_target_compile_options(tracing)
