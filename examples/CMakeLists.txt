@@ -39,6 +39,7 @@ endif()
 
 
 add_subdirectory(doomgram)
+add_subdirectory(ev)
 add_subdirectory(tracing)
 
 

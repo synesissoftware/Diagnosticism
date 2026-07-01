@@ -35,4 +35,22 @@ examples/tracing/main.c:15:g(argument=the argument to g)
 ```
 
 
+## ev
+
+Illustrates environment-variable helpers with defaults and `errno` behaviour.
+
+* Source: `examples/ev/main.c`
+* API: @ref diagnosticism_ev
+
+Typical output:
+
+```plaintext
+getenv("DIAGNOSTICISM_EXAMPLE_NAME", NULL) -> "Diagnosticism" (errno=0)
+getenv("DIAGNOSTICISM_EXAMPLE_MISSING", default-value) -> "default-value" (errno=2)
+getenv_atoi("DIAGNOSTICISM_EXAMPLE_PORT", 0) -> 8080 (errno=0)
+getenv_atoi("DIAGNOSTICISM_EXAMPLE_MISSING", 42) -> 42 (errno=2)
+getenv_atoi("DIAGNOSTICISM_EXAMPLE_BADINT", 99) -> 0 (errno=22)
+```
+
+
 <!-- ########################### end of file ########################### -->
