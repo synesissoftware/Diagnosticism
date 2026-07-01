@@ -1,8 +1,6 @@
 
 #include <diagnosticism/tracing.h>
 
-#include <clasp/clasp.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 

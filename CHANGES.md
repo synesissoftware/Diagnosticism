@@ -7,7 +7,8 @@
 * added **doomgram** example program (`examples/doomgram/`);
 * **clang** v17 compatibility;
 * removed unnecessary dependency on **<stdatomic.h>**;
-* fixed unnecessary dependency on **cstring** when not building tests;
+* removed unnecessary dependencies on **CLASP** and **cstring** from **CMake** configuration;
+* examples link only `core` (`define_example_program()` no longer links **CLASP**);
 * fixed undefined `m_has_overflowed` identifier in `diagnosticism_doomgram_push_event_time_ns()` (debug builds);
 * fixed **CMake** install omitting `<diagnosticism/version_string.hpp>`;
 * **README.md** improvements (Components, DoomGram example, related projects);

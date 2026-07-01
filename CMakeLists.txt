@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for Diagnosticism
 #
 # Created:  23rd November 2024
-# Updated:  25th August 2025
+# Updated:  1st July 2026
 #
 # ######################################################################## #
 
@@ -114,39 +114,11 @@ endif(Diagnosticism_OS_SIMULATE_WINDOWS_ON_UNIX)
 # dependencies
 #
 # required:
-# - CLASP - required for testing;
-# - cstring - required for testing;
 # - STLSoft - required for testing;
 # - xTests - required for testing;
 #
 # optional:
 # - shwild - required for testing;
-
-
-# ############################
-# CLASP
-
-if(BUILD_TESTING)
-
-	set(CLASP_REQUIRED_VERSION_ 0.14)
-
-	find_package(CLASP ${CLASP_REQUIRED_VERSION_} REQUIRED)
-
-	message("-- CMake package CLASP found (version ${CLASP_VERSION}; ${CLASP_REQUIRED_VERSION_} requested)")
-endif(BUILD_TESTING)
-
-
-# ############################
-# cstring
-
-if(BUILD_TESTING)
-
-	set(cstring_REQUIRED_VERSION_ 4.0)
-
-	find_package(cstring ${cstring_REQUIRED_VERSION_} REQUIRED)
-
-	message("-- CMake package cstring found (version ${cstring_VERSION}; ${cstring_REQUIRED_VERSION_} requested)")
-endif(BUILD_TESTING)
 
 
 # ############################

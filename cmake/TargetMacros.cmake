@@ -34,14 +34,6 @@ macro(define_target_compile_options target_name)
 	)
 endmacro(define_target_compile_options)
 
-macro(target_link_CLASP target_name)
-
-	target_link_libraries(${target_name}
-		PRIVATE
-			CLASP::core
-	)
-endmacro(target_link_CLASP)
-
 macro(target_link_STLSoft target_name)
 
 	target_link_libraries(${target_name}
@@ -199,8 +191,6 @@ function(define_example_program program_name entry_point_source_name)
 		PRIVATE
 			core
 	)
-
-	target_link_CLASP(${program_name})
 
 	define_target_compile_options(${program_name})
 endfunction(define_example_program)
