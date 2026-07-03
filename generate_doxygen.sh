@@ -21,9 +21,8 @@ while [[ $# -gt 0 ]]; do
   case $1 in
     --help)
 
+      [ -f "$Dir/.sis/script_info_lines.txt" ] && cat "$Dir/.sis/script_info_lines.txt"
       cat << EOF
-Diagnosticism is a standalone library of simple components for aiding in diagnostics for C and C++ projects
-Copyright (c) 2024-2026, Matthew Wilson and Synesis Information Systems
 Generates HTML API documentation from public headers via Doxygen
 
 $ScriptPath [ ... flags/options ... ]
