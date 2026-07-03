@@ -47,7 +47,7 @@ Other facilities include environment-variable helpers (`diagnosticism_getenv()`,
 
 ## Installation
 
-Detailed instructions — via **CMake**, via bundling, via custom makefile parameters — are provided in the accompanying [INSTALL.md](./INSTALL.md) file.
+Detailed instructions — via **CMake** — are provided in the accompanying [INSTALL.md](./INSTALL.md) file.
 
 
 ### CMake consumer projects
