@@ -154,11 +154,6 @@ build/makefile.tools.xml
 build/shwild.tmplgen
 build/CMakeCache.txt
 
-include/fastformat/internal/dos2unix.has.been.performed
-include/pantheios/internal/dos2unix.has.been.performed
-include/stlsoft/dos2unix.has.been.performed
-include/stlsoft/internal/dos2unix.has.been.performed
-
 test/testpatterns.orj
 test/tests-plan.txt
 
