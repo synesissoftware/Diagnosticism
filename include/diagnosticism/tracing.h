@@ -8,6 +8,14 @@
  * @{
  */
 
+#ifndef DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_TRACING
+#define DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_TRACING
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
 #include <diagnosticism/diagnosticism.h>
 
 #include <stdio.h>
@@ -78,7 +86,10 @@ diagnosticism_trace_impl(
  * inclusion control
  */
 
-#pragma once
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
 
+#endif /* !DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_TRACING */
 
 /* ///////////////////////////// end of file //////////////////////////// */

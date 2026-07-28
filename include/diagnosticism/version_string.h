@@ -6,6 +6,14 @@
  * @{
  */
 
+#ifndef DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_VERSION_STRING
+#define DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_VERSION_STRING
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
 #include <diagnosticism/diagnosticism.h>
 
 #include <stddef.h>
@@ -55,6 +63,10 @@ diagnosticism_calc_version_string(
  * inclusion control
  */
 
-#pragma once
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
+
+#endif /* !DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_VERSION_STRING */
 
 /* ///////////////////////////// end of file //////////////////////////// */

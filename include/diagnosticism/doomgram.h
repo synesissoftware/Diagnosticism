@@ -8,6 +8,15 @@
  * @{
  */
 
+
+#ifndef DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_DOOMGRAM
+#define DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_DOOMGRAM
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
 #include <diagnosticism/diagnosticism.h>
 
 #include <stdbool.h>
@@ -305,6 +314,10 @@ diagnosticism_doomgram_to_strip_12(
  * inclusion control
  */
 
-#pragma once
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
+
+#endif /* !DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_DOOMGRAM */
 
 /* ///////////////////////////// end of file //////////////////////////// */

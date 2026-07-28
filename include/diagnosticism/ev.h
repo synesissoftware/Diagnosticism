@@ -6,6 +6,14 @@
  * @{
  */
 
+#ifndef DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_EV
+#define DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_EV
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
 #include <diagnosticism/diagnosticism.h>
 
 
@@ -62,6 +70,10 @@ diagnosticism_getenv_atoi(
  * inclusion control
  */
 
-#pragma once
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
+
+#endif /* !DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_EV */
 
 /* ///////////////////////////// end of file //////////////////////////// */

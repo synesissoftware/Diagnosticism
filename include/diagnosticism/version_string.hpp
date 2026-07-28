@@ -5,6 +5,14 @@
  * @ingroup diagnosticism_version
  */
 
+#ifndef DIAGNOSTICISM_INCL_DIAGNOSTICISM_HPP_VERSION_STRING
+#define DIAGNOSTICISM_INCL_DIAGNOSTICISM_HPP_VERSION_STRING
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
 #include <diagnosticism/version_string.h>
 
 #include <stdexcept>
@@ -57,6 +65,10 @@ calc_version_string(
  * inclusion control
  */
 
-#pragma once
+#ifdef STLSOFT_CF_PRAGMA_ONCE_SUPPORT
+# pragma once
+#endif /* STLSOFT_CF_PRAGMA_ONCE_SUPPORT */
+
+#endif /* !DIAGNOSTICISM_INCL_DIAGNOSTICISM_HPP_VERSION_STRING */
 
 /* ///////////////////////////// end of file //////////////////////////// */
