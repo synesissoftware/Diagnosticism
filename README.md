@@ -10,15 +10,6 @@ Simple diagnostics utilities for C (and C++) — part of the cross-language **Di
 [![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/Diagnosticism)](https://github.com/synesissoftware/Diagnosticism/commits/master)
 
 
-## Introduction
-
-**Diagnosticism** is a library providing miscellaneous discrete and simple diagnostics facilities to supplement what is available in the standard library. It is implemented in several languages, providing enhancements that are necessary (and possible). For example, [**Diagnosticism.Python**](https://github.com/synesissoftware/Diagnosticism.Python) can provide the `trace()` function that can capture the callstack information to issue into a diagnostic log statement.
-
-In **C** and **C++**, which offer only modest built-in diagnostic support, the facilities are aimed at lightweight, low-overhead utilities that integrate cleanly with existing code. For example, the **DoomGram** component records duration events into an order-of-magnitude histogram and can summarise many thousands of timings in a single 12-character strip — useful for logging cumulative execution costs in long-running performance-sensitive applications. (See the [Components](#components) section below for more on this.) The `diagnosticism_trace()` macro provides a simple call-site trace facility, writing file, line, function, and a `printf`-style message to a chosen stream; see [**examples/tracing/**](./examples/tracing/).
-
-Other facilities include environment-variable helpers (`diagnosticism_getenv()`, `diagnosticism_getenv_atoi()`), version-string formatting (`diagnosticism_calc_version_string()` and the C++ wrapper `diagnosticism::calc_version_string()`), and a small core API for library initialisation and version discovery. Further facilities will be added over time (and will be listed in the [Components](#components) section below).
-
-
 ## Table of Contents <!-- omit in toc -->
 
 
@@ -43,6 +34,15 @@ Other facilities include environment-variable helpers (`diagnosticism_getenv()`,
   - [Dependencies](#dependencies)
   - [Related projects](#related-projects)
   - [License](#license)
+
+
+## Introduction
+
+**Diagnosticism** is a library providing miscellaneous discrete and simple diagnostics facilities to supplement what is available in the standard library. It is implemented in several languages, providing enhancements that are necessary (and possible). For example, [**Diagnosticism.Python**](https://github.com/synesissoftware/Diagnosticism.Python) can provide the `trace()` function that can capture the callstack information to issue into a diagnostic log statement.
+
+In **C** and **C++**, which offer only modest built-in diagnostic support, the facilities are aimed at lightweight, low-overhead utilities that integrate cleanly with existing code. For example, the **DoomGram** component records duration events into an order-of-magnitude histogram and can summarise many thousands of timings in a single 12-character strip — useful for logging cumulative execution costs in long-running performance-sensitive applications. (See the [Components](#components) section below for more on this.) The `diagnosticism_trace()` macro provides a simple call-site trace facility, writing file, line, function, and a `printf`-style message to a chosen stream; see [**examples/tracing/**](./examples/tracing/).
+
+Other facilities include environment-variable helpers (`diagnosticism_getenv()`, `diagnosticism_getenv_atoi()`), version-string formatting (`diagnosticism_calc_version_string()` and the C++ wrapper `diagnosticism::calc_version_string()`), and a small core API for library initialisation and version discovery. Further facilities will be added over time (and will be listed in the [Components](#components) section below).
 
 
 ## Installation
@@ -72,7 +72,7 @@ Ensure `CMAKE_PREFIX_PATH` includes the install prefix (for example `/usr/local`
 HTML API reference for the public headers may be generated locally:
 
 ```bash
-$ ./generate_doxygen.sh
+./generate_doxygen.sh
 ```
 
 Open `_build/doxygen/html/index.html` in a browser (or `<build-dir>/doxygen/html/index.html` when `SIS_CMAKE_BUILD_DIR` is set). Requires [Doxygen](https://www.doxygen.nl/) on `PATH`.
@@ -306,6 +306,7 @@ Other implementations in the **Diagnosticism** family:
 * [**Diagnosticism.Rust**](https://github.com/synesissoftware/Diagnosticism.Rust);
 * [**Diagnosticism.Ruby**](https://github.com/synesissoftware/Diagnosticism.Ruby);
 * [**Diagnosticism.NET**](https://github.com/synesissoftware/Diagnosticism.NET);
+* [**p99**](https://github.com/synesissoftware/p99) - extremely high-performance percentiles library;
 
 The **DoomGram** component in this (C) library is ported from [`stlsoft::doomgram`](https://github.com/synesissoftware/STLSoft-1.11) in **STLSoft** (see [Dependencies](#dependencies)).
 
