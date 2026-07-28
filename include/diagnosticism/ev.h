@@ -51,10 +51,10 @@ diagnosticism_getenv(
  * @param defaultValue An optional default value to be used in the case that
  *  no such environment variable exists.
  *
- * @return Integer value of the named environment variable, or @c defaultValue
- *  if no such environment variable exists (in which case @c errno is set
- *  to @c ENOENT); returns 0 when the value cannot be interpreted as an
- *  integer.
+ * @return Integer value of the named environment variable, or
+ *  @c defaultValue if no such environment variable exists (in which case
+ *  @c errno is set to @c ENOENT); returns 0 when the value cannot be
+ *  interpreted as an integer.
  */
 DIAGNOSTICISM_CALL(int)
 diagnosticism_getenv_atoi(

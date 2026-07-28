@@ -223,7 +223,8 @@ diagnosticism_doomgram_try_get_total_event_time_ns(
 
 /** @def diagnosticism_doomgram_try_get_total_event_time_ns_raw(pdg)
  *
- * @brief Obtains the total event time in nanoseconds without regard to overflow.
+ * @brief Obtains the total event time in nanoseconds without regard to
+ *  overflow.
  *
  * @param pdg The doomgram whose value is to be elicited.
  */
@@ -264,7 +265,8 @@ diagnosticism_doomgram_try_get_max_event_time_ns(
 
 #ifndef DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION
 
-/** Writes a textual dump of the doomgram to a stream (primarily for debugging).
+/** Writes a textual dump of the doomgram to a stream (primarily for
+ * debugging).
  *
  * @param stm Output stream.
  * @param dg The doomgram to dump.
@@ -284,7 +286,8 @@ diagnosticism_doomgram_dump_to_stream(
 );
 #endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
-/** Writes a 12-character histogram strip summarising the magnitude distribution.
+/** Writes a 12-character histogram strip summarising the magnitude
+ * distribution.
  *
  * Each character encodes the event count in one bucket: `_` for zero,
  * `a`–`z` for increasing ranges, and `*` when a bucket exceeds the

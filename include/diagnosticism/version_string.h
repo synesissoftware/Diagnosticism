@@ -22,8 +22,8 @@
 
 /** Formats a version number into a caller-supplied buffer.
  *
- * Formats @a verMajor, @a verMinor, @a verPatch, and an optional pre-release
- * component encoded in @a verAlphaBeta:
+ * Formats @a verMajor, @a verMinor, @a verPatch, and an optional
+ * pre-release component encoded in @a verAlphaBeta:
  *
  * - @c 0x4000+ yields @c -alphaN
  * - @c 0x8000+ yields @c -betaN
@@ -40,7 +40,8 @@
  * @param pnWritten Receives the number of characters written (excluding the
  *  terminating null); may be NULL.
  *
- * @return 0 on success, or -1 on failure (buffer too small or invalid input).
+ * @return 0 on success, or -1 on failure (buffer too small or invalid
+ *  input).
  *
  * @pre NULL != buffer
  */
