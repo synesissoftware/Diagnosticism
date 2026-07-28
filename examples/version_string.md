@@ -1,14 +1,17 @@
 # Diagnosticism Example - **version_string**
 
+
 ## Summary
 
 Example illustrating use of `diagnosticism_calc_version_string()` to format version tuples into human-readable strings, including pre-release suffixes encoded in the `verAlphaBeta` argument (`-alphaN`, `-betaN`, `-rcN`, or a fourth dotted component).
 
 A C++ wrapper `diagnosticism::calc_version_string()` is available in `<diagnosticism/version_string.hpp>`.
 
+
 ## Source
 
 See [**examples/version_string/main.c**](./version_string/main.c).
+
 
 ## Execution
 

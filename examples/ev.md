@@ -1,5 +1,6 @@
 # Diagnosticism Example - **ev**
 
+
 ## Summary
 
 Example illustrating use of `diagnosticism_getenv()` and `diagnosticism_getenv_atoi()` to read environment variables with optional defaults.
@@ -8,9 +9,11 @@ When a named variable is not set, both functions set `errno` to `ENOENT` and ret
 
 The program sets several `DIAGNOSTICISM_EXAMPLE_*` variables at startup so that output is deterministic.
 
+
 ## Source
 
 See [**examples/ev/main.c**](./ev/main.c).
+
 
 ## Execution
 

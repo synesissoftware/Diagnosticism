@@ -1,5 +1,6 @@
 # Diagnosticism - Installation and Use <!-- omit in toc -->
 
+
 ## Table of Contents <!-- omit in toc -->
 
 - [Using CMake](#using-cmake)
@@ -16,6 +17,7 @@ You may elect to compile in the **src** file(s) needed, but the standard way to 
 
 
 ## Using CMake
+
 
 ### Obtain the latest distribution of **Diagnosticism**
 
@@ -44,7 +46,7 @@ $ cd Diagnosticism
 Prepare the CMake configuration, via the **prepare_cmake.sh** script, as in:
 
 ```bash
-$ ./prepare_cmake.sh
+./prepare_cmake.sh
 ```
 
 By default, this will create a **_build** directory under the project directory. If you want to use a specific directory you can do so via the environment variable `SIS_CMAKE_BUILD_DIR`.
@@ -60,15 +62,15 @@ $ ./prepare_cmake.sh
 #### Visual C++ with Static Dependency on Standard Library
 
 ```bash
-$ export SIS_CMAKE_BUILD_DIR=/tmp/Diagnosticism
-$ ./prepare_cmake.sh --msvc-mt
+export SIS_CMAKE_BUILD_DIR=/tmp/Diagnosticism
+./prepare_cmake.sh --msvc-mt
 ```
 
 
 ### Build
 
 ```bash
-$ ./build_cmake.sh
+./build_cmake.sh
 ```
 
 > **NOTE**: If you provide the flag `--run-make` (=== `-m`) in step 3 then you do not need this step.
@@ -77,7 +79,7 @@ $ ./build_cmake.sh
 4. As a check, execute the built test program files via the **build_run_all_unit_tests.sh** script, as in:
 
   ```bash
-  $ ./run_all_unit_tests.sh -M
+  ./run_all_unit_tests.sh -M
   ```
 
 > **NOTE**: If you do not provide the flag `--no-make` (=== `-M`) then the script will also run a build.
@@ -89,7 +91,7 @@ $ ./build_cmake.sh
 
 
   ```bash
-  $ sudo cmake --install ${SIS_CMAKE_BUILD_DIR:-./_build} --config Release
+  sudo cmake --install ${SIS_CMAKE_BUILD_DIR:-./_build} --config Release
   ```
 
 

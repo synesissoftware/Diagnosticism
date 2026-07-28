@@ -1,5 +1,6 @@
 # Diagnosticism - Authors
 
+
 ## Major Contributors:
 
 * Matt Wilson ([mwsis](https://github.com/mwsis))

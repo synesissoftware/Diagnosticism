@@ -1,12 +1,15 @@
 # Diagnosticism Example - **tracing**
 
+
 ## Summary
 
 Example illustrating use of the `diagnosticism_trace()` macro to write call-site trace lines to a `FILE*` stream. Each line includes the source file, line number, function name, and an optional `printf`-style formatted message.
 
+
 ## Source
 
 See [**examples/tracing/main.c**](./tracing/main.c).
+
 
 ## Execution
 
