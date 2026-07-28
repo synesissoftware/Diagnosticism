@@ -111,9 +111,9 @@ jobs:
           XTSRC="${RUNNER_TEMP}/xtests-src"
           XTBUILDDIR="${RUNNER_TEMP}/xtests-build"
 
-          mkdir -p "$(dirname "$STL")"
+          mkdir -p "$(dirname "$STLSOFT")"
 
-          git clone --depth 1 https://github.com/synesissoftware/STLSoft-1.11 "$STL"
+          git clone --depth 1 https://github.com/synesissoftware/STLSoft "$STLSOFT"
           git clone --depth 1 https://github.com/synesissoftware/xTests "$XTSRC"
 
           if [ "${{ matrix.c_compiler }}" = "msvc" ]; then
@@ -122,7 +122,7 @@ jobs:
               -DBUILD_EXAMPLES=OFF \
               -DBUILD_TESTING=OFF \
               -DNO_SHWILD=TRUE \
-              -DSTLSOFT="$STL"
+              -DSTLSOFT="$STLSOFT"
             cmake --build "$XTBUILDDIR" --config ${{ env.BUILD_TYPE }} --parallel
             cmake --install "$XTBUILDDIR" --config ${{ env.BUILD_TYPE }}
           else
@@ -132,13 +132,13 @@ jobs:
               -DBUILD_EXAMPLES=OFF \
               -DBUILD_TESTING=OFF \
               -DNO_SHWILD=TRUE \
-              -DSTLSOFT="$STL"
+              -DSTLSOFT="$STLSOFT"
             cmake --build "$XTBUILDDIR" --parallel
             cmake --install "$XTBUILDDIR"
           fi
 
           echo "SIS_CMAKE_DEPS_PREFIX=$DEPS" >> "$GITHUB_ENV"
-          echo "STLSOFT=$STL" >> "$GITHUB_ENV"
+          echo "STLSOFT=$STLSOFT" >> "$GITHUB_ENV"
 
       - name: Configure
         shell: bash
