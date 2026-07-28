@@ -291,10 +291,10 @@ Defect reports, feature requests, and pull requests are welcome on https://githu
 
 The original (~2005) implementation used **STLSoft** for discrimination of compilers and for library support. For modern compilers with broad support for the latest language standards this is not necessary. Hence, if the preprocessor symbol `Diagnosticism_NO_STLSOFT` is specified then all dependencies on **STLSoft** are removed and basic **C++-14** features are used instead. (This is done in the **CMake** configuration provided - see [INSTALL.md](./INSTALL.md).)
 
-If you _do_ need **STLSoft**, then version 1.10.6 or later is recommended. If you're using a _very_ old compiler you may wish to use STLSoft-1.9, for which version 1.9.136 is recommended. Further, the makefiles require definition of the environment variable `STLSOFT` that should be set to the root directory of a clone of **STLSoft**.
+If you _do_ need **STLSoft**, then version 1.11.0 or later is recommended. If you're using a _very_ old compiler you may wish to use STLSoft-1.9, for which version 1.9.136 is recommended. Further, the makefiles require definition of the environment variable `STLSOFT` that should be set to the root directory of a clone of **STLSoft**.
 
-* [STLSoft 1.9](http://github.com/synesissoftware/STLSoft-1.9/)
-* [STLSoft 1.10](http://github.com/synesissoftware/STLSoft-1.10/) (Recommended)
+* [STLSoft 1.9](http://github.com/synesissoftware/STLSoft-1.9/);
+* [STLSoft](http://github.com/synesissoftware/STLSoft/) (Recommended);
 
 
 ### Related projects
@@ -308,7 +308,7 @@ Other implementations in the **Diagnosticism** family:
 * [**Diagnosticism.NET**](https://github.com/synesissoftware/Diagnosticism.NET);
 * [**p99**](https://github.com/synesissoftware/p99) - extremely high-performance percentiles library;
 
-The **DoomGram** component in this (C) library is ported from [`stlsoft::doomgram`](https://github.com/synesissoftware/STLSoft-1.11) in **STLSoft** (see [Dependencies](#dependencies)).
+The **DoomGram** component in this (C) library is ported from [`stlsoft::doomgram`](https://github.com/synesissoftware/STLSoft) in **STLSoft** (see [Dependencies](#dependencies)).
 
 
 ### License

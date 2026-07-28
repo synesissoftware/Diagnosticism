@@ -41,7 +41,7 @@
  * @see diagnosticism_doomgram_to_strip_12()
  *
  * This is a C port of the equivalent `stlsoft::doomgram` class from
- * [STLSoft](https://github.com/synesissoftware/STLSoft-1.11).
+ * [STLSoft](https://github.com/synesissoftware/STLSoft).
  */
 struct diagnosticism_doomgram_t
 {
