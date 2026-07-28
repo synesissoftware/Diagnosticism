@@ -112,6 +112,8 @@ install(TARGETS ${TARGET_NAME}
 
 # additional headers into specific sub-directories
 
+#[====[
+
 install(
 	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/util
 	DESTINATION include/${PROJECT_NAME_LOWER}
@@ -125,6 +127,7 @@ install(
 	FILES_MATCHING
 	PATTERN "*.h*"
 )
+#]====]
 
 
 # ############################## end of file ############################# #
