@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - master
-      - main
+      - dev
+      - boilerplate
   pull_request:
 
 env:
@@ -107,7 +108,7 @@ jobs:
           set -euxo pipefail
 
           DEPS="${RUNNER_TEMP}/sis-deps"
-          STL="${RUNNER_TEMP}/stlsoft/STLSoft_1_11"
+          STLSOFT="${RUNNER_TEMP}/stlsoft/STLSoft_1_11"
           XTSRC="${RUNNER_TEMP}/xtests-src"
           XTBUILDDIR="${RUNNER_TEMP}/xtests-build"
 
