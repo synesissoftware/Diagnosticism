@@ -2,7 +2,7 @@
 
 A **D**ecimal **O**rder-**O**f-**M**agnitude histo**G**ram records many timing events into twelve magnitude buckets and can summarise the distribution in a single 12-character **strip** — useful for logging cumulative execution costs in long-running, performance-sensitive applications.
 
-This is a C port of the equivalent `stlsoft::doomgram` class from [STLSoft](https://github.com/synesissoftware/STLSoft-1.11).
+This is a C port of the equivalent `stlsoft::doomgram` class from [STLSoft](https://github.com/synesissoftware/STLSoft).
 
 
 ## Magnitude buckets

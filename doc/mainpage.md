@@ -39,7 +39,7 @@ Consumer **CMake** projects may use `find_package(Diagnosticism)` and link `Diag
 * [Diagnosticism.Ruby](https://github.com/synesissoftware/Diagnosticism.Ruby)
 * [Diagnosticism.NET](https://github.com/synesissoftware/Diagnosticism.NET)
 
-The **DoomGram** component is ported from [`stlsoft::doomgram`](https://github.com/synesissoftware/STLSoft-1.11) in **STLSoft**.
+The **DoomGram** component is ported from [`stlsoft::doomgram`](https://github.com/synesissoftware/STLSoft) in **STLSoft**.
 
 
 <!-- ########################### end of file ########################### -->
