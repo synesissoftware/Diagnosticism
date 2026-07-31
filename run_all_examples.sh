@@ -29,7 +29,7 @@ while [[ $# -gt 0 ]]; do
 
       [ -f "$Dir/.sis/script_info_lines.txt" ] && cat "$Dir/.sis/script_info_lines.txt"
       cat << EOF
-Runs all example programs
+Runs all (matching) example programs
 
 $ScriptPath [ ... flags/options ... ]
 

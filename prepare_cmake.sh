@@ -6,11 +6,11 @@ Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
 if [[ -n "$MSYSTEM" ]]; then
 
-	DefaultMakeCmd=mingw32-make.exe
-	MinGW=1
+  DefaultMakeCmd=mingw32-make.exe
+  MinGW=1
 else
 
-	DefaultMakeCmd=make
+  DefaultMakeCmd=make
 fi
 MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
 
@@ -96,7 +96,8 @@ Flags/options:
         required (and not searched)
 
     --mingw
-        uses explicitly the "MinGW Makefiles" generator
+        uses explicitly the "MinGW Makefiles" generator, and defaults the
+        make-command to "mingw32-make.exe"
 
     --msvc-mt
         when using Visual C++ (MSVC), the static runtime library will be
@@ -120,17 +121,17 @@ Flags/options:
 
 EOF
 
-            exit 0
-            ;;
-        *)
+      exit 0
+      ;;
+    *)
 
-            >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
+      >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
 
-            exit 1
-            ;;
-    esac
+      exit 1
+      ;;
+  esac
 
-    shift
+  shift
 done
 
 
@@ -173,7 +174,6 @@ else
     -B $CMakeDir \
     || (cd ->/dev/null ; exit 1)
 fi
-
 
 status=0
 
