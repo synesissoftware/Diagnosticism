@@ -1,7 +1,7 @@
 # **Diagnosticism** Changes <!-- omit in toc -->
 
 
-## 0.2.1 - 28th July 2026
+## 0.2.1 - 1st August 2026
 
 * added `diagnosticism_doomgram_clear()`;
 * added **doomgram** example program (**examples/doomgram/**);
