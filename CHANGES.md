@@ -1,4 +1,4 @@
-# **Diagnosticism** Changes
+# **Diagnosticism** Changes <!-- omit in toc -->
 
 
 ## 0.2.1 - 28th July 2026

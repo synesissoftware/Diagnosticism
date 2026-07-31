@@ -1,4 +1,4 @@
-# Diagnosticism - Authors
+# Diagnosticism - Authors <!-- omit in toc -->
 
 
 ## Major Contributors:
