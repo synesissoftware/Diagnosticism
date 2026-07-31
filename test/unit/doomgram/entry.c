@@ -4,7 +4,7 @@
  * Purpose: Tests Diagnosticism Doomgram.
  *
  * Created: 5th February 2025
- * Updated: 1st July 2026
+ * Updated: 1st August 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -173,7 +173,7 @@ static void TEST_doomgram_INITIALISE_1(void)
 static void TEST_doomgram_SINGLE_TIMING_EVENT(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
 #if 0
 
@@ -227,7 +227,7 @@ static void TEST_doomgram_SINGLE_TIMING_EVENT(void)
 static void TEST_doomgram_ZERO_TIME_EVENTS(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg, 0);
     diagnosticism_doomgram_push_event_time_us(&dg, 0);
@@ -270,7 +270,7 @@ static void TEST_doomgram_ZERO_TIME_EVENTS(void)
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_1(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg,   9);
     diagnosticism_doomgram_push_event_time_ns(&dg,  80);
@@ -322,7 +322,7 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_1(void)
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_2(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg,      9);
     diagnosticism_doomgram_push_event_time_ns(&dg,     80);
@@ -374,7 +374,7 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_2(void)
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_3(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg,            9);
     diagnosticism_doomgram_push_event_time_ns(&dg,           80);
@@ -426,7 +426,7 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_3(void)
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_4(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_us(&dg,         6);
     diagnosticism_doomgram_push_event_time_us(&dg,        50);
@@ -475,7 +475,7 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_4(void)
 static void TEST_doomgram_SEVERAL_DISTINCT_TIMINGS(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg, 23);
     diagnosticism_doomgram_push_event_time_ns(&dg, 10);
@@ -523,7 +523,7 @@ static void TEST_doomgram_SEVERAL_DISTINCT_TIMINGS(void)
 static void TEST_doomgram_SEVERAL_INTERSECTING_TIMINGS(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg, 11);
     diagnosticism_doomgram_push_event_time_ns(&dg, 19);
@@ -572,7 +572,7 @@ static void TEST_doomgram_SEVERAL_INTERSECTING_TIMINGS(void)
 static void TEST_doomgram_MANY_CUMULATIVE_TIMINGS(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     { for (int i = 0; 10000 != i; ++i)
     {
