@@ -1,9 +1,33 @@
-# **to-be.Rust** Changes
+# **Diagnosticism** Changes <!-- omit in toc -->
 
 
-## 0.2.1 - 25th August 2025
+## 0.2.1 - 1st August 2026
 
-* fixed unnecessary dependency on **cstring** when not building tests;
+* added `diagnosticism_doomgram_clear()`;
+* added **doomgram** example program (**examples/doomgram/**);
+* **clang** v17 compatibility;
+* removed unnecessary dependency on **<stdatomic.h>**;
+* removed unnecessary dependencies on **CLASP** and **cstring** from **CMake** configuration;
+* examples link only **core** (`define_example_program()` no longer links **CLASP**);
+* added [EXAMPLES.md](./EXAMPLES.md), [examples/tracing.md](./examples/tracing.md), and **generate_doxygen.sh** API documentation;
+* added **ev** example program (**examples/ev/**) with markdown walkthroughs;
+* added **version_string** example program (**examples/version_string/**) with markdown walkthroughs;
+* expanded Doxygen documentation (**doc/** topic pages, header API comments, example snippets);
+* added GitHub Actions CI (`.github/workflows/ci.yml`);
+* fixed undefined `m_has_overflowed` identifier in `diagnosticism_doomgram_push_event_time_ns()` (debug builds);
+* fixed **CMake** install omitting `<diagnosticism/version_string.hpp>`;
+* **README.md** improvements (Components, DoomGram example, related projects, **EXAMPLES.md**, tracing example, **CMake** consumer quick-start, Doxygen);
+* boilerplate:
+  * include-guards for all public headers;
+  * **STLSoft** references now to **https://github.com/synesissoftware/STLSoft**;
+  * **README.md** layout;
+  * comment lengths;
+  * CMake fixes;
+  * ignores;
+  * markdown file consistency;
+  * trivial improvements to CI;
+  * helper scripts;
+  * **LICENSE**;
 
 
 ## 0.2.0 - 25th August 2025

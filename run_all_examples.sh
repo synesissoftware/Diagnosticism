@@ -9,7 +9,24 @@ MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
 
 ListOnly=0
 RunMake=1
-Verbosity=${XTESTS_VERBOSITY:-${TEST_VERBOSITY:-3}}
+
+
+# ##########################################################
+# colours
+
+if command -v tput > /dev/null; then
+
+  RbEnvClr_Blue=${FG_BLUE:-$(tput setaf 4)}
+  RbEnvClr_Red=${FG_BLUE:-$(tput setaf 1)}
+  RbEnvClr_Bold=${FD_BOLD:-$(tput bold)}
+  RbEnvClr_None=${FD_NONE:-$(tput sgr0)}
+else
+
+  RbEnvClr_Blue=
+  RbEnvClr_Red=
+  RbEnvClr_Bold=
+  RbEnvClr_None=
+fi
 
 
 # ##########################################################
@@ -26,16 +43,11 @@ while [[ $# -gt 0 ]]; do
 
       RunMake=0
       ;;
-    --verbosity)
-
-      shift
-      Verbosity=$1
-      ;;
     --help)
 
       [ -f "$Dir/.sis/script_info_lines.txt" ] && cat "$Dir/.sis/script_info_lines.txt"
       cat << EOF
-Runs all (matching) scratch and performance test programs
+Runs all (matching) example programs
 
 $ScriptPath [ ... flags/options ... ]
 
@@ -50,9 +62,6 @@ Flags/options:
     -M
     --no-make
         does not execute CMake and make before running tests
-
-    --verbosity <verbosity>
-        specifies an explicit verbosity for the unit-test(s)
 
 
     standard flags:
@@ -85,7 +94,7 @@ if [ $RunMake -ne 0 ]; then
 
   if [ $ListOnly -eq 0 ]; then
 
-    echo "Executing build (via command \`$MakeCmd\`) and then running all scratch test programs"
+    echo "Executing build (via command \`$MakeCmd\`) and then running all example programs"
 
     mkdir -p $CMakeDir || exit 1
 
@@ -108,32 +117,25 @@ if [ $status -eq 0 ]; then
 
   if [ $ListOnly -ne 0 ]; then
 
-    echo "Listing all scratch test programs"
+    echo "Listing all example programs"
   else
 
-    echo "Running all scratch test programs"
+    echo "Running all example programs"
   fi
 
-  for f in $(find $CMakeDir -type f '(' -name 'test_scratch*' -o -name 'test.scratch.*' -o -name 'test_performance*' -o -name 'test.performance.*' ')' -exec test -x {} \; -print)
+  for f in $(find $CMakeDir/examples -type f -exec test -x {} \; -print)
   do
 
     if [ $ListOnly -ne 0 ]; then
 
-      echo "would execute $f:"
+      echo "would execute $RbEnvClr_Blue$RbEnvClr_Bold$f$RbEnvClr_None:"
 
       continue
     fi
 
-    if [ $Verbosity -ge 3 ]; then
+    echo
+    echo "executing $RbEnvClr_Blue$RbEnvClr_Bold$f$RbEnvClr_None:"
 
-      echo
-    fi
-    if [ $Verbosity -ge 2 ]; then
-
-      echo "executing $f:"
-    fi
-
-    # NOTE: we do not break on fail because these tests are not always intended to succeed
     $f
   done
 fi

@@ -69,6 +69,7 @@ set(CORE_PUBLIC_HEADERS
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/ev.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/tracing.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/version_string.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/version_string.hpp"
 )
 
 set_target_properties(${TARGET_NAME} PROPERTIES
@@ -111,6 +112,8 @@ install(TARGETS ${TARGET_NAME}
 
 # additional headers into specific sub-directories
 
+#[====[
+
 install(
 	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/util
 	DESTINATION include/${PROJECT_NAME_LOWER}
@@ -124,6 +127,7 @@ install(
 	FILES_MATCHING
 	PATTERN "*.h*"
 )
+#]====]
 
 
 # ############################## end of file ############################# #

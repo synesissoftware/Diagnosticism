@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for Diagnosticism
 #
 # Created:  23rd November 2024
-# Updated:  25th August 2025
+# Updated:  1st August 2026
 #
 # ######################################################################## #
 
@@ -102,6 +102,8 @@ include(TargetMacros)
 
 option(BUILD_EXAMPLES "Build examples" ON)
 
+option(BUILD_TESTING "Build tests" ON)
+
 if(Diagnosticism_OS_SIMULATE_WINDOWS_ON_UNIX)
 
 	message("-- defining Diagnosticism_OS_SIMULATE_WINDOWS_ON_UNIX")
@@ -114,39 +116,11 @@ endif(Diagnosticism_OS_SIMULATE_WINDOWS_ON_UNIX)
 # dependencies
 #
 # required:
-# - CLASP - required for testing;
-# - cstring - required for testing;
 # - STLSoft - required for testing;
 # - xTests - required for testing;
 #
 # optional:
 # - shwild - required for testing;
-
-
-# ############################
-# CLASP
-
-if(BUILD_TESTING)
-
-	set(CLASP_REQUIRED_VERSION_ 0.14)
-
-	find_package(CLASP ${CLASP_REQUIRED_VERSION_} REQUIRED)
-
-	message("-- CMake package CLASP found (version ${CLASP_VERSION}; ${CLASP_REQUIRED_VERSION_} requested)")
-endif(BUILD_TESTING)
-
-
-# ############################
-# cstring
-
-if(BUILD_TESTING)
-
-	set(cstring_REQUIRED_VERSION_ 4.0)
-
-	find_package(cstring ${cstring_REQUIRED_VERSION_} REQUIRED)
-
-	message("-- CMake package cstring found (version ${cstring_VERSION}; ${cstring_REQUIRED_VERSION_} requested)")
-endif(BUILD_TESTING)
 
 
 # ############################
@@ -306,7 +280,7 @@ install(EXPORT project-targets
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
 )
 
-install( FILES
+install(FILES
 	"${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config.cmake"
 	"${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config-version.cmake"
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
@@ -316,7 +290,7 @@ install( FILES
 # ##########################################################
 # completion
 
-message(NOTICE "Generating CMake build scripts for ${PROJECT_NAME} ${PROJECT_VERSION}, for C${CMAKE_C_STANDARD} C++${CMAKE_CXX_STANDARD}")
+message(NOTICE "Generating CMake build scripts for ${PROJECT_NAME} ${PROJECT_VERSION}, for C${CMAKE_C_STANDARD} C++${CMAKE_CXX_STANDARD}, with build type ${CMAKE_BUILD_TYPE}")
 
 
 # ############################## end of file ############################# #

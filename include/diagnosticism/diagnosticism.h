@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    diagnosticm/diagnosticm.h
+ * File:    diagnosticism/diagnosticism.h
  *
- * Purpose: Main header file for Diagnosticm (C-API).
+ * Purpose: Main header file for Diagnosticism (C-API).
  *
  * Created: 23rd November 2024
- * Updated: 25th August 2025
+ * Updated: 1st August 2026
  *
  * Home:    https://github.com/synesissoftware/Diagnosticism/
  *
- * Copyright (c) 2024-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2024-2026, Matthew Wilson and Synesis Information Systems
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,9 +39,12 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-/** \file diagnosticm/diagnosticm.h
+/** \file diagnosticism/diagnosticism.h
  *
- * [C, C++] Main header file for Diagnosticm (C-API).
+ * [C, C++] Main header file for Diagnosticism (C-API).
+ *
+ * @defgroup diagnosticism_core Core API
+ * @{
  */
 
 #ifndef DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_DIAGNOSTICISM
@@ -50,8 +53,8 @@
 #ifndef DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MAJOR  0
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MINOR  0
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  10
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   11
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  11
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   13
 #endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -79,7 +82,7 @@
 
 #define DIAGNOSTICISM_VER_MAJOR         0
 #define DIAGNOSTICISM_VER_MINOR         2
-#define DIAGNOSTICISM_VER_PATCH         0
+#define DIAGNOSTICISM_VER_PATCH         1
 #define DIAGNOSTICISM_VER_ALPHABETA     0xFF
 
 #define DIAGNOSTICISM_VER \
@@ -103,11 +106,15 @@
  * macros
  */
 
-/** \def DIAGNOSTICISM_CALL(rt)
+/** Expands to the appropriate linkage/return-type decoration for C and C++.
  *
- * \param rt The return type.
+ * In C++ expands to `extern "C" rt`; in C expands to `rt`.
+ *
+ * @param rt The return type.
  */
-#ifndef DIAGNOSTICISM_CALL
+#if defined(__DOXYGEN__)
+# define DIAGNOSTICISM_CALL(rt)                            rt
+#elif !defined(DIAGNOSTICISM_CALL)
 # ifdef __cplusplus
 #  define DIAGNOSTICISM_CALL(rt)                            extern "C" rt
 # else
@@ -120,6 +127,7 @@
  * types
  */
 
+/** Unsigned 32-bit integer type used by the core API. */
 typedef uint32_t                                            diag_uint32_t;
 
 
@@ -141,6 +149,10 @@ diagnosticism_api_version(void);
 
 /** Initialises the Diagnosticism API.
  *
+ * @param init_flags Reserved; pass 0.
+ * @param init_param Reserved; pass NULL.
+ *
+ * @return 0 on success.
  */
 DIAGNOSTICISM_CALL(int)
 diagnosticism_api_init(
@@ -148,9 +160,7 @@ diagnosticism_api_init(
 ,   void*           init_param
 );
 
-/** Uninitialises the Diagnosticism API.
- *
- */
+/** Uninitialises the Diagnosticism API. */
 DIAGNOSTICISM_CALL(void)
 diagnosticism_api_uninit(void);
 
@@ -158,6 +168,9 @@ diagnosticism_api_uninit(void);
 /* /////////////////////////////////////////////////////////////////////////
  * API functions (C++)
  */
+
+
+/** @} */
 
 
 /* /////////////////////////////////////////////////////////////////////////

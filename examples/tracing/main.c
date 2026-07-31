@@ -1,8 +1,6 @@
 
 #include <diagnosticism/tracing.h>
 
-#include <clasp/clasp.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,7 +19,9 @@ int main(int argc, char* argv[])
 {
     ((void)&argv);
 
+    //! [tracing_call]
     diagnosticism_trace(stderr, "argc=%d, argv=...", argc);
+    //! [tracing_call]
 
     f();
 
