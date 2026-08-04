@@ -1,4 +1,4 @@
-# Diagnosticism Examples <!-- omit in toc -->
+# Diagnosticism - Examples <!-- omit in toc -->
 
 |Name|Source & Description|Summary|
 |---|---|---|
