@@ -20,7 +20,7 @@ FOR %%a IN (%*) DO (
 		)
 		ECHO ^
 
-Runs all ^(matching^) unit-test programs ^
+Runs all ^(matching^) component-test and unit-test programs ^
 
 ^
 

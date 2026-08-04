@@ -1,6 +1,15 @@
 # Diagnosticism - CHANGES <!-- omit in toc -->
 
 
+## 0.2.2-alpha1 - 4th August 2026
+
+* fixed unnecessary dependency on **cstring** when not building tests;
+* **CMake** enhancements: version parsing accepts `VER_PATCH` or `VER_REVISION`; **`_BUILD_AS_UNIX`** / **`_BUILD_AS_WIN32`** OS discrimination; **`X_CMAKE_C_FULLSTANDARD`** in **LanguageFullVersion.cmake**;
+* helper scripts: **run_all_scratch_tests.sh** propagates failure status from scratch/performance programs; help text for scratch and unit runners clarified;
+* markdown title canonicalisation (**CHANGES.md**, **EXAMPLES.md**);
+* boilerplate: **BuildType.cmake** tidy;
+
+
 ## 0.2.1 - 1st August 2026
 
 * added `diagnosticism_doomgram_clear()`;
