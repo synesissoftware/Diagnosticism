@@ -33,7 +33,7 @@ diagnosticism_abortf(
 ,   ...
 )
 {
-    const size_t BUF_SIZE   =    1024;
+    enum { BUF_SIZE = 1024 };
 
     int n;
     char stub[1]; /* used solely to supply memory for any impl that does not ignore buff when bufsz is 0 */
