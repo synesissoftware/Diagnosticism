@@ -4,7 +4,7 @@
  * Purpose: Tests Diagnosticism Doomgram.
  *
  * Created: 5th February 2025
- * Updated: 5th February 2025
+ * Updated: 1st August 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -24,6 +24,7 @@
  * forward declarations
  */
 
+static void TEST_doomgram_CLEAR(void);
 static void TEST_doomgram_INITIALISE_0(void);
 static void TEST_doomgram_INITIALISE_1(void);
 static void TEST_doomgram_SINGLE_TIMING_EVENT(void);
@@ -52,6 +53,7 @@ int main(int argc, char* argv[])
 
     if (XTESTS_START_RUNNER("test.unit.doomgram", verbosity))
     {
+        XTESTS_RUN_CASE(TEST_doomgram_CLEAR);
         XTESTS_RUN_CASE(TEST_doomgram_INITIALISE_0);
         XTESTS_RUN_CASE(TEST_doomgram_INITIALISE_1);
         XTESTS_RUN_CASE(TEST_doomgram_SINGLE_TIMING_EVENT);
@@ -77,6 +79,48 @@ int main(int argc, char* argv[])
 /* /////////////////////////////////////////////////////////////////////////
  * test function implementations
  */
+
+static void TEST_doomgram_CLEAR(void)
+{
+    diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
+
+    diagnosticism_doomgram_push_event_time_ms(&dg, 13);
+    diagnosticism_doomgram_push_event_time_ms(&dg, 20);
+
+    TEST_INTEGER_EQUAL(2, dg.event_count);
+
+    diagnosticism_doomgram_clear(&dg);
+
+    TEST_INT_EQ(0, dg.event_count);
+    TEST_INT_EQ(0, dg.total_event_time_ns);
+    TEST_INT_EQ(0, dg.min_event_time_ns);
+    TEST_INT_EQ(0, dg.max_event_time_ns);
+    TEST_INT_EQ(0, dg.oom_event_counts[ 0]);
+    TEST_INT_EQ(0, dg.oom_event_counts[ 1]);
+    TEST_INT_EQ(0, dg.oom_event_counts[ 2]);
+    TEST_INT_EQ(0, dg.oom_event_counts[ 3]);
+    TEST_INT_EQ(0, dg.oom_event_counts[ 4]);
+    TEST_INT_EQ(0, dg.oom_event_counts[ 5]);
+    TEST_INT_EQ(0, dg.oom_event_counts[ 6]);
+    TEST_INT_EQ(0, dg.oom_event_counts[ 7]);
+    TEST_INT_EQ(0, dg.oom_event_counts[ 8]);
+    TEST_INT_EQ(0, dg.oom_event_counts[ 9]);
+    TEST_INT_EQ(0, dg.oom_event_counts[10]);
+    TEST_INT_EQ(0, dg.oom_event_counts[11]);
+    TEST_BOOLEAN_FALSE(dg.has_overflowed);
+
+    {
+        char    strip[12];
+
+        diagnosticism_doomgram_to_strip_12(&dg, &strip);
+
+        TEST_MULTIBYTE_STRING_EQUAL_N("____________", strip, 12);
+    }
+
+    diagnosticism_doomgram_push_event_time_ms(&dg, 1);
+
+    TEST_INTEGER_EQUAL(1, dg.event_count);
+}
 
 static void TEST_doomgram_INITIALISE_0(void)
 {
@@ -129,7 +173,7 @@ static void TEST_doomgram_INITIALISE_1(void)
 static void TEST_doomgram_SINGLE_TIMING_EVENT(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
 #if 0
 
@@ -183,7 +227,7 @@ static void TEST_doomgram_SINGLE_TIMING_EVENT(void)
 static void TEST_doomgram_ZERO_TIME_EVENTS(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg, 0);
     diagnosticism_doomgram_push_event_time_us(&dg, 0);
@@ -226,7 +270,7 @@ static void TEST_doomgram_ZERO_TIME_EVENTS(void)
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_1(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg,   9);
     diagnosticism_doomgram_push_event_time_ns(&dg,  80);
@@ -278,7 +322,7 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_1(void)
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_2(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg,      9);
     diagnosticism_doomgram_push_event_time_ns(&dg,     80);
@@ -330,7 +374,7 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_2(void)
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_3(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg,            9);
     diagnosticism_doomgram_push_event_time_ns(&dg,           80);
@@ -382,7 +426,7 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_3(void)
 static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_4(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_us(&dg,         6);
     diagnosticism_doomgram_push_event_time_us(&dg,        50);
@@ -431,7 +475,7 @@ static void TEST_doomgram_UNIFORM_SPREAD_TIMINGS_4(void)
 static void TEST_doomgram_SEVERAL_DISTINCT_TIMINGS(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg, 23);
     diagnosticism_doomgram_push_event_time_ns(&dg, 10);
@@ -479,7 +523,7 @@ static void TEST_doomgram_SEVERAL_DISTINCT_TIMINGS(void)
 static void TEST_doomgram_SEVERAL_INTERSECTING_TIMINGS(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     diagnosticism_doomgram_push_event_time_ns(&dg, 11);
     diagnosticism_doomgram_push_event_time_ns(&dg, 19);
@@ -528,7 +572,7 @@ static void TEST_doomgram_SEVERAL_INTERSECTING_TIMINGS(void)
 static void TEST_doomgram_MANY_CUMULATIVE_TIMINGS(void)
 {
     diagnosticism_doomgram_t    dg  =   DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
-    uint64_t                    v;
+    uint64_t                    v = 0;
 
     { for (int i = 0; 10000 != i; ++i)
     {

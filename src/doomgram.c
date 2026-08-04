@@ -2,7 +2,6 @@
 #include <diagnosticism/doomgram.h>
 
 #include <assert.h>
-#include <stdatomic.h>
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -58,12 +57,12 @@ calc_doom_(
 {
     if (v >= 100000000)
     {
-        size_t n = 0u;
+        uint64_t n = 0u;
 
         for (; 0 != v; v /= 10, ++n)
         {}
 
-        return n;
+        return (unsigned)n;
     }
     else
     {
@@ -186,13 +185,24 @@ gram_to_strip_impl_(
  * API functions
  */
 
+DIAGNOSTICISM_CALL(void)
+diagnosticism_doomgram_clear(
+    diagnosticism_doomgram_t*   dg
+)
+{
+    assert(NULL != dg);
+
+    *dg = (diagnosticism_doomgram_t)DIAGNOSTICISM_DOOMGRAM_INITIALIZER;
+}
+
 DIAGNOSTICISM_CALL(bool)
 diagnosticism_doomgram_push_event_time_ns(
     diagnosticism_doomgram_t*   dg
 ,   uint64_t                    time_in_ns
 )
 {
-    assert(!m_has_overflowed);
+    assert(NULL != dg);
+    assert(!dg->has_overflowed);
 
     if (!try_add_ns_to_total_and_update_minmax_and_count_(dg, time_in_ns))
     {

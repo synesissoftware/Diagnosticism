@@ -58,7 +58,7 @@ if NOT EXIST "%CMAKE_DIR%" (
     EXIT /B 1
 )
 
-FOR /F "usebackq" %%f IN (`DIR /A:-D /B /S %CMAKE_DIR% ^| FINDSTR /I test.*unit.*\.exe$`) DO (
+FOR /F "usebackq" %%f IN (`DIR /A:-D /B /S %CMAKE_DIR% ^| FINDSTR /I test[._]unit.*\.exe$`) DO (
 	ECHO .
 	ECHO executing %%f
 	%%f
