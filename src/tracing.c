@@ -17,7 +17,7 @@ diagnosticism_trace_impl(
 ,   ...
 )
 {
-    const size_t BUF_SIZE   =    1024;
+    enum { BUF_SIZE = 1024 };
 
     int n;
     int r;
@@ -51,4 +51,7 @@ diagnosticism_trace_impl(
         return r;
     }
 }
+
+
+/* ///////////////////////////// end of file //////////////////////////// */
 

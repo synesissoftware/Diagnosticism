@@ -1,0 +1,52 @@
+# Doxyfile for Diagnosticism (C/C++ API)
+
+PROJECT_NAME           = "Diagnosticism"
+PROJECT_BRIEF          = "Simple diagnostics utilities for C and C++"
+PROJECT_NUMBER         = 0.2.1
+
+# Overridden at generation time by generate_doxygen.sh (respects SIS_CMAKE_BUILD_DIR).
+OUTPUT_DIRECTORY       = _build/doxygen
+CREATE_SUBDIRS         = NO
+
+INPUT                  = include/diagnosticism \
+                         doc
+FILE_PATTERNS          = *.h \
+                         *.hpp \
+                         *.md
+RECURSIVE              = NO
+
+USE_MDFILE_AS_MAINPAGE = doc/mainpage.md
+
+EXAMPLE_PATH           = examples
+EXAMPLE_RECURSIVE      = YES
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HTML_OUTPUT            = html
+
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+SEARCHENGINE           = YES
+SOURCE_BROWSER         = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+
+MARKDOWN_SUPPORT       = YES
+JAVADOC_AUTOBRIEF      = YES
+QUIET                  = YES
+
+WARN_IF_UNDOCUMENTED   = YES
+WARN_NO_PARAMDOC       = YES
+WARN_IF_DOC_ERROR      = YES
+
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+PREDEFINED             = DIAGNOSTICISM_CALL(rt)=rt
+
+# ########################### end of file ########################### #

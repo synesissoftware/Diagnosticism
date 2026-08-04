@@ -39,7 +39,10 @@ endif()
 
 
 add_subdirectory(abort)
+add_subdirectory(doomgram)
+add_subdirectory(ev)
 add_subdirectory(tracing)
+add_subdirectory(version_string)
 
 
 # ############################## end of file ############################# #

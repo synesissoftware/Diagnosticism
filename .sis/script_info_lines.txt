@@ -1,0 +1,2 @@
+Diagnosticism is a standalone library of simple components for aiding in diagnostics for C and C++ projects
+Copyright (c) 2024-2026, Matthew Wilson and Synesis Information Systems

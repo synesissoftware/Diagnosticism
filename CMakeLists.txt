@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for Diagnosticism
 #
 # Created:  23rd November 2024
-# Updated:  15th January 2025
+# Updated:  1st August 2026
 #
 # ######################################################################## #
 
@@ -46,8 +46,8 @@ string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_MAJOR${RX_WS}+
 set(_VERSION_MAJOR ${CMAKE_MATCH_1})
 string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_MINOR${RX_WS}+([0-9]+)" MINOR_DUMMY ${_header_file})
 set(_VERSION_MINOR ${CMAKE_MATCH_1})
-string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_PATCH${RX_WS}+([0-9]+)" PATCH_DUMMY ${_header_file})
-set(_VERSION_PATCH ${CMAKE_MATCH_1})
+string(REGEX MATCH "#${RX_WS}*define${RX_WS}+_?${RX_PROJ_TAG}_VER_(PATCH|REVISION)${RX_WS}+([0-9]+)" PATCH_DUMMY ${_header_file})
+set(_VERSION_PATCH ${CMAKE_MATCH_2})
 
 # set project version number here
 set(PROJECT_VERSION_MAJOR ${_VERSION_MAJOR})
@@ -60,7 +60,7 @@ set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON) # GNU extensions and POSIX standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
@@ -71,6 +71,18 @@ if(MSVC)
 		set(CMAKE_C_STANDARD 90)
 		set(CMAKE_CXX_STANDARD 98)
 	endif()
+
+	if(MSVC_USE_MT)
+
+		set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+	endif(MSVC_USE_MT)
+else(MSVC)
+
+	if(MSVC_USE_MT)
+
+		# this here just to absorb warning about not using `MSVC_USE_MT` (to
+		# enable **prepare_cmake.sh** to be simple)
+	endif(MSVC_USE_MT)
 endif(MSVC)
 
 
@@ -90,6 +102,8 @@ include(TargetMacros)
 
 option(BUILD_EXAMPLES "Build examples" ON)
 
+option(BUILD_TESTING "Build tests" ON)
+
 if(Diagnosticism_OS_SIMULATE_WINDOWS_ON_UNIX)
 
 	message("-- defining Diagnosticism_OS_SIMULATE_WINDOWS_ON_UNIX")
@@ -102,36 +116,11 @@ endif(Diagnosticism_OS_SIMULATE_WINDOWS_ON_UNIX)
 # dependencies
 #
 # required:
-# - CLASP - required for testing;
-# - cstring;
 # - STLSoft - required for testing;
 # - xTests - required for testing;
 #
 # optional:
 # - shwild - required for testing;
-
-
-# ############################
-# CLASP
-
-if(BUILD_TESTING)
-
-	set(CLASP_REQUIRED_VERSION_ 0.14)
-
-	find_package(CLASP ${CLASP_REQUIRED_VERSION_} REQUIRED)
-
-	message("-- CMake package CLASP found (version ${CLASP_VERSION}; ${CLASP_REQUIRED_VERSION_} requested)")
-endif(BUILD_TESTING)
-
-
-# ############################
-# cstring
-
-set(cstring_REQUIRED_VERSION_ 4.0)
-
-find_package(cstring ${cstring_REQUIRED_VERSION_} REQUIRED)
-
-message("-- CMake package cstring found (version ${cstring_VERSION}; ${cstring_REQUIRED_VERSION_} requested)")
 
 
 # ############################
@@ -226,7 +215,37 @@ include(GNUInstallDirs)
 # targets
 
 # ################################################
-# main library
+# custom definitions
+
+if(UNIX)
+
+	set(_BUILD_AS_UNIX 1)
+
+	message("-- Operating system Unix")
+else(UNIX)
+
+	if(WIN32)
+
+		if(USE_UNIXEM)
+
+			set(_BUILD_AS_UNIX 1)
+
+			message("-- Operating system Unix (synthesised on Windows)")
+		else(USE_UNIXEM)
+
+			set(_BUILD_AS_WIN32 1)
+
+			message("-- Operating system Windows")
+		endif(USE_UNIXEM)
+	else(WIN32)
+
+		message("-- Operating system unknown")
+	endif(WIN32)
+endif(UNIX)
+
+
+# ################################################
+# main libraries
 
 add_subdirectory(src)
 
@@ -266,7 +285,7 @@ endif(BUILD_TESTING)
 # ##########################################################
 # export
 
-set(EXPORT_NAME ${PROJECT_NAME})
+set(EXPORT_NAME ${PROJECT_NAME_LOWER})
 
 configure_package_config_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/cmake/${EXPORT_NAME}-config.cmake.in
@@ -291,7 +310,7 @@ install(EXPORT project-targets
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
 )
 
-install( FILES
+install(FILES
 	"${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config.cmake"
 	"${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config-version.cmake"
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
@@ -301,7 +320,7 @@ install( FILES
 # ##########################################################
 # completion
 
-message(NOTICE "Generating CMake build scripts for ${PROJECT_NAME} ${PROJECT_VERSION}, for C${CMAKE_C_STANDARD} C++${CMAKE_CXX_STANDARD}")
+message(NOTICE "Generating CMake build scripts for ${PROJECT_NAME} ${PROJECT_VERSION}, for C${CMAKE_C_STANDARD} C++${CMAKE_CXX_STANDARD}, with build type ${CMAKE_BUILD_TYPE}")
 
 
 # ############################## end of file ############################# #

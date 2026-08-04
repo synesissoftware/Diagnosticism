@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for Diagnosticsm core library
 #
 # Created:  23rd November 2024
-# Updated:  23rd November 2024
+# Updated:  25th August 2025
 #
 # ######################################################################## #
 
@@ -48,7 +48,10 @@ set(TARGET_NAME core)
 set(CORE_SRCS
 	abort.c
 	api.c
+	doomgram.c
+	ev.c
 	tracing.c
+	version_string.c
 )
 
 add_library(${TARGET_NAME}
@@ -63,7 +66,11 @@ add_library(${TARGET_NAME}
 # `install()` step
 set(CORE_PUBLIC_HEADERS
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/${PROJECT_NAME_LOWER}.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/doomgram.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/ev.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/tracing.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/version_string.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/version_string.hpp"
 )
 
 set_target_properties(${TARGET_NAME} PROPERTIES
@@ -79,7 +86,7 @@ target_include_directories(${TARGET_NAME}
 
 target_link_libraries(${TARGET_NAME}
 	PUBLIC
-		$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+		$<$<BOOL:${STLSoft_FOUND}>:STLSoft::STLSoft>
 )
 
 target_compile_options(${TARGET_NAME}
@@ -106,6 +113,8 @@ install(TARGETS ${TARGET_NAME}
 
 # additional headers into specific sub-directories
 
+#[====[
+
 install(
 	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/util
 	DESTINATION include/${PROJECT_NAME_LOWER}
@@ -119,6 +128,7 @@ install(
 	FILES_MATCHING
 	PATTERN "*.h*"
 )
+#]====]
 
 
 # ############################## end of file ############################# #

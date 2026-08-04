@@ -4,13 +4,20 @@ ScriptPath=$0
 Dir=$(cd $(dirname "$ScriptPath"); pwd)
 Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
-MakeCmd=${SIS_CMAKE_COMMAND:-make}
+if [[ -n "$MSYSTEM" ]]; then
 
+  DefaultMakeCmd=mingw32-make.exe
+  MinGW=1
+else
+
+  DefaultMakeCmd=make
+fi
+MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
 
 Configuration=Release
 ExamplesDisabled=0
 MSVC_MT=0
-MinGW=0
+MinGW="${MinGW:=0}"
 RunMake=0
 STLSoftDirGiven=
 TestingDisabled=0
@@ -23,19 +30,19 @@ VerboseMakefile=0
 while [[ $# -gt 0 ]]; do
 
   case $1 in
-    -v|--cmake-verbose-makefile)
+    --cmake-verbose-makefile|-v)
 
       VerboseMakefile=1
       ;;
-    -d|--debug-configuration)
+    --debug-configuration|-d)
 
       Configuration=Debug
       ;;
-    -E|--disable-examples)
+    --disable-examples|-E)
 
       ExamplesDisabled=1
       ;;
-    -T|--disable-testing)
+    --disable-testing|-T)
 
       TestingDisabled=1
       ;;
@@ -47,20 +54,19 @@ while [[ $# -gt 0 ]]; do
 
       MSVC_MT=1
       ;;
-    -m|--run-make)
+    --run-make|-m)
 
       RunMake=1
       ;;
-    -s|--stlsoft-root-dir)
+    --stlsoft-root-dir|-s)
 
       shift
       STLSoftDirGiven=$1
       ;;
     --help)
 
+      [ -f "$Dir/.sis/script_info_lines.txt" ] && cat "$Dir/.sis/script_info_lines.txt"
       cat << EOF
-Diagnosticism is a standalone library of simple components for aiding in diagnostics for C and C++ projects
-Copyright (c) 2024, Matthew Wilson and Synesis Information Systems
 Creates/reinitialises the CMake build script(s)
 
 $ScriptPath [ ... flags/options ... ]
@@ -90,7 +96,8 @@ Flags/options:
         required (and not searched)
 
     --mingw
-        uses explicitly the "MinGW Makefiles" generator
+        uses explicitly the "MinGW Makefiles" generator, and defaults the
+        make-command to "mingw32-make.exe"
 
     --msvc-mt
         when using Visual C++ (MSVC), the static runtime library will be
@@ -114,17 +121,17 @@ Flags/options:
 
 EOF
 
-            exit 0
-            ;;
-        *)
+      exit 0
+      ;;
+    *)
 
-            >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
+      >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
 
-            exit 1
-            ;;
-    esac
+      exit 1
+      ;;
+  esac
 
-    shift
+  shift
 done
 
 
@@ -167,7 +174,6 @@ else
     -B $CMakeDir \
     || (cd ->/dev/null ; exit 1)
 fi
-
 
 status=0
 

@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    diagnosticm/diagnosticm.h
+ * File:    diagnosticism/diagnosticism.h
  *
- * Purpose: Main header file for Diagnosticm (C-API).
+ * Purpose: Main header file for Diagnosticism (C-API).
  *
  * Created: 23rd November 2024
- * Updated: 16th January 2025
+ * Updated: 4th August 2026
  *
- * Home:    https://github.com/synesissoftware/DIAGNOSTICISM/
+ * Home:    https://github.com/synesissoftware/Diagnosticism/
  *
- * Copyright (c) 2024-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2024-2026, Matthew Wilson and Synesis Information Systems
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,9 +39,12 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-/** \file diagnosticm/diagnosticm.h
+/** \file diagnosticism/diagnosticism.h
  *
- * [C, C++] Main header file for Diagnosticm (C-API).
+ * [C, C++] Main header file for Diagnosticism (C-API).
+ *
+ * @defgroup diagnosticism_core Core API
+ * @{
  */
 
 #ifndef DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_DIAGNOSTICISM
@@ -50,8 +53,8 @@
 #ifndef DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MAJOR  0
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MINOR  0
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  1
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   2
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  12
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   14
 #endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -78,9 +81,9 @@
  */
 
 #define DIAGNOSTICISM_VER_MAJOR         0
-#define DIAGNOSTICISM_VER_MINOR         0
+#define DIAGNOSTICISM_VER_MINOR         3
 #define DIAGNOSTICISM_VER_PATCH         0
-#define DIAGNOSTICISM_VER_ALPHABETA     22
+#define DIAGNOSTICISM_VER_ALPHABETA     0x41
 
 #define DIAGNOSTICISM_VER \
     (0\
@@ -106,15 +109,19 @@
  * macros
  */
 
-/** \def DIAGNOSTICISM_CALL(rc)
+/** Expands to the appropriate linkage/return-type decoration for C and C++.
  *
- * T.B.C.
+ * In C++ expands to `extern "C" rt`; in C expands to `rt`.
+ *
+ * @param rt The return type.
  */
-#ifndef DIAGNOSTICISM_CALL
+#if defined(__DOXYGEN__)
+# define DIAGNOSTICISM_CALL(rt)                            rt
+#elif !defined(DIAGNOSTICISM_CALL)
 # ifdef __cplusplus
 #  define DIAGNOSTICISM_CALL(rt)                            extern "C" rt
 # else
-#  define DIAGNOSTICISM_CALL(rt)                            extern rt
+#  define DIAGNOSTICISM_CALL(rt)                            rt
 # endif
 #endif
 
@@ -127,6 +134,7 @@
  * types
  */
 
+/** Unsigned 32-bit integer type used by the core API. */
 typedef uint32_t                                            diag_uint32_t;
 
 
@@ -135,7 +143,7 @@ typedef uint32_t                                            diag_uint32_t;
  * API functions
  */
 
-/** Obtains the Diagnosticism version (at time of compilation)
+/** Obtains the Diagnosticism version (at time of compilation).
  *
  * @note Can be called without having initialised the API.
  *
@@ -146,8 +154,12 @@ diagnosticism_api_version(void);
 
 
 
-/** T.B.C.
+/** Initialises the Diagnosticism API.
  *
+ * @param init_flags Reserved; pass 0.
+ * @param init_param Reserved; pass NULL.
+ *
+ * @return 0 on success.
  */
 DIAGNOSTICISM_CALL(int)
 diagnosticism_api_init(
@@ -155,9 +167,7 @@ diagnosticism_api_init(
 ,   void*           init_param
 );
 
-/** T.B.C.
- *
- */
+/** Uninitialises the Diagnosticism API. */
 DIAGNOSTICISM_CALL(void)
 diagnosticism_api_uninit(void);
 
@@ -165,6 +175,9 @@ diagnosticism_api_uninit(void);
 /* /////////////////////////////////////////////////////////////////////////
  * API functions (C++)
  */
+
+
+/** @} */
 
 
 /* /////////////////////////////////////////////////////////////////////////

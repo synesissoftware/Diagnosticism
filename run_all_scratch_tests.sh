@@ -4,11 +4,12 @@ ScriptPath=$0
 Dir=$(cd $(dirname "$ScriptPath"); pwd)
 Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
-MakeCmd=${SIS_CMAKE_COMMAND:-make}
+[[ -n "$MSYSTEM" ]] && DefaultMakeCmd=mingw32-make.exe || DefaultMakeCmd=make
+MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
 
 ListOnly=0
 RunMake=1
-Verbosity=3
+Verbosity=${XTESTS_VERBOSITY:-${TEST_VERBOSITY:-3}}
 
 
 # ##########################################################
@@ -17,11 +18,11 @@ Verbosity=3
 while [[ $# -gt 0 ]]; do
 
   case $1 in
-    -l|--list-only)
+    --list-only|-l)
 
       ListOnly=1
       ;;
-    -M|--no-make)
+    --no-make|-M)
 
       RunMake=0
       ;;
@@ -32,10 +33,9 @@ while [[ $# -gt 0 ]]; do
       ;;
     --help)
 
+      [ -f "$Dir/.sis/script_info_lines.txt" ] && cat "$Dir/.sis/script_info_lines.txt"
       cat << EOF
-Diagnosticism is a standalone library of simple components for aiding in diagnostics for C and C++ projects
-Copyright (c) 2024, Matthew Wilson and Synesis Information Systems
-Runs all (matching) scratch and performance test programs
+Runs all (matching) performance-test and scratch-test programs
 
 $ScriptPath [ ... flags/options ... ]
 
@@ -85,7 +85,7 @@ if [ $RunMake -ne 0 ]; then
 
   if [ $ListOnly -eq 0 ]; then
 
-    echo "Executing build (via command \`$MakeCmd\`) and then running all scratch test programs"
+    echo "Executing build (via command \`$MakeCmd\`) and then running all scratch (and performance) test programs"
 
     mkdir -p $CMakeDir || exit 1
 
@@ -108,14 +108,15 @@ if [ $status -eq 0 ]; then
 
   if [ $ListOnly -ne 0 ]; then
 
-    echo "Listing all scratch test programs"
+    echo "Listing all scratch (and performance) test programs"
   else
 
-    echo "Running all scratch test programs"
+    echo "Running all scratch (and performance) test programs"
   fi
 
   for f in $(find $CMakeDir -type f '(' -name 'test_scratch*' -o -name 'test.scratch.*' -o -name 'test_performance*' -o -name 'test.performance.*' ')' -exec test -x {} \; -print)
   do
+
     if [ $ListOnly -ne 0 ]; then
 
       echo "would execute $f:"
@@ -132,8 +133,13 @@ if [ $status -eq 0 ]; then
       echo "executing $f:"
     fi
 
-    # NOTE: we do not break on fail because these tests are not always intended to succeed
-    $f
+    if $f; then
+
+      :
+    else
+
+      status=$?
+    fi
   done
 fi
 
