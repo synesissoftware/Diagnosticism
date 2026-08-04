@@ -1,6 +1,14 @@
 # Diagnosticism - CHANGES <!-- omit in toc -->
 
 
+## 0.3.0-alpha1 - 9th August 2026
+
+* added Abort API (`diagnosticism_abort()`, `diagnosticism_abortf()`) in **abort.h** / **abort.c**;
+* added **abort** example program (**examples/abort/**);
+* added `DIAGNOSTICISM_CALL_NORETURN`;
+* added **include/diagnosticism/internal/compiler.h** and **include/diagnosticism/internal/language.h** stubs;
+
+
 ## 0.2.2-alpha1 - 4th August 2026
 
 * fixed unnecessary dependency on **cstring** when not building tests;

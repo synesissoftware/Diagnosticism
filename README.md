@@ -107,6 +107,11 @@ The following types are defined in the public C headers:
 
 The following functions comprise the public C API:
 
+Abort (`<diagnosticism/abort.h>`):
+
+* `diagnosticism_abort()` - writes a program-name-qualified message to a stream and then aborts;
+* `diagnosticism_abortf()` - as `diagnosticism_abort()`, with a `printf`-style formatted message;
+
 Core API (`<diagnosticism/diagnosticism.h>`):
 
 * `diagnosticism_api_version()` - obtains the **Diagnosticism** version (at time of compilation); may be called without having initialised the API;
@@ -146,6 +151,7 @@ The following macros are defined in the public C headers:
 Core API (`<diagnosticism/diagnosticism.h>`):
 
 * `DIAGNOSTICISM_CALL(rt)` - expands to the appropriate linkage/return-type decoration for C and C++ (`extern "C" rt` in C++, `rt` in C);
+* `DIAGNOSTICISM_CALL_NORETURN` - as `DIAGNOSTICISM_CALL(void)`, for functions that do not return (currently pending `[[noreturn]]` treatment);
 
 DoomGram (`<diagnosticism/doomgram.h>`):
 
