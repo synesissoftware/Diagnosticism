@@ -93,3 +93,4 @@ diagnosticism_trace_impl(
 #endif /* !DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_TRACING */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

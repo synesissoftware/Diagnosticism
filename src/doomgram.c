@@ -318,6 +318,8 @@ diagnosticism_doomgram_push_event_time_us(
 
     uint64_t const time_in_ns = time_in_us * 1000;
 
+    assert(NULL != dg);
+
     if (!try_add_ns_to_total_and_update_minmax_and_count_(dg, time_in_ns))
     {
         return false;
@@ -406,6 +408,8 @@ diagnosticism_doomgram_push_event_time_ms(
 {
     uint64_t const time_in_ns = time_in_ms * 1000000;
 
+    assert(NULL != dg);
+
     if (!try_add_ns_to_total_and_update_minmax_and_count_(dg, time_in_ns))
     {
         return false;
@@ -472,6 +476,8 @@ diagnosticism_doomgram_push_event_time_s(
 )
 {
     uint64_t const time_in_ns = time_in_s * 1000000000;
+
+    assert(NULL != dg);
 
     if (!try_add_ns_to_total_and_update_minmax_and_count_(dg, time_in_ns))
     {
@@ -588,7 +594,9 @@ diagnosticism_doomgram_dump_to_stream(
 ,   char const*                 var_name
 )
 {
+    assert(NULL != stm);
     assert(NULL != dg);
+    assert(NULL != var_name);
 
 #define DDD2S_fmt_(v) _Generic((v), \
 	unsigned long: \
@@ -650,6 +658,7 @@ diagnosticism_doomgram_to_strip_12(
 )
 {
     assert(NULL != dg);
+    assert(NULL != ar);
 
     return gram_to_strip_impl_(
                 dg

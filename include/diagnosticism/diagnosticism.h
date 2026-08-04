@@ -81,8 +81,8 @@
  */
 
 #define DIAGNOSTICISM_VER_MAJOR         0
-#define DIAGNOSTICISM_VER_MINOR         2
-#define DIAGNOSTICISM_VER_PATCH         2
+#define DIAGNOSTICISM_VER_MINOR         3
+#define DIAGNOSTICISM_VER_PATCH         0
 #define DIAGNOSTICISM_VER_ALPHABETA     0x41
 
 #define DIAGNOSTICISM_VER \
@@ -92,6 +92,8 @@
         |   (   DIAGNOSTICISM_VER_PATCH       <<  8   ) \
         |   (   DIAGNOSTICISM_VER_ALPHABETA   <<  0   ) \
     )
+
+#define DIAGNOSTICISM_VER_REVISION      DIAGNOSTICISM_VER_PATCH
 
 
 /* /////////////////////////////////////////////////////////////////////////

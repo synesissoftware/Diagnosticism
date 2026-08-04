@@ -6,6 +6,9 @@ Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
 [[ -n "$MSYSTEM" ]] && DefaultMakeCmd=mingw32-make.exe || DefaultMakeCmd=make
 MakeCmd=${SIS_CMAKE_MAKE_COMMAND:-${SIS_CMAKE_COMMAND:-$DefaultMakeCmd}}
+ProjectNameFile="$Dir/.sis/project_name.txt"
+ProjectName=$(tr -d '[:space:]' < "$ProjectNameFile")
+
 
 ListOnly=0
 RunMake=1
@@ -119,7 +122,7 @@ if [ $RunMake -ne 0 ]; then
 
   if [ $ListOnly -eq 0 ]; then
 
-    echo "Executing build (via command \`$MakeCmd\`) and then running all ${TestKindDescription} programs"
+    echo "Executing build of ${ProjectName} (via command \`$MakeCmd\`) and then running all ${TestKindDescription} programs"
 
     mkdir -p $CMakeDir || exit 1
 
@@ -144,10 +147,10 @@ if [ $status -eq 0 ]; then
 
   if [ $ListOnly -ne 0 ]; then
 
-    echo "Listing all ${TestKindDescription} programs"
+    echo "Listing all ${ProjectName} ${TestKindDescription} programs"
   else
 
-    echo "Running all ${TestKindDescription} programs"
+    echo "Running all ${ProjectName} ${TestKindDescription} programs"
   fi
 
   if [ $UnitOnly -ne 0 ]; then

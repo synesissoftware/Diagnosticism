@@ -208,12 +208,12 @@ diagnosticism_doomgram_push_event_time_s(
 /** Attempts to obtain the total event time in nanoseconds.
  *
  * @param dg The doomgram whose value is to be elicited.
- * @param value Pointer to a variable into which the value is written.
+ * @param value Pointer to a variable into which the value is written; may
+ *  be NULL when only the success/failure indication is required.
  *
  * @return `true` on success, or `false` if overflow has occurred.
  *
  * @pre NULL != dg
- * @pre NULL != value
  */
 DIAGNOSTICISM_CALL(bool)
 diagnosticism_doomgram_try_get_total_event_time_ns(
@@ -233,12 +233,12 @@ diagnosticism_doomgram_try_get_total_event_time_ns(
 /** Attempts to obtain the minimum event time in nanoseconds.
  *
  * @param dg The doomgram whose value is to be elicited.
- * @param value Pointer to a variable into which the value is written.
+ * @param value Pointer to a variable into which the value is written; may
+ *  be NULL when only the success/failure indication is required.
  *
  * @return `true` on success, or `false` if overflow has occurred.
  *
  * @pre NULL != dg
- * @pre NULL != value
  */
 DIAGNOSTICISM_CALL(bool)
 diagnosticism_doomgram_try_get_min_event_time_ns(
@@ -249,12 +249,12 @@ diagnosticism_doomgram_try_get_min_event_time_ns(
 /** Attempts to obtain the maximum event time in nanoseconds.
  *
  * @param dg The doomgram whose value is to be elicited.
- * @param value Pointer to a variable into which the value is written.
+ * @param value Pointer to a variable into which the value is written; may
+ *  be NULL when only the success/failure indication is required.
  *
  * @return `true` on success, or `false` if overflow has occurred.
  *
  * @pre NULL != dg
- * @pre NULL != value
  */
 DIAGNOSTICISM_CALL(bool)
 diagnosticism_doomgram_try_get_max_event_time_ns(
@@ -324,3 +324,4 @@ diagnosticism_doomgram_to_strip_12(
 #endif /* !DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_DOOMGRAM */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

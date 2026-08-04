@@ -1,6 +1,18 @@
 # Diagnosticism - CHANGES <!-- omit in toc -->
 
 
+## 0.3.0-alpha1 - 4th August 2026
+
+* changed `diagnosticism_calc_version_string()` to take `int` version elements interpreted strictly as 8-bit values (`0x41` alpha1, `0x81` beta1, `0xC1` rc1, `0xFF` final);
+* added `diagnosticism_calc_version_string_16()` (prior 16-bit behaviour) and `diagnosticism::calc_version_string_16()`;
+* added **version_string_16** example program (**examples/version_string_16/**);
+* expanded version-string unit tests with thorough 8-bit and 16-bit coverage;
+* ensured C/C++/CMake sources end with a full blank line;
+* completed `@pre` contract assertions in **doomgram** API implementations;
+* added **.sis/project_name.txt**; helper scripts load `ProjectName` for status messages;
+* boilerplate: version **0.3.0-alpha1**; added `DIAGNOSTICISM_VER_REVISION`;
+
+
 ## 0.2.2-alpha1 - 4th August 2026
 
 * fixed unnecessary dependency on **cstring** when not building tests;

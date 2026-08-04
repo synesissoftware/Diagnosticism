@@ -42,7 +42,7 @@ Simple diagnostics utilities for C (and C++) — part of the cross-language **Di
 
 In **C** and **C++**, which offer only modest built-in diagnostic support, the facilities are aimed at lightweight, low-overhead utilities that integrate cleanly with existing code. For example, the **DoomGram** component records duration events into an order-of-magnitude histogram and can summarise many thousands of timings in a single 12-character strip — useful for logging cumulative execution costs in long-running performance-sensitive applications. (See the [Components](#components) section below for more on this.) The `diagnosticism_trace()` macro provides a simple call-site trace facility, writing file, line, function, and a `printf`-style message to a chosen stream; see [**examples/tracing/**](./examples/tracing/).
 
-Other facilities include environment-variable helpers (`diagnosticism_getenv()`, `diagnosticism_getenv_atoi()`), version-string formatting (`diagnosticism_calc_version_string()` and the C++ wrapper `diagnosticism::calc_version_string()`), and a small core API for library initialisation and version discovery. Further facilities will be added over time (and will be listed in the [Components](#components) section below).
+Other facilities include environment-variable helpers (`diagnosticism_getenv()`, `diagnosticism_getenv_atoi()`), version-string formatting (`diagnosticism_calc_version_string()`, `diagnosticism_calc_version_string_16()`, and the C++ wrappers `diagnosticism::calc_version_string()` / `diagnosticism::calc_version_string_16()`), and a small core API for library initialisation and version discovery. Further facilities will be added over time (and will be listed in the [Components](#components) section below).
 
 
 ## Installation
@@ -136,7 +136,8 @@ Tracing (`<diagnosticism/tracing.h>`):
 
 Version strings (`<diagnosticism/version_string.h>`):
 
-* `diagnosticism_calc_version_string()` - formats a version number (major, minor, patch, and optional alpha/beta/rc/build component) into a caller-supplied buffer; returns the number of characters written, or a negative value on failure. The `verAlphaBeta` argument encodes pre-release information: values in the ranges 0x4000+, 0x8000+, and 0xC000+ yield `-alphaN`, `-betaN`, and `-rcN` suffixes respectively; 0xFFFF suppresses any suffix; other non-zero values are appended as a fourth dotted component;
+* `diagnosticism_calc_version_string()` - formats a version number (major, minor, patch, and optional alpha/beta/rc/build component) into a caller-supplied buffer; each component is an `int` interpreted strictly as an 8-bit value. Returns 0 on success (with character count via `pnWritten`), or -1 on failure. The `verAlphaBeta` argument encodes pre-release information: values in the ranges 0x40+, 0x80+, and 0xC0+ yield `-alphaN`, `-betaN`, and `-rcN` suffixes respectively (e.g. 0x41 → `-alpha1`, 0x81 → `-beta1`, 0xC1 → `-rc1`); 0xFF suppresses any suffix (final); other non-zero values are appended as a fourth dotted component;
+* `diagnosticism_calc_version_string_16()` - as `diagnosticism_calc_version_string()`, but with `uint16_t` components and 16-bit pre-release encoding (0x4000+ / 0x8000+ / 0xC000+ / 0xFFFF);
 
 
 #### Macros
@@ -184,6 +185,8 @@ Version strings (`<diagnosticism/version_string.hpp>`):
 std::string const s = diagnosticism::calc_version_string(1, 2, 3, 0);
 // s == "1.2.3"
 ```
+
+* `diagnosticism::calc_version_string_16()` - C++ wrapper around `diagnosticism_calc_version_string_16()`;
 
 
 ## Examples
