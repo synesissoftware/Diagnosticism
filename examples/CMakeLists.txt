@@ -43,6 +43,7 @@ add_subdirectory(doomgram)
 add_subdirectory(ev)
 add_subdirectory(tracing)
 add_subdirectory(version_string)
+add_subdirectory(version_string_16)
 
 
 # ############################## end of file ############################# #
