@@ -1,6 +1,14 @@
 # Diagnosticism - CHANGES <!-- omit in toc -->
 
 
+## 0.3.0-alpha2 - 5th August 2026
+
+* added Abort API (`diagnosticism_abort()`, `diagnosticism_abortf()`) in **abort.h** / **abort.c**;
+* added **abort** example program (**examples/abort/**);
+* added `DIAGNOSTICISM_CALL_NORETURN`;
+* added **include/diagnosticism/internal/compiler.h** and **include/diagnosticism/internal/language.h** stubs;
+
+
 ## 0.3.0-alpha1 - 5th August 2026
 
 * changed `diagnosticism_calc_version_string()` to take `int` version elements interpreted strictly as 8-bit values (`0x41` alpha1, `0x81` beta1, `0xC1` rc1, `0xFF` final);

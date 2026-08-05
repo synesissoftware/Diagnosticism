@@ -74,7 +74,7 @@ diagnosticism_trace_impl(
         (stm)                                               \
     ,   __FILE__                                            \
     ,   __LINE__                                            \
-    , DIAGNOSTICISM_FUNCTION_                               \
+    ,   DIAGNOSTICISM_FUNCTION_                             \
     ,   __VA_ARGS__                                         \
     )
 
