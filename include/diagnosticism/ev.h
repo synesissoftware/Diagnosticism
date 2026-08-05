@@ -77,3 +77,4 @@ diagnosticism_getenv_atoi(
 #endif /* !DIAGNOSTICISM_INCL_DIAGNOSTICISM_H_EV */
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

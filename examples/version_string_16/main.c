@@ -6,16 +6,16 @@
 
 
 static int
-print_version_string(
-    int verMajor
-,   int verMinor
-,   int verPatch
-,   int verAlphaBeta
+print_version_string_16(
+    uint16_t    verMajor
+,   uint16_t    verMinor
+,   uint16_t    verPatch
+,   uint16_t    verAlphaBeta
 )
 {
     char        buffer[101];
     size_t      n;
-    int const   r = diagnosticism_calc_version_string(
+    int const   r = diagnosticism_calc_version_string_16(
         buffer, sizeof(buffer) / sizeof(buffer[0])
     ,   verMajor, verMinor, verPatch, verAlphaBeta
     ,   &n
@@ -31,11 +31,11 @@ print_version_string(
 
     fprintf(
         stderr
-    ,   "%d.%d.%d (0x%02x) -> \"%s\"\n"
-    ,   verMajor
-    ,   verMinor
-    ,   verPatch
-    ,   verAlphaBeta & 0xFF
+    ,   "%u.%u.%u (0x%04x) -> \"%s\"\n"
+    ,   (unsigned)verMajor
+    ,   (unsigned)verMinor
+    ,   (unsigned)verPatch
+    ,   (unsigned)verAlphaBeta
     ,   buffer
     );
 
@@ -45,22 +45,22 @@ print_version_string(
 
 int main(void)
 {
-    if (EXIT_SUCCESS != print_version_string(1, 2, 3, 0))
+    if (EXIT_SUCCESS != print_version_string_16(1, 2, 3, 0))
     {
         return EXIT_FAILURE;
     }
 
-    if (EXIT_SUCCESS != print_version_string(0, 1, 0, 0x41))
+    if (EXIT_SUCCESS != print_version_string_16(0, 1, 0, 0x4321))
     {
         return EXIT_FAILURE;
     }
 
-    if (EXIT_SUCCESS != print_version_string(1, 2, 3, 0xC1))
+    if (EXIT_SUCCESS != print_version_string_16(1, 2, 3, 0xC123))
     {
         return EXIT_FAILURE;
     }
 
-    if (EXIT_SUCCESS != print_version_string(1, 2, 3, 0xFF))
+    if (EXIT_SUCCESS != print_version_string_16(1, 2, 3, 0xFFFF))
     {
         return EXIT_FAILURE;
     }
