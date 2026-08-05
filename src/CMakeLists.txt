@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for Diagnosticsm core library
 #
 # Created:  23rd November 2024
-# Updated:  25th August 2025
+# Updated:  5th August 2026
 #
 # ######################################################################## #
 
@@ -61,10 +61,11 @@ add_library(${TARGET_NAME}
 # specify the primary public headers for the library, which controls whether
 # they'll be installed
 #
-# NOTE: it is not yet known (to me, at least) how to include additional
-# header files from sub-directories, so this is done below in an additional
-# `install()` step
+# NOTE: `PUBLIC_HEADER` installs into a single destination directory and so
+# cannot preserve subdirectory structure. Headers under sub-directories
+# (e.g. `internal/`) are installed separately below.
 set(CORE_PUBLIC_HEADERS
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/abort.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/${PROJECT_NAME_LOWER}.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/doomgram.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/ev.h"
@@ -113,22 +114,12 @@ install(TARGETS ${TARGET_NAME}
 
 # additional headers into specific sub-directories
 
-#[====[
-
 install(
-	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/util
-	DESTINATION include/${PROJECT_NAME_LOWER}
+	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/internal
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER}
 	FILES_MATCHING
 	PATTERN "*.h*"
 )
-
-install(
-	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/test/util
-	DESTINATION include/${PROJECT_NAME_LOWER}/test
-	FILES_MATCHING
-	PATTERN "*.h*"
-)
-#]====]
 
 
 # ############################## end of file ############################# #

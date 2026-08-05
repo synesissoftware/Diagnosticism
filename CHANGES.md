@@ -1,6 +1,12 @@
 # Diagnosticism - CHANGES <!-- omit in toc -->
 
 
+## 0.3.0-alpha3 - 5th August 2026
+
+* fixed CMake install so **compiler.h** and **language.h** install under **include/diagnosticism/internal/** (not flattened into **include/diagnosticism/**);
+* installed **abort.h** with the other top-level public headers;
+
+
 ## 0.3.0-alpha2 - 5th August 2026
 
 * added Abort API (`diagnosticism_abort()`, `diagnosticism_abortf()`) in **abort.h** / **abort.c**;
