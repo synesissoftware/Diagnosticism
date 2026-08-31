@@ -95,8 +95,10 @@ Flags/options:
     -T
     --disable-testing
         disables building of tests (by setting BUILD_TESTING=OFF). With
-        testing disabled, the dependency projects shwild and xTests are not
-        required (and not searched)
+        testing disabled, the dependency projects STLSoft, shwild, and
+        xTests are not required (and not searched). Note: STLSoft is never
+        required to build, install, or consume the Diagnosticism::core
+        library itself — only for automated tests
 
     --mingw
         uses explicitly the "MinGW Makefiles" generator, and defaults the
@@ -112,9 +114,11 @@ Flags/options:
 
     -s <dir>
     --stlsoft-root-dir <dir>
-        specifies the STLSoft root-directory, which will be passed to CMake
-        as the variable STLSOFT, and which will override the environment
-        variable STLSOFT (if present)
+        specifies the STLSoft root-directory for test builds, which will be
+        passed to CMake as the variable STLSOFT, and which will override
+        the environment variable STLSOFT (if present). Ignored when testing
+        is disabled. Does not affect Diagnosticism::core's exported
+        interface
 
 
     standard flags:

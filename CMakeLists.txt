@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for Diagnosticism
 #
 # Created:  23rd November 2024
-# Updated:  1st August 2026
+# Updated:  10th August 2026
 #
 # ######################################################################## #
 
@@ -115,23 +115,32 @@ endif(Diagnosticism_OS_SIMULATE_WINDOWS_ON_UNIX)
 # ######################################
 # dependencies
 #
-# required:
-# - STLSoft - required for testing;
-# - xTests - required for testing;
+# Library (Diagnosticism::core): none.
 #
-# optional:
-# - shwild - required for testing;
+# Testing only (when BUILD_TESTING=ON):
+# - STLSoft - required for testing (via xTests and/or direct test use);
+# - xTests - required for testing;
+# - shwild - optional for testing;
+#
+# IMPORTANT: test-only packages must never be linked PUBLIC/INTERFACE onto
+# Diagnosticism::core (see src/CMakeLists.txt and cmake/TargetMacros.cmake).
 
 
 # ############################
 # STLSoft
+#
+# STLSoft is a test-time dependency only. It is not required to build,
+# install, or consume Diagnosticism::core. Discovery is therefore gated on
+# BUILD_TESTING, and include/link wiring is applied only to test programs
+# (never via directory-wide include_directories(), which would leak into
+# the core library target).
 
 if(BUILD_TESTING)
 
 	# We provide flexibility here, as in:
 	# 1. if a CMake variable STLSOFT is provided then it is used; otherwise
-	# 2. if an environment variable STLSOFT is provided then it then it is
-	#    used; otherwise
+	# 2. if an environment variable STLSOFT is provided then it is used;
+	#    otherwise
 	# 3. if the package STLSoft (via find_package()) is found then it is
 	#    used; otherwise
 	# 4. we abort
@@ -153,11 +162,6 @@ if(BUILD_TESTING)
 		find_package(STLSoft ${STLSoft_REQUIRED_VERSION_} REQUIRED)
 
 		message("-- CMake package STLSoft found (version ${STLSoft_VERSION}; ${STLSoft_REQUIRED_VERSION_} requested)")
-	endif()
-
-	if(DEFINED STLSOFT_INCLUDE_DIR)
-
-		include_directories(${STLSOFT_INCLUDE_DIR})
 	endif()
 endif(BUILD_TESTING)
 
