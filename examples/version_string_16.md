@@ -1,4 +1,4 @@
-# Diagnosticism Example - **version_string_16**
+# Diagnosticism - Example - **version_string_16**
 
 
 ## Summary

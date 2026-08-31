@@ -1,4 +1,4 @@
-# Diagnosticism - CHANGES <!-- omit in toc -->
+# Diagnosticism - Changes <!-- omit in toc -->
 
 
 ## 0.3.0 - 9th August 2026
