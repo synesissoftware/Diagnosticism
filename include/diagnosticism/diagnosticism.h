@@ -4,7 +4,7 @@
  * Purpose: Main header file for Diagnosticism (C-API).
  *
  * Created: 23rd November 2024
- * Updated: 9th August 2026
+ * Updated: 17th September 2026
  *
  * Home:    https://github.com/synesissoftware/Diagnosticism/
  *
@@ -93,7 +93,9 @@
         |   (   DIAGNOSTICISM_VER_ALPHABETA   <<  0   ) \
     )
 
-#define DIAGNOSTICISM_VER_REVISION      DIAGNOSTICISM_VER_PATCH
+#ifndef DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION
+# define DIAGNOSTICISM_VER_REVISION                         DIAGNOSTICISM_VER_PATCH
+#endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
 
 /* /////////////////////////////////////////////////////////////////////////
