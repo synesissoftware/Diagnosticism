@@ -1,6 +1,12 @@
 # Diagnosticism - Changes <!-- omit in toc -->
 
 
+## Unreleased
+
+* Applied **misc-dev-scripts** **0.6.0** editor/Git/`.sis` drop-in templates on **boilerplate**;
+* Restored historical **.gitignore** patterns as a sorted union with **misc-dev-scripts** gold section layout;
+
+
 ## 0.3.0 - 9th August 2026
 
 0.3.0
