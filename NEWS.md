@@ -1,4 +1,4 @@
-# Diagnosticism - NEWS <!-- omit in toc -->
+# Diagnosticism - News <!-- omit in toc -->
 
 
 | Date                 | News Item                                                                                                            |
