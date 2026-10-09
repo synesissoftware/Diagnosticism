@@ -3,6 +3,7 @@
 
 | Date                 | News Item                                                                                                            |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 10th October 2026    | [Diagnosticism 0.3.1 released](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.1)                  |
 | 9th August 2026      | [Diagnosticism 0.3.0 3) released](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.0) |
 | 5th August 2026      | [Diagnosticism 0.3.0 (alpha 3) released](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.0-alpha3) |
 | 5th August 2026      | [Diagnosticism 0.3.0 (alpha 2) released](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.0-alpha2) |
