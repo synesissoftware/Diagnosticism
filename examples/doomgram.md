@@ -1,4 +1,4 @@
-# Diagnosticism Example - **doomgram**
+# Diagnosticism - Example - **doomgram**
 
 
 ## Summary

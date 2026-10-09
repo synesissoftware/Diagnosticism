@@ -1,4 +1,4 @@
-# Diagnosticism Example - **tracing**
+# Diagnosticism - Example - **tracing**
 
 
 ## Summary

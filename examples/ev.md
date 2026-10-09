@@ -1,4 +1,4 @@
-# Diagnosticism Example - **ev**
+# Diagnosticism - Example - **ev**
 
 
 ## Summary
