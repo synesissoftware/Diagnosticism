@@ -1,9 +1,18 @@
 # Diagnosticism - Changes <!-- omit in toc -->
 
 
+## 0.3.1-alpha1 - 10th August 2026
+
+* **CMake**: removed erroneous `PUBLIC` link of **STLSoft::STLSoft** from **Diagnosticism::core** (exported interface no longer advertises a transitive **STLSoft** dependency);
+* **CMake**: stopped applying directory-wide `include_directories()` for **STLSoft**; test programs receive **STLSoft** privately via **target_link_STLSoft()**;
+* **CMake**: example helper macros no longer link **STLSoft**; automated-test helper links **STLSoft** `PRIVATE` only;
+* **CMake**: **diagnosticism-config.cmake.in** documents that the installed package has no `find_dependency()` requirements;
+* **README.md** / **INSTALL.md** / **prepare_cmake.sh**: clarified that **STLSoft**, **xTests**, and **shwild** are test-build dependencies only;
+
+
 ## 0.3.0 - 9th August 2026
 
-0.3.0
+0.3.0 release;
 
 
 ## 0.3.0-alpha3 - 5th August 2026
