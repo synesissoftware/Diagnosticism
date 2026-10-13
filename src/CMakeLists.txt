@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for Diagnosticsm core library
 #
 # Created:  23rd November 2024
-# Updated:  5th August 2026
+# Updated:  10th August 2026
 #
 # ######################################################################## #
 
@@ -85,10 +85,11 @@ target_include_directories(${TARGET_NAME}
 		$<INSTALL_INTERFACE:include>
 )
 
-target_link_libraries(${TARGET_NAME}
-	PUBLIC
-		$<$<BOOL:${STLSoft_FOUND}>:STLSoft::STLSoft>
-)
+# Diagnosticism::core is a standalone C library: public headers and sources
+# do not use STLSoft. Do NOT link STLSoft (or any test-only package) as
+# PUBLIC/INTERFACE here — that would export a false transitive dependency
+# on Diagnosticism::core for every consumer. STLSoft is wired only to
+# automated tests (see cmake/TargetMacros.cmake).
 
 target_compile_options(${TARGET_NAME}
 	PRIVATE
