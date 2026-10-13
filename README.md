@@ -296,14 +296,30 @@ Defect reports, feature requests, and pull requests are welcome on https://githu
 
 ### Dependencies
 
-#### STLSoft (optional) <!-- omit in toc -->
+#### Library use / install <!-- omit in toc -->
 
-The original (~2005) implementation used **STLSoft** for discrimination of compilers and for library support. For modern compilers with broad support for the latest language standards this is not necessary. Hence, if the preprocessor symbol `Diagnosticism_NO_STLSOFT` is specified then all dependencies on **STLSoft** are removed and basic **C++-14** features are used instead. (This is done in the **CMake** configuration provided - see [INSTALL.md](./INSTALL.md).)
+**Diagnosticism::core** has **no** package dependencies. After install, consumer projects need only:
 
-If you _do_ need **STLSoft**, then version 1.11.0 or later is recommended. If you're using a _very_ old compiler you may wish to use STLSoft-1.9, for which version 1.9.136 is recommended. Further, the makefiles require definition of the environment variable `STLSOFT` that should be set to the root directory of a clone of **STLSoft**.
+```cmake
+find_package(Diagnosticism REQUIRED)
+target_link_libraries(myapp PRIVATE Diagnosticism::core)
+```
 
-* [STLSoft 1.9](http://github.com/synesissoftware/STLSoft-1.9/);
-* [STLSoft](http://github.com/synesissoftware/STLSoft/) (Recommended);
+Public headers do not include **STLSoft** (or any other Synesis library). Optional `STLSOFT_CF_*` guards in headers are inert unless a consumer already defines those macros.
+
+
+#### Building automated tests <!-- omit in toc -->
+
+When configuring with `BUILD_TESTING=ON` (the default for **prepare_cmake.sh**), the following are required for the test suite only — not for building or installing the library:
+
+* [**STLSoft**](https://github.com/synesissoftware/STLSoft) (1.11+ recommended) — provide via `find_package(STLSoft)`, CMake variable `STLSOFT`, or environment variable `STLSOFT` (see **prepare_cmake.sh** `--stlsoft-root-dir`);
+* [**xTests**](https://github.com/synesissoftware/xTests) (0.25+);
+
+Optional for testing:
+
+* [**shwild**](https://github.com/synesissoftware/shwild);
+
+Pass `--disable-testing` / `-T` to **prepare_cmake.sh** (or `-DBUILD_TESTING=OFF`) to build and install without those projects.
 
 
 ### Related projects
@@ -317,7 +333,7 @@ Other implementations in the **Diagnosticism** family:
 * [**Diagnosticism.NET**](https://github.com/synesissoftware/Diagnosticism.NET);
 * [**p99**](https://github.com/synesissoftware/p99) - extremely high-performance percentiles library;
 
-The **DoomGram** component in this (C) library is ported from [`stlsoft::doomgram`](https://github.com/synesissoftware/STLSoft) in **STLSoft** (see [Dependencies](#dependencies)).
+The **DoomGram** component in this (C) library is a port of [`stlsoft::doomgram`](https://github.com/synesissoftware/STLSoft) from **STLSoft**; the C implementation is self-contained and does not require **STLSoft** at build or use time.
 
 
 ### License

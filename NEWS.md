@@ -3,8 +3,9 @@
 
 | Date                | News Item                                                                                                            | Details |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------- | ------- |
-| 13th October 2026   | [**Diagnosticism** 0.3.2](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.2)                        | Modular CI; tip helpers; versions reporter; `DIAGNOSTICISM_VER_RELSTATUS`; **NEWS** Details |
+| 13th October 2026   | [**Diagnosticism** 0.3.2](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.2)                        | Modular CI; tip helpers; versions reporter; `DIAGNOSTICISM_VER_RELSTATUS`; standalone **core** (no **PUBLIC** **STLSoft**) |
 | 10th October 2026   | [**Diagnosticism** 0.3.1](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.1)                        | **misc-dev-scripts** **0.6.0** drop-ins; **.gitignore** sorted union |
+| 10th August 2026    | [**Diagnosticism** 0.3.1-alpha1](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.1-alpha1)          | **Diagnosticism::core** standalone; no **PUBLIC** **STLSoft**; test-only deps |
 | 9th August 2026     | [**Diagnosticism** 0.3.0](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.0)                        | Stable **0.3.0** |
 | 5th August 2026     | [**Diagnosticism** 0.3.0-alpha3](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.0-alpha3)          | Install **internal/** headers; **abort.h** install |
 | 5th August 2026     | [**Diagnosticism** 0.3.0-alpha2](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.0-alpha2)          | Abort API; **examples/abort/**; `DIAGNOSTICISM_CALL_NORETURN` |

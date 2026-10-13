@@ -8,6 +8,7 @@
 * **test.scratch.versions** dogfoods `diagnosticism_calc_version_string()` and prints conditional **STLSoft** / **shwild** efferents;
 * **NEWS.md** three-column **Details** chronology;
 * Migrated version low-byte macro to `DIAGNOSTICISM_VER_RELSTATUS` (legacy `DIAGNOSTICISM_VER_ALPHABETA` retained as a documentation-hidden alias);
+* Merged **dev** packaging fix so **Diagnosticism::core** no longer exports a false **STLSoft** interface dependency (see **0.3.1-alpha1**);
 
 
 ## 0.3.1 - 10th October 2026
@@ -16,9 +17,18 @@
 * Restored historical **.gitignore** patterns as a sorted union with **misc-dev-scripts** gold section layout;
 
 
+## 0.3.1-alpha1 - 10th August 2026
+
+* **CMake**: removed erroneous `PUBLIC` link of **STLSoft::STLSoft** from **Diagnosticism::core** (exported interface no longer advertises a transitive **STLSoft** dependency);
+* **CMake**: stopped applying directory-wide `include_directories()` for **STLSoft**; test programs receive **STLSoft** privately via **target_link_STLSoft()**;
+* **CMake**: example helper macros no longer link **STLSoft**; automated-test helper links **STLSoft** `PRIVATE` only;
+* **CMake**: **diagnosticism-config.cmake.in** documents that the installed package has no `find_dependency()` requirements;
+* **README.md** / **INSTALL.md** / **prepare_cmake.sh**: clarified that **STLSoft**, **xTests**, and **shwild** are test-build dependencies only;
+
+
 ## 0.3.0 - 9th August 2026
 
-0.3.0
+0.3.0 release;
 
 
 ## 0.3.0-alpha3 - 5th August 2026

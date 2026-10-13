@@ -11,9 +11,11 @@
   - [Install](#install)
 
 
-**Diagnosticism** is a classic-form C/C++ library, insofar as it has implementation files in its **src** directory and header files in its **include/Diagnosticism** directory. Thus, once "installed", one must simply include **diagnosticism/_XXXX_*_.h** (where **_XXXX_** might be **doomgram**, or **ev**, or another of the API header headers).
+**Diagnosticism** is a classic-form C/C++ library, insofar as it has implementation files in its **src** directory and header files in its **include/diagnosticism** directory. Thus, once "installed", one must simply include **diagnosticism/_XXXX_.h** (where **_XXXX_** might be **doomgram**, or **ev**, or another of the API headers).
 
-You may elect to compile in the **src** file(s) needed, but the standard way to do so is to build and install the library via **CMake** as described below:
+You may elect to compile in the **src** file(s) needed, but the standard way to do so is to build and install the library via **CMake** as described below.
+
+> **NOTE**: **Diagnosticism::core** has no install-time package dependencies. **STLSoft**, **xTests**, and optional **shwild** are required only when building automated tests (`BUILD_TESTING=ON`). Use `./prepare_cmake.sh --disable-testing` (or `-DBUILD_TESTING=OFF`) for a library-only configure/build/install.
 
 
 ## Using CMake
@@ -92,6 +94,14 @@ export SIS_CMAKE_BUILD_DIR=/tmp/Diagnosticism
 
   ```bash
   sudo cmake --install ${SIS_CMAKE_BUILD_DIR:-./_build} --config Release
+  ```
+
+2. Consume from another **CMake** project (no **STLSoft** / **xTests** required):
+
+
+  ```cmake
+  find_package(Diagnosticism REQUIRED)
+  target_link_libraries(myapp PRIVATE Diagnosticism::core)
   ```
 
 

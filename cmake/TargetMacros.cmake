@@ -1,3 +1,13 @@
+# ######################################################################## #
+# File:     /cmake/TargetMacros.cmake
+#
+# Purpose:  CMake macros for Diagnosticism example and test targets.
+#
+# Created:  23rd November 2024
+# Updated:  10th August 2026
+#
+# ######################################################################## #
+
 
 macro(define_target_compile_options target_name)
 
@@ -34,12 +44,28 @@ macro(define_target_compile_options target_name)
 	)
 endmacro(define_target_compile_options)
 
+# Apply STLSoft to a *test* (or other non-exported) target only.
+#
+# Handles both discovery modes from the top-level CMakeLists.txt:
+# - find_package(STLSoft) → STLSoft::STLSoft imported target;
+# - STLSOFT / ENV{STLSOFT} path → STLSOFT_INCLUDE_DIR only.
+#
+# Always PRIVATE: never put STLSoft on Diagnosticism::core's interface.
 macro(target_link_STLSoft target_name)
 
-	target_link_libraries(${target_name}
-		PRIVATE
-			$<$<BOOL:${STLSoft_FOUND}>:STLSoft::STLSoft>
-	)
+	if(STLSoft_FOUND)
+
+		target_link_libraries(${target_name}
+			PRIVATE
+				STLSoft::STLSoft
+		)
+	elseif(DEFINED STLSOFT_INCLUDE_DIR)
+
+		target_include_directories(${target_name}
+			PRIVATE
+				${STLSOFT_INCLUDE_DIR}
+		)
+	endif()
 endmacro(target_link_STLSoft)
 
 macro(target_link_shwild_ target_name)
@@ -58,7 +84,7 @@ macro(target_link_shwild_if_found target_name)
 
 	if(shwild_FOUND)
 
-		target_link_shwild_(${program_name})
+		target_link_shwild_(${target_name})
 	endif(shwild_FOUND)
 endmacro(target_link_shwild_if_found)
 
@@ -76,7 +102,10 @@ function(define_simple_console_example_c program_and_main_source_stem)
 		${program_and_main_source_stem}.c
 	)
 
-	target_link_STLSoft(${program_and_main_source_stem})
+	target_link_libraries(${program_and_main_source_stem}
+		PRIVATE
+			core
+	)
 
 	set(X_GCC_CUSTOM_WARNINGS_ "")
 
@@ -117,7 +146,10 @@ function(define_simple_console_example_cpp program_and_main_source_stem)
 		${program_and_main_source_stem}.cpp
 	)
 
-	target_link_STLSoft(${program_and_main_source_stem})
+	target_link_libraries(${program_and_main_source_stem}
+		PRIVATE
+			core
+	)
 
 	set(X_GCC_CUSTOM_WARNINGS_ "")
 
@@ -173,6 +205,9 @@ function(define_automated_test_program program_name entry_point_source_name)
 			core
 	)
 
+	# Tests may use STLSoft macros/helpers directly; keep that PRIVATE.
+	target_link_STLSoft(${program_name})
+
 	target_link_shwild_if_found(${program_name})
 
 	target_link_xTests(${program_name})
@@ -197,4 +232,3 @@ endfunction(define_example_program)
 
 
 # ############################## end of file ############################# #
-
