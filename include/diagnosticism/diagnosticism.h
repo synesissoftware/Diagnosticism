@@ -4,7 +4,7 @@
  * Purpose: Main header file for Diagnosticism (C-API).
  *
  * Created: 23rd November 2024
- * Updated: 10th August 2026
+ * Updated: 13th October 2026
  *
  * Home:    https://github.com/synesissoftware/Diagnosticism/
  *
@@ -53,8 +53,8 @@
 #ifndef DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MAJOR  0
 # define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_MINOR  0
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  15
-# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   18
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_PATCH  17
+# define DIAGNOSTICISM_VER_DIAGNOSTICISM_H_DIAGNOSTICISM_EDIT   19
 #endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
 
@@ -75,6 +75,11 @@
  *
  * The patch number of the DIAGNOSTICISM library
  *
+ * \def DIAGNOSTICISM_VER_RELSTATUS
+ *
+ * Release-status discriminator in the low byte of DIAGNOSTICISM_VER
+ * (`0xFF` = full release; otherwise pre-alpha / alpha / beta / rc ranges)
+ *
  * \def DIAGNOSTICISM_VER
  *
  * The composite version of the DIAGNOSTICISM library
@@ -82,18 +87,21 @@
 
 #define DIAGNOSTICISM_VER_MAJOR         0
 #define DIAGNOSTICISM_VER_MINOR         3
-#define DIAGNOSTICISM_VER_PATCH         1
-#define DIAGNOSTICISM_VER_ALPHABETA     0xA1
+#define DIAGNOSTICISM_VER_PATCH         2
+#define DIAGNOSTICISM_VER_RELSTATUS     0xFF
 
 #define DIAGNOSTICISM_VER \
     (0\
         |   (   DIAGNOSTICISM_VER_MAJOR       << 24   ) \
         |   (   DIAGNOSTICISM_VER_MINOR       << 16   ) \
         |   (   DIAGNOSTICISM_VER_PATCH       <<  8   ) \
-        |   (   DIAGNOSTICISM_VER_ALPHABETA   <<  0   ) \
+        |   (   DIAGNOSTICISM_VER_RELSTATUS   <<  0   ) \
     )
 
-#define DIAGNOSTICISM_VER_REVISION      DIAGNOSTICISM_VER_PATCH
+#ifndef DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION
+# define DIAGNOSTICISM_VER_ALPHABETA                        DIAGNOSTICISM_VER_RELSTATUS
+# define DIAGNOSTICISM_VER_REVISION                         DIAGNOSTICISM_VER_PATCH
+#endif /* !DIAGNOSTICISM_DOCUMENTATION_SKIP_SECTION */
 
 
 /* /////////////////////////////////////////////////////////////////////////

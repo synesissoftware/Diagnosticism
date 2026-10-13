@@ -91,7 +91,7 @@ The C library is organised by header under `include/diagnosticism/`. Include `<d
 The following version constants are defined in `<diagnosticism/diagnosticism.h>`:
 
 * `DIAGNOSTICISM_VER_MAJOR`, `DIAGNOSTICISM_VER_MINOR`, `DIAGNOSTICISM_VER_PATCH` - the major, minor, and patch components of the library version;
-* `DIAGNOSTICISM_VER_ALPHABETA` - the alpha/beta component of the library version (0xFF when not applicable);
+* `DIAGNOSTICISM_VER_RELSTATUS` - release-status discriminator in the low byte of `DIAGNOSTICISM_VER` (`0xFF` = full release);
 * `DIAGNOSTICISM_VER` - a composite 32-bit encoding of the library version;
 
 

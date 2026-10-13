@@ -1,2 +1,3 @@
 # SIS:AUTO_GENERATED: Remove this line if you edit the file, otherwise it will be overwritten
-define_example_program(version_string_16 main.c)
+define_example_program(example.version_string_16 main.c)
+
