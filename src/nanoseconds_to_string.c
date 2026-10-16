@@ -70,14 +70,11 @@ static uint64_t const s_scales[12] =
     100000000000ull,
 };
 
-/* UTF-8 MICRO SIGN U+00B5 (C2 B5) + 's' — default microsecond suffix. */
-static char const s_suffix_us_utf8[] =
-{
-        (char)0xC2
-    ,   (char)0xB5
-    ,   's'
-    ,   '\0'
-};
+/* UTF-8 MICRO SIGN U+00B5 (C2 B5) + 's' — default microsecond suffix.
+ * Use a string literal (not (char)0xC2 casts): MSVC C4310 treats those as
+ * truncating constant casts when `char` is signed.
+ */
+static char const s_suffix_us_utf8[] = "\xC2\xB5s";
 
 static char const* const s_suffixes_ascii[4] =
 {
