@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for Diagnosticsm core library
 #
 # Created:  23rd November 2024
-# Updated:  10th August 2026
+# Updated:  16th October 2026
 #
 # ######################################################################## #
 
@@ -50,6 +50,7 @@ set(CORE_SRCS
 	api.c
 	doomgram.c
 	ev.c
+	nanoseconds_to_string.c
 	tracing.c
 	version_string.c
 )
@@ -69,6 +70,8 @@ set(CORE_PUBLIC_HEADERS
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/${PROJECT_NAME_LOWER}.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/doomgram.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/ev.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/nanoseconds_to_string.h"
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/nanoseconds_to_string.hpp"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/tracing.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/version_string.h"
 	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/version_string.hpp"

@@ -50,7 +50,12 @@ int main(void)
         return EXIT_FAILURE;
     }
 
-    if (EXIT_SUCCESS != print_version_string(0, 1, 0, 0x41))
+    if (EXIT_SUCCESS != print_version_string(1, 2, 3, 0x42))
+    {
+        return EXIT_FAILURE;
+    }
+
+    if (EXIT_SUCCESS != print_version_string(1, 2, 3, 0x83))
     {
         return EXIT_FAILURE;
     }
@@ -61,6 +66,11 @@ int main(void)
     }
 
     if (EXIT_SUCCESS != print_version_string(1, 2, 3, 0xFF))
+    {
+        return EXIT_FAILURE;
+    }
+
+    if (EXIT_SUCCESS != print_version_string(1, 2, 3, 0x05))
     {
         return EXIT_FAILURE;
     }

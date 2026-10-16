@@ -27,6 +27,7 @@ Simple diagnostics utilities for C (and C++) — part of the cross-language **Di
     - [Functions (C++)](#functions-c)
 - [Examples](#examples)
   - [Example - DoomGram](#example---doomgram)
+  - [Example - nanoseconds\_to\_string](#example---nanoseconds_to_string)
   - [Example - tracing](#example---tracing)
 - [Project Information](#project-information)
   - [Where to get help](#where-to-get-help)
@@ -42,7 +43,7 @@ Simple diagnostics utilities for C (and C++) — part of the cross-language **Di
 
 In **C** and **C++**, which offer only modest built-in diagnostic support, the facilities are aimed at lightweight, low-overhead utilities that integrate cleanly with existing code. For example, the **DoomGram** component records duration events into an order-of-magnitude histogram and can summarise many thousands of timings in a single 12-character strip — useful for logging cumulative execution costs in long-running performance-sensitive applications. (See the [Components](#components) section below for more on this.) The `diagnosticism_trace()` macro provides a simple call-site trace facility, writing file, line, function, and a `printf`-style message to a chosen stream; see [**examples/tracing/**](./examples/tracing/).
 
-Other facilities include environment-variable helpers (`diagnosticism_getenv()`, `diagnosticism_getenv_atoi()`), version-string formatting (`diagnosticism_calc_version_string()`, `diagnosticism_calc_version_string_16()`, and the C++ wrappers `diagnosticism::calc_version_string()` / `diagnosticism::calc_version_string_16()`), and a small core API for library initialisation and version discovery. Further facilities will be added over time (and will be listed in the [Components](#components) section below).
+Other facilities include environment-variable helpers (`diagnosticism_getenv()`, `diagnosticism_getenv_atoi()`), compact duration formatting (`diagnosticism_nanoseconds_to_string()` and the C++ wrappers `diagnosticism::nanoseconds_to_string()`), version-string formatting (`diagnosticism_calc_version_string()`, `diagnosticism_calc_version_string_16()`, and the C++ wrappers `diagnosticism::calc_version_string()` / `diagnosticism::calc_version_string_16()`), and a small core API for library initialisation and version discovery. Further facilities will be added over time (and will be listed in the [Components](#components) section below).
 
 
 ## Installation
@@ -80,7 +81,7 @@ Open `_build/doxygen/html/index.html` in a browser (or `<build-dir>/doxygen/html
 
 ## Components
 
-The C library is organised by header under `include/diagnosticism/`. Include `<diagnosticism/diagnosticism.h>` for the core API, and the component headers as required.
+The C library is organised by header under `include/diagnosticism/`. Include `<diagnosticism/diagnosticism.h>` for the core API, and the component headers as required. Each component (and selected later additions) is tagged with a **since** badge for the **Diagnosticism** version in which it was introduced; badge colour is constant for a given **MAJOR.MINOR** (patch releases share the series colour: [![since 0.1.0](https://img.shields.io/badge/0.1-green)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.1), [![since 0.2.0](https://img.shields.io/badge/0.2-blue)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.2), [![since 0.3.0](https://img.shields.io/badge/0.3-orange)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3), [![since 0.4.0](https://img.shields.io/badge/0.4-brightgreen)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4)).
 
 
 ### C API / core library
@@ -100,14 +101,14 @@ The following version constants are defined in `<diagnosticism/diagnosticism.h>`
 The following types are defined in the public C headers:
 
 * `diag_uint32_t` - an unsigned 32-bit integer type used by the core API (`<diagnosticism/diagnosticism.h>`);
-* `diagnosticism_doomgram_t` - a **D**ecimal **O**rder-**O**f-**M**agnitude histo**G**ram structure that records duration values efficiently in the orders of magnitude 1ns+, 10ns+, 100ns+, 1µs+, ..., 10s+, 100s+ (`<diagnosticism/doomgram.h>`). This is a C port of the equivalent `stlsoft::doomgram` class from the **STLSoft** libraries;
+* `diagnosticism_doomgram_t` [![since 0.1.0](https://img.shields.io/badge/since-0.1.0-green)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.1.0) - a **D**ecimal **O**rder-**O**f-**M**agnitude histo**G**ram structure that records duration values efficiently in the orders of magnitude 1ns+, 10ns+, 100ns+, 1µs+, ..., 10s+, 100s+ (`<diagnosticism/doomgram.h>`). This is a C port of the equivalent `stlsoft::doomgram` class from the **STLSoft** libraries;
 
 
 #### Functions
 
 The following functions comprise the public C API:
 
-Abort (`<diagnosticism/abort.h>`):
+Abort (`<diagnosticism/abort.h>`) [![since 0.3.0](https://img.shields.io/badge/since-0.3.0-orange)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.0):
 
 * `diagnosticism_abort()` - writes a program-name-qualified message to a stream and then aborts;
 * `diagnosticism_abortf()` - as `diagnosticism_abort()`, with a `printf`-style formatted message;
@@ -118,31 +119,79 @@ Core API (`<diagnosticism/diagnosticism.h>`):
 * `diagnosticism_api_init()` - initialises the **Diagnosticism** API;
 * `diagnosticism_api_uninit()` - uninitialises the **Diagnosticism** API;
 
-DoomGram (`<diagnosticism/doomgram.h>`):
+DoomGram (`<diagnosticism/doomgram.h>`) [![since 0.1.0](https://img.shields.io/badge/since-0.1.0-green)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.1.0):
 
 * `diagnosticism_doomgram_push_event_time_ns()` - records an event of the given duration in nanoseconds;
 * `diagnosticism_doomgram_push_event_time_us()` - records an event of the given duration in microseconds;
 * `diagnosticism_doomgram_push_event_time_ms()` - records an event of the given duration in milliseconds;
 * `diagnosticism_doomgram_push_event_time_s()` - records an event of the given duration in seconds;
-* `diagnosticism_doomgram_clear()` - resets all fields of a doomgram to their initial state;
+* `diagnosticism_doomgram_clear()` [![since 0.2.1](https://img.shields.io/badge/since-0.2.1-blue)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.2.1) - resets all fields of a doomgram to their initial state;
 * `diagnosticism_doomgram_try_get_total_event_time_ns()` - attempts to obtain the cumulative event time (in nanoseconds), which may fail if overflow has occurred;
 * `diagnosticism_doomgram_try_get_min_event_time_ns()` - attempts to obtain the minimum recorded event time (in nanoseconds);
 * `diagnosticism_doomgram_try_get_max_event_time_ns()` - attempts to obtain the maximum recorded event time (in nanoseconds);
 * `diagnosticism_doomgram_to_strip_12()` - writes a terse 12-character histogram strip summarising the order-of-magnitude distribution; useful for logging cumulative execution costs in long-running performance-sensitive applications. Each character encodes the event count in one magnitude bucket, using `_` for zero, `a`-`z` for increasing count ranges, and `*` when a bucket's count exceeds the representable range;
 
-Environment variables (`<diagnosticism/ev.h>`):
+Environment variables (`<diagnosticism/ev.h>`) [![since 0.2.0](https://img.shields.io/badge/since-0.2.0-blue)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.2.0):
 
 * `diagnosticism_getenv()` - obtains the value of a named environment variable, or a caller-supplied default when the variable is not set (in which case `errno` is set to `ENOENT`);
 * `diagnosticism_getenv_atoi()` - obtains the value of a named environment variable interpreted as an integer, or a caller-supplied default when the variable is not set (in which case `errno` is set to `ENOENT`); returns 0 when the value cannot be interpreted as an integer;
 
-Tracing (`<diagnosticism/tracing.h>`):
+Nanosecond duration strings (`<diagnosticism/nanoseconds_to_string.h>`) [![since 0.4.0](https://img.shields.io/badge/since-0.4.0-brightgreen)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.0):
+
+* `diagnosticism_nanoseconds_to_string()` - formats a nanosecond count as a compact human-readable duration string into a caller-supplied UTF-8 buffer, adapting the unit (`ns`, `µs`, `ms`, `s`) and decimal precision to keep roughly three significant digits; zero is always `"0s"` (no sign); optional `DIAGNOSTICISM_NS_TO_STRING_F_PLUS` requests a leading `+` on positive values; optional `DIAGNOSTICISM_NS_TO_STRING_F_ASCII_ONLY` emits the microsecond unit as `"us"` instead of `"µs"`. Default behaviour matches **Diagnosticism.Python** / **Diagnosticism.Rust** `nanoseconds_to_string()`. For example:
+
+```C
+#include <diagnosticism/nanoseconds_to_string.h>
+
+char    buf[DIAGNOSTICISM_NS_TO_STRING_MIN_CCH];
+size_t  n;
+
+diagnosticism_nanoseconds_to_string(sizeof(buf), buf, 123456789, DIAGNOSTICISM_NS_TO_STRING_F_NONE, &n);
+/* buf == "123.4ms" */
+
+diagnosticism_nanoseconds_to_string(sizeof(buf), buf, 6789, DIAGNOSTICISM_NS_TO_STRING_F_NONE, &n);
+/* buf == "6.789µs" */
+
+diagnosticism_nanoseconds_to_string(sizeof(buf), buf, 6789, DIAGNOSTICISM_NS_TO_STRING_F_ASCII_ONLY, &n);
+/* buf == "6.789us" */
+
+diagnosticism_nanoseconds_to_string(sizeof(buf), buf, 999772000, DIAGNOSTICISM_NS_TO_STRING_F_PLUS, &n);
+/* buf == "+999.7ms" */
+```
+
+Tracing (`<diagnosticism/tracing.h>`) [![since 0.1.0](https://img.shields.io/badge/since-0.1.0-green)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.1.0):
 
 * `diagnosticism_trace_impl()` - low-level implementation used by the `diagnosticism_trace()` macro; writes a trace line to a given `FILE*` stream, including file, line, and function, followed by a `printf`-style formatted message;
 
-Version strings (`<diagnosticism/version_string.h>`):
+Version strings (`<diagnosticism/version_string.h>`) [![since 0.2.0](https://img.shields.io/badge/since-0.2.0-blue)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.2.0):
 
-* `diagnosticism_calc_version_string()` - formats a version number (major, minor, patch, and optional alpha/beta/rc/build component) into a caller-supplied buffer; each component is an `int` interpreted strictly as an 8-bit value. Returns 0 on success (with character count via `pnWritten`), or -1 on failure. The `verAlphaBeta` argument encodes pre-release information: values in the ranges 0x40+, 0x80+, and 0xC0+ yield `-alphaN`, `-betaN`, and `-rcN` suffixes respectively (e.g. 0x41 → `-alpha1`, 0x81 → `-beta1`, 0xC1 → `-rc1`); 0xFF suppresses any suffix (final); other non-zero values are appended as a fourth dotted component;
-* `diagnosticism_calc_version_string_16()` - as `diagnosticism_calc_version_string()`, but with `uint16_t` components and 16-bit pre-release encoding (0x4000+ / 0x8000+ / 0xC000+ / 0xFFFF);
+* `diagnosticism_calc_version_string()` - formats a version number (major, minor, patch, and optional alpha/beta/rc/build component) into a caller-supplied buffer; each component is an `int` interpreted strictly as an 8-bit value. Returns 0 on success (with character count via `pnWritten`), or -1 on failure. The `verAlphaBeta` argument encodes pre-release information: values in the ranges 0x40+, 0x80+, and 0xC0+ yield `-alphaN`, `-betaN`, and `-rcN` suffixes respectively (e.g. 0x42 → `-alpha2`, 0x83 → `-beta3`, 0xC1 → `-rc1`); 0xFF suppresses any suffix (final); other non-zero values are appended as a fourth dotted component. For example:
+
+```C
+#include <diagnosticism/version_string.h>
+
+char    buf[64];
+size_t  n;
+
+diagnosticism_calc_version_string(buf, sizeof(buf), 1, 2, 3, 0x42, &n);
+/* buf == "1.2.3-alpha2" */
+
+diagnosticism_calc_version_string(buf, sizeof(buf), 1, 2, 3, 0x83, &n);
+/* buf == "1.2.3-beta3" */
+
+diagnosticism_calc_version_string(buf, sizeof(buf), 1, 2, 3, 0xC1, &n);
+/* buf == "1.2.3-rc1" */
+
+diagnosticism_calc_version_string(buf, sizeof(buf), 1, 2, 3, 0xFF, &n);
+/* buf == "1.2.3"  (final — no suffix) */
+
+diagnosticism_calc_version_string(buf, sizeof(buf), 1, 2, 3, 0x05, &n);
+/* buf == "1.2.3.5"  (fourth dotted component) */
+```
+
+See also [**examples/version_string/**](./examples/version_string/).
+
+* `diagnosticism_calc_version_string_16()` [![since 0.3.0](https://img.shields.io/badge/since-0.3.0-orange)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.0) - as `diagnosticism_calc_version_string()`, but with `uint16_t` components and 16-bit pre-release encoding (0x4000+ / 0x8000+ / 0xC000+ / 0xFFFF);
 
 
 #### Macros
@@ -152,15 +201,22 @@ The following macros are defined in the public C headers:
 Core API (`<diagnosticism/diagnosticism.h>`):
 
 * `DIAGNOSTICISM_CALL(rt)` - expands to the appropriate linkage/return-type decoration for C and C++ (`extern "C" rt` in C++, `rt` in C);
-* `DIAGNOSTICISM_CALL_NORETURN` - as `DIAGNOSTICISM_CALL(void)`, for functions that do not return (currently pending `[[noreturn]]` treatment);
+* `DIAGNOSTICISM_CALL_NORETURN` [![since 0.3.0](https://img.shields.io/badge/since-0.3.0-orange)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.0) - as `DIAGNOSTICISM_CALL(void)`, for functions that do not return (currently pending `[[noreturn]]` treatment);
 
-DoomGram (`<diagnosticism/doomgram.h>`):
+DoomGram (`<diagnosticism/doomgram.h>`) [![since 0.1.0](https://img.shields.io/badge/since-0.1.0-green)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.1.0):
 
 * `DIAGNOSTICISM_DOOMGRAM_INITIALIZER` - brace initialiser for a zeroed `diagnosticism_doomgram_t` instance;
 * `diagnosticism_doomgram_num_events_in_1ns()` through `diagnosticism_doomgram_num_events_ge_100s()` - elicit the event count for each order-of-magnitude bucket;
 * `diagnosticism_doomgram_try_get_total_event_time_ns_raw()` - obtains the cumulative event time (in nanoseconds) without regard to overflow;
 
-Tracing (`<diagnosticism/tracing.h>`):
+Nanosecond duration strings (`<diagnosticism/nanoseconds_to_string.h>`) [![since 0.4.0](https://img.shields.io/badge/since-0.4.0-brightgreen)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.0):
+
+* `DIAGNOSTICISM_NS_TO_STRING_MIN_CCH` - minimum buffer capacity (including NUL) always sufficient for `diagnosticism_nanoseconds_to_string()`;
+* `DIAGNOSTICISM_NS_TO_STRING_F_ASCII_ONLY` - emit the microsecond unit as ASCII `"us"` instead of UTF-8 `"µs"`;
+* `DIAGNOSTICISM_NS_TO_STRING_F_NONE` - no special formatting flags;
+* `DIAGNOSTICISM_NS_TO_STRING_F_PLUS` - request an explicit leading `+` on positive (non-zero) durations;
+
+Tracing (`<diagnosticism/tracing.h>`) [![since 0.1.0](https://img.shields.io/badge/since-0.1.0-green)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.1.0):
 
 * `diagnosticism_trace(stm, ...)` - writes a trace line to `stm` at the call site, automatically supplying `__FILE__`, `__LINE__`, and the current function name together with a `printf`-style formatted message. For example:
 
@@ -181,18 +237,48 @@ The C++ API is intentionally small: a thin convenience layer over selected C fun
 
 #### Functions (C++)
 
-Version strings (`<diagnosticism/version_string.hpp>`):
+Nanosecond duration strings (`<diagnosticism/nanoseconds_to_string.hpp>`) [![since 0.4.0](https://img.shields.io/badge/since-0.4.0-brightgreen)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.0):
+
+* `diagnosticism::nanoseconds_to_string(int64_t, uint32_t = …)` - returns a `std::string`; throws `std::runtime_error` on failure. For example:
+
+```C++
+#include <diagnosticism/nanoseconds_to_string.hpp>
+
+std::string const s = diagnosticism::nanoseconds_to_string(123456789);
+// s == "123.4ms"
+```
+
+* `diagnosticism::nanoseconds_to_string(T_string&, int64_t, uint32_t = …)` - writes into a mutable string-like destination (`assign(char const*, size_t)`); returns a reference to that destination. For example:
+
+```C++
+#include <diagnosticism/nanoseconds_to_string.hpp>
+
+std::string s;
+diagnosticism::nanoseconds_to_string(s, 6789);
+// s == "6.789µs"
+```
+
+Version strings (`<diagnosticism/version_string.hpp>`) [![since 0.2.0](https://img.shields.io/badge/since-0.2.0-blue)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.2.0):
 
 * `diagnosticism::calc_version_string()` - C++ wrapper around `diagnosticism_calc_version_string()` that returns a `std::string`; throws `std::runtime_error` on failure. For example:
 
 ```C++
 #include <diagnosticism/version_string.hpp>
 
-std::string const s = diagnosticism::calc_version_string(1, 2, 3, 0);
-// s == "1.2.3"
+std::string const alpha = diagnosticism::calc_version_string(1, 2, 3, 0x42);
+// alpha == "1.2.3-alpha2"
+
+std::string const beta = diagnosticism::calc_version_string(1, 2, 3, 0x83);
+// beta == "1.2.3-beta3"
+
+std::string const rc = diagnosticism::calc_version_string(1, 2, 3, 0xC1);
+// rc == "1.2.3-rc1"
+
+std::string const released = diagnosticism::calc_version_string(1, 2, 3, 0xFF);
+// released == "1.2.3"  (final — no suffix)
 ```
 
-* `diagnosticism::calc_version_string_16()` - C++ wrapper around `diagnosticism_calc_version_string_16()`;
+* `diagnosticism::calc_version_string_16()` [![since 0.3.0](https://img.shields.io/badge/since-0.3.0-orange)](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.0) - C++ wrapper around `diagnosticism_calc_version_string_16()`;
 
 
 ## Examples
@@ -260,6 +346,11 @@ indicating, among other buckets:
 - and further non-uniform counts across the remaining magnitude buckets.
 
 In a live system one would log only the strip (and perhaps min/max), not the full internal histogram state.
+
+
+### Example - nanoseconds_to_string
+
+The example program **nanoseconds_to_string** (in the **examples** directory) illustrates use of `diagnosticism_nanoseconds_to_string()` for compact duration formatting — including the default UTF-8 `"µs"` unit, `DIAGNOSTICISM_NS_TO_STRING_F_ASCII_ONLY` (`"us"`), `DIAGNOSTICISM_NS_TO_STRING_F_PLUS`, and a `cchBuffer == 0` size probe. See [**examples/nanoseconds_to_string/main.c**](./examples/nanoseconds_to_string/main.c) and [**examples/nanoseconds_to_string.md**](./examples/nanoseconds_to_string.md).
 
 
 ### Example - tracing

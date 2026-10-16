@@ -1,6 +1,16 @@
 # Diagnosticism - Changes <!-- omit in toc -->
 
 
+## 0.4.0 - 16th October 2026
+
+* Added `diagnosticism_nanoseconds_to_string()` compact duration formatter (**nanoseconds_to_string.h** / **nanoseconds_to_string.c**) with golden parity vs **Diagnosticism.Python** / **Diagnosticism.Rust** (`ns` / `µs` / `ms` / `s`, optional `+` flag, UTF-8 MICRO SIGN by default; `DIAGNOSTICISM_NS_TO_STRING_F_ASCII_ONLY` selects `"us"`);
+* Added C++ wrappers `diagnosticism::nanoseconds_to_string()` (**nanoseconds_to_string.hpp**) returning `std::string` or writing via a mutating `T_string&` (`assign(char const*, size_t)`);
+* Added unit programs **test.unit.nanoseconds_to_string** and **test.unit.C++.nanoseconds_to_string** (Python golden table; C++ return and mutating-ref overloads);
+* Added **example.nanoseconds_to_string** (**examples/nanoseconds_to_string/**) covering units, flags, and size probe;
+* Documented the new API under **README.md** Components, with **since** badges for introduction versions;
+* Boilerplate gold: **.sis/ci_scratch_tests_allowed_to_fail.txt** and **.sis/ci_scratch_tests_skip_interactive.txt**; tip **run_all_scratch_tests** / **run_all_examples** / **run_all_unit_tests** helpers; CI scratch steps pass `--skip-interactive`;
+
+
 ## 0.3.2 - 13th October 2026
 
 * Modular GitHub Actions CI (**ci.yml** + **ci-cell.yml** + **install-sis-deps**; execute-bit restore; Windows **.cmd** dogfood; install-smoke);

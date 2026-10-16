@@ -363,7 +363,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          SIS_CMAKE_BUILD_DIR="${{ github.workspace }}/build" ./run_all_scratch_tests.sh -M
+          SIS_CMAKE_BUILD_DIR="${{ github.workspace }}/build" ./run_all_scratch_tests.sh -M --skip-interactive
 
       - name: Run scratch tests (native cmd)
         if: runner.os == 'Windows'
@@ -373,5 +373,5 @@ jobs:
           SIS_CMAKE_BUILD_DIR: ${{ github.workspace }}\build
         run: |
           if "${{ inputs.toolchain }}"=="mingw" set "PATH=%MSYS2_LOCATION%\mingw64\bin;%PATH%"
-          call run_all_scratch_tests.cmd
+          call run_all_scratch_tests.cmd --skip-interactive
           if errorlevel 1 exit /b 1
