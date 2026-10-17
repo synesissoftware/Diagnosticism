@@ -1,5 +1,6 @@
 # Example programs that are allowed to fail in CI / run_all_examples.
 # example.abort calls diagnosticism_abortf() and therefore exits non-zero
 # by design; tip runners still execute it and treat the failure as
-# anticipated when listed here.
+# anticipated when listed here. List program names or stems
+# (example.abort and example.abort.exe are equivalent).
 example.abort
