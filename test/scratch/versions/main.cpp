@@ -5,7 +5,7 @@
  *          and optional test-time efferent siblings.
  *
  * Created: 5th August 2026
- * Updated: 13th October 2026
+ * Updated: 27th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -19,6 +19,9 @@
 #ifdef HAS_shwild
 # include <shwild/shwild.h>
 #endif /* HAS_shwild */
+#ifdef HAS_xTests
+# include <xtests/xtests.h>
+#endif /* HAS_xTests */
 
 #include <iomanip>
 #include <iostream>
@@ -86,9 +89,10 @@ version(
     return EXIT_SUCCESS;
 }
 
-
 int main(int /* argc */, char* /* argv */[])
 {
+    int efferents_count = 0;
+
     {
         unsigned const libver = DIAGNOSTICISM_VER;
 
@@ -98,12 +102,12 @@ int main(int /* argc */, char* /* argv */[])
         }
     }
 
-#if defined(HAS_STLSoft) ||\
-    defined(HAS_shwild)
+#ifdef HAS_STLSoft
 
-    std::cout << "\n" << "efferent dependencies:" << std::endl;
-
-# ifdef HAS_STLSoft
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
 
     {
         unsigned const libver = _STLSOFT_VER;
@@ -113,9 +117,14 @@ int main(int /* argc */, char* /* argv */[])
             return EXIT_FAILURE;
         }
     }
-# endif /* HAS_STLSoft */
+#endif /* HAS_STLSoft */
 
-# ifdef HAS_shwild
+#ifdef HAS_shwild
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
 
     {
         unsigned const libver = SHWILD_VER;
@@ -125,13 +134,27 @@ int main(int /* argc */, char* /* argv */[])
             return EXIT_FAILURE;
         }
     }
-# endif /* HAS_shwild */
+#endif /* HAS_shwild */
 
-#endif /* HAS_STLSoft || HAS_shwild */
+#ifdef HAS_xTests
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
+    {
+        unsigned const libver = _XTESTS_VER;
+
+        if (EXIT_SUCCESS != version(std::cout, "\t", "xTests", "_XTESTS_VER", libver))
+        {
+            return EXIT_FAILURE;
+        }
+    }
+#endif /* HAS_xTests */
 
     return EXIT_SUCCESS;
 }
-
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

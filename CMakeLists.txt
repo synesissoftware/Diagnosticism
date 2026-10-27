@@ -163,6 +163,12 @@ if(BUILD_TESTING)
 
 		message("-- CMake package STLSoft found (version ${STLSoft_VERSION}; ${STLSoft_REQUIRED_VERSION_} requested)")
 	endif()
+
+	if(DEFINED STLSOFT_INCLUDE_DIR OR DEFINED STLSoft_FOUND)
+
+		add_compile_definitions(HAS_STLSOFT)
+		add_compile_definitions(HAS_STLSoft)
+	endif()
 endif(BUILD_TESTING)
 
 
