@@ -3,6 +3,7 @@
 
 | Date                | News Item                                                                                                            | Details |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------- | ------- |
+| 27th October 2026   | Release of [Diagnosticism 0.4.1](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.1)                | `HAS_shwild` / `HAS_SHWILD`; dropped `DIAGNOSTICISM_HAS_SHWILD` |
 | 16th October 2026   | [**Diagnosticism** 0.4.0](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.0)                        | `nanoseconds_to_string()` + example; ASCII-only `us`; ATF/SKIP `.sis` gold |
 | 13th October 2026   | [**Diagnosticism** 0.3.2](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.2)                        | Modular CI; tip helpers; versions reporter; `DIAGNOSTICISM_VER_RELSTATUS`; standalone **core** (no **PUBLIC** **STLSoft**) |
 | 10th October 2026   | [**Diagnosticism** 0.3.1](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.1)                        | **misc-dev-scripts** **0.6.0** drop-ins; **.gitignore** sorted union |

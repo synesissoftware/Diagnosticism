@@ -1,6 +1,11 @@
 # Diagnosticism - Changes <!-- omit in toc -->
 
 
+## 0.4.1 - 27th October 2026
+
+* Defined `HAS_shwild` and `HAS_SHWILD` when **shwild** is detected, and stopped defining `DIAGNOSTICISM_HAS_SHWILD`;
+
+
 ## 0.4.0 - 16th October 2026
 
 * Added `diagnosticism_nanoseconds_to_string()` compact duration formatter (**nanoseconds_to_string.h** / **nanoseconds_to_string.c**) with golden parity vs **Diagnosticism.Python** / **Diagnosticism.Rust** (`ns` / `µs` / `ms` / `s`, optional `+` flag, UTF-8 MICRO SIGN by default; `DIAGNOSTICISM_NS_TO_STRING_F_ASCII_ONLY` selects `"us"`);
