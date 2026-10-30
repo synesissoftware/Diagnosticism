@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    ev/entry.c
+ * File:    test/component/ev/entry.cpp
  *
  * Purpose: Tests Diagnosticism API (un)initialisation.
  *
  * Created: 5th July 2025
- * Updated: 5th July 2025
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 

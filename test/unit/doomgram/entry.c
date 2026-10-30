@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.doomgram/entry.c
+ * File:    test/unit/doomgram/entry.c
  *
  * Purpose: Tests Diagnosticism Doomgram.
  *
  * Created: 5th February 2025
- * Updated: 1st August 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 

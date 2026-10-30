@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.api_version/entry.c
+ * File:    test/unit/api_version/entry.c
  *
  * Purpose: Tests `diagnosticism_api_version()`.
  *
  * Created: 23rd November 2024
- * Updated: 23rd November 2024
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 

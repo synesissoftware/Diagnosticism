@@ -28,9 +28,9 @@ You can obtain a **.zip** or **.tar.gz** at the [Releases page](https://github.c
 ```bash
 $ mkdir -p ~/open-source
 $ cd ~/open-source
-$ curl -L -O https://github.com/synesissoftware/Diagnosticism/archive/refs/tags/0.2.0-beta4.tar.gz
-$ gunzip 0.2.0-beta4.tar.gz
-$ cd Diagnosticism-0.2.0-beta4
+$ curl -L -O https://github.com/synesissoftware/Diagnosticism/archive/refs/tags/0.4.2.tar.gz
+$ gunzip 0.4.2.tar.gz
+$ cd Diagnosticism-0.4.2
 ```
 
 Or you may prefer to clone the project via git

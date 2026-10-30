@@ -1,6 +1,15 @@
 # Diagnosticism - Changes <!-- omit in toc -->
 
 
+## 0.4.2 - 31st October 2026
+
+* testing:
+  * `File:` labels under **test** name the project-relative path;
+* documentation and boilerplate:
+  * **Doxyfile** `PROJECT_NUMBER` is **0.4.2**;
+  * **INSTALL.md** archive example names **0.4.2**;
+
+
 ## 0.4.1 - 27th October 2026
 
 * Defined `HAS_shwild` and `HAS_SHWILD` when **shwild** is detected, and stopped defining `DIAGNOSTICISM_HAS_SHWILD`;

@@ -1,11 +1,11 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.C++.version_string/entry.cpp
+ * File:    test/unit/C++.version_string/entry.cpp
  *
  * Purpose: Tests `diagnosticism::calc_version_string()` and
  *          `diagnosticism::calc_version_string_16()`.
  *
  * Created: 23rd August 2025
- * Updated: 4th August 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
