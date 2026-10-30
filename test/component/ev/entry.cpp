@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    ev/entry.c
+ * File:    test/component/ev/entry.cpp
  *
  * Purpose: Tests Diagnosticism API (un)initialisation.
  *
  * Created: 5th July 2025
- * Updated: 5th July 2025
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 
     XTESTS_COMMANDLINE_PARSE_VERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.api_init", verbosity))
+    if (XTESTS_START_RUNNER(__FILE__, verbosity))
     {
         XTESTS_RUN_CASE(TEST_getenv);
 

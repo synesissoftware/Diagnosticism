@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.nanoseconds_to_string/entry.c
+ * File:    test/unit/nanoseconds_to_string/entry.c
  *
  * Purpose: Golden-parity tests for diagnosticism_nanoseconds_to_string().
  *
  * Created: 16th October 2026
- * Updated: 16th October 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
