@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 
     XTESTS_COMMANDLINE_PARSE_VERBOSITY(argc, argv, &verbosity);
 
-    if (XTESTS_START_RUNNER("test.unit.api_init", verbosity))
+    if (XTESTS_START_RUNNER(__FILE__, verbosity))
     {
         XTESTS_RUN_CASE(TEST_getenv);
 

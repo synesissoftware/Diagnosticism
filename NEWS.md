@@ -3,7 +3,7 @@
 
 | Date                | News Item                             | Details |
 | ------------------- | ------------------------------------- | ------- |
-| 31st October 2026   | Release of [Diagnosticism 0.4.2](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.2) | `File:` labels use the project-relative path |
+| 31st October 2026   | Release of [Diagnosticism 0.4.2](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.2) | `File:` labels; `__FILE__` runners (**xTests** 0.28.2) |
 | 27th October 2026   | Release of [Diagnosticism 0.4.1](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.1) | `HAS_shwild` / `HAS_SHWILD`; dropped `DIAGNOSTICISM_HAS_SHWILD` |
 | 17th October 2026   | [**Diagnosticism** 0.4.0](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.0) | `nanoseconds_to_string()` + example; ASCII-only `us`; ATF/SKIP `.sis` gold |
 | 13th October 2026   | [**Diagnosticism** 0.3.2](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.3.2) | Modular CI; tip helpers; versions reporter; `DIAGNOSTICISM_VER_RELSTATUS`; standalone **core** (no **PUBLIC** **STLSoft**) |

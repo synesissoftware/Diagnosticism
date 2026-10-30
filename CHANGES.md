@@ -5,9 +5,13 @@
 
 * testing:
   * `File:` labels under **test** name the project-relative path;
+  * automated-test runners pass `__FILE__` to `XTESTS_START_RUNNER`;
+* build:
+  * **xTests** minimum is **0.28.2**;
 * documentation and boilerplate:
   * **Doxyfile** `PROJECT_NUMBER` is **0.4.2**;
   * **INSTALL.md** archive example names **0.4.2**;
+  * documented **xTests** minimum is **0.28.2**;
 
 
 ## 0.4.1 - 27th October 2026
