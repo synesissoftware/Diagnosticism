@@ -7,6 +7,7 @@
   * `File:` labels under **test** name the project-relative path;
   * automated-test runners pass `__FILE__` to `XTESTS_START_RUNNER`;
 * build:
+  * the **Check test names** job runs **STLSoft** **check_unit_test_names.rb** over **examples** and **test**;
   * **xTests** minimum is **0.28.2**;
 * documentation and boilerplate:
   * **Doxyfile** `PROJECT_NUMBER` is **0.4.2**;
