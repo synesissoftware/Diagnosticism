@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.version_string/entry.c
+ * File:    test/unit/version_string/entry.c
  *
  * Purpose: Tests Diagnosticism VersionString API.
  *
  * Created: 15th May 2025
- * Updated: 4th August 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 

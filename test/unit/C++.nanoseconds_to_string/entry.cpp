@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.C++.nanoseconds_to_string/entry.cpp
+ * File:    test/unit/C++.nanoseconds_to_string/entry.cpp
  *
  * Purpose: Tests `diagnosticism::nanoseconds_to_string()` C++ overloads.
  *
  * Created: 16th October 2026
- * Updated: 16th October 2026
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 

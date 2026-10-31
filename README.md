@@ -404,7 +404,7 @@ Public headers do not include **STLSoft** (or any other Synesis library). Option
 When configuring with `BUILD_TESTING=ON` (the default for **prepare_cmake.sh**), the following are required for the test suite only — not for building or installing the library:
 
 * [**STLSoft**](https://github.com/synesissoftware/STLSoft) (1.11+ recommended) — provide via `find_package(STLSoft)`, CMake variable `STLSOFT`, or environment variable `STLSOFT` (see **prepare_cmake.sh** `--stlsoft-root-dir`);
-* [**xTests**](https://github.com/synesissoftware/xTests) (0.25+);
+* [**xTests**](https://github.com/synesissoftware/xTests) (0.28.2+);
 
 Optional for testing:
 

@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    test.unit.api_init/entry.c
+ * File:    test/unit/api_init/entry.c
  *
  * Purpose: Tests Diagnosticism API (un)initialisation.
  *
  * Created: 23rd November 2024
- * Updated: 23rd November 2024
+ * Updated: 30th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
