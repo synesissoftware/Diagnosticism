@@ -1,6 +1,11 @@
 # Diagnosticism - Changes <!-- omit in toc -->
 
 
+## 0.4.3 - 2nd November 2026
+
+* build:
+  * **STLSoft** minimum is **1.11.5**;
+
 ## 0.4.2 - 1st November 2026
 
 * testing:
