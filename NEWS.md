@@ -3,6 +3,7 @@
 
 | Date                | News Item                             | Details |
 | ------------------- | ------------------------------------- | ------- |
+| 6th November 2026   | Release of [Diagnosticism 0.4.4](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.4) | CI installs **woad** before **xTests** |
 | 2nd November 2026   | Release of [Diagnosticism 0.4.3](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.3) | **STLSoft** **1.11.5** |
 | 1st November 2026   | Release of [Diagnosticism 0.4.2](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.2) | `File:` labels; `__FILE__` runners (**xTests** 0.28.2); **Check test names** |
 | 27th October 2026   | Release of [Diagnosticism 0.4.1](https://github.com/synesissoftware/Diagnosticism/releases/tag/0.4.1) | `HAS_shwild` / `HAS_SHWILD`; dropped `DIAGNOSTICISM_HAS_SHWILD` |

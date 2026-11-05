@@ -1,6 +1,15 @@
 # Diagnosticism - Changes <!-- omit in toc -->
 
 
+## 0.4.4 - 6th November 2026
+
+* build:
+  * CI installs **woad** before **xTests**, which **xTests** 0.29 requires;
+* documentation and boilerplate:
+  * **Doxyfile** `PROJECT_NUMBER` is **0.4.4**;
+  * **INSTALL.md** archive example names **0.4.4**;
+
+
 ## 0.4.3 - 2nd November 2026
 
 * build:
