@@ -59,14 +59,15 @@ jobs:
       # Dependency order is deliberate (not lexicographic): each package
       # configures against those already installed in the shared prefix.
       # Omit shwild — Diagnosticism finds it QUIET and CI historically
-      # built xTests with NO_SHWILD (match actual CI needs).
+      # built xTests with NO_SHWILD (match actual CI needs). woad
+      # precedes xTests (xTests 0.29 requires it).
       - name: Install SIS dependencies
         uses: ./.github/actions/install-sis-deps
         with:
           build-type: ${{ inputs.build-type }}
           c-compiler: ${{ inputs.c-compiler }}
           cpp-compiler: ${{ inputs.cpp-compiler }}
-          dependencies: STLSoft xTests
+          dependencies: STLSoft woad xTests
           toolchain: ${{ inputs.toolchain }}
 
       - name: Configure
